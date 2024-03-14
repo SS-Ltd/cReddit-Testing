@@ -1,1 +1,6 @@
 /venv
+/Web_Text_Files/fail_file.txt
+/Web_Text_Files/combined_file.txt
+/Web_Text_Files/success_file.txt
+/Web_Text_Files/Usefulinfo.txt
+/Web_tests/__pycache__
