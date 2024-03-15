@@ -2,21 +2,13 @@
 This module is used to test the login page of the website
 """
 
-import time as thread
+from my_imports import WebDriverWait, EC, By, TimeoutException, time as thread
 from constants import DELAY_TIME
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-import selenium.webdriver.support.expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from webdriver_manager.chrome import ChromeDriverManager
 from write_to_files import write_to_all_files, report_fail, report_success
 
-
-def goto_login(driver: webdriver.Chrome):
+def goto_login(driver) -> None:
     """
-    This function test the login page of the website
+    This function test the login window of the website
     """
     # Check login button
     try:
@@ -49,7 +41,7 @@ def goto_login(driver: webdriver.Chrome):
         )
 
 
-def close_button(driver: webdriver.Chrome):
+def close_button(driver) -> None:
     """
     This function test the close button of the website
     """
@@ -83,15 +75,12 @@ def close_button(driver: webdriver.Chrome):
             + "[login() -> close_button() -> close button passed]"
         )
 
-
-def login(driver: webdriver.Chrome):
+def login(driver):
     """
     This function test the login page of the website
     """
 
-    write_to_all_files("############################################################")
     write_to_all_files("#################### Testing Login Page ####################")
-    write_to_all_files("############################################################")
     goto_login(driver)
     thread.sleep(DELAY_TIME)
 

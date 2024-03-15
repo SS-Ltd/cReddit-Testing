@@ -60,3 +60,7 @@
 2024-03-15 00:16:33.648096 : The Login Window appeared [login() -> goto_login() -> login window appeared]
 2024-03-15 00:16:37.705373 : The element with the ID 'login_close' was found[login() -> close_button() -> close button found]
 2024-03-15 00:16:41.795427 : The close button worked[login() -> close_button() -> close button passed]
+2024-03-15 10:15:19.384406 : The element with the ID 'navbar_login_button' was found [login() -> goto_login() -> login button found]
+2024-03-15 10:15:19.395147 : The Login Window appeared [login() -> goto_login() -> login window appeared]
+2024-03-15 10:15:23.449641 : The element with the ID 'login_close' was found[login() -> close_button() -> close button found]
+2024-03-15 10:15:27.535550 : The close button worked[login() -> close_button() -> close button passed]
