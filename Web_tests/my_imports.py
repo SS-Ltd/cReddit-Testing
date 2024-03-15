@@ -1,7 +1,7 @@
 '''
 This is the file that contains all the imports that could be needed by other files
 '''
-import time
+import time as thread
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
