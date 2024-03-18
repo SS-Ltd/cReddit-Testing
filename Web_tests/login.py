@@ -122,7 +122,7 @@ def hyper_links(driver, hyperlink: Hyperlink) -> None:
     driver.switch_to.window(driver.window_handles[0])
 
 
-def close_button(driver) -> None:
+def close_button_login(driver) -> None:
     """
     This function test the close button of the website
     """
@@ -157,7 +157,7 @@ def close_button(driver) -> None:
         )
 
 
-def login(driver):
+def login(driver) -> None:
     """
     This function test the login page of the website
     """
@@ -183,7 +183,7 @@ def login(driver):
     # Check Sign up
 
     # Check close button
-    close_button(driver)
+    close_button_login(driver)
     thread.sleep(DELAY_TIME)
     write_to_all_files(
         "############################################################")
