@@ -5,6 +5,17 @@ This module is used to navigate to the google Gmail and log in to the account
 from my_imports import WebDriverWait, EC, By, TimeoutException , thread
 from write_to_files import write_to_all_files, report_fail, report_success
 from constants import EMAIL, PASSWORD ,DELAY_TIME
+def search_for_email(driver, text :str) -> None:
+    '''
+    This function searches for an email in the Gmail inbox
+    @param driver: The driver to use
+    @param Text: The text to search for
+    '''
+    a = driver.find_elements(By.XPATH, "//*[@class='yW']/span")
+    for i in a:
+        if i.text == text:
+            i.click()
+
 def goto_google(driver) -> None:
     '''
     This function navigates to google Gmail
@@ -143,9 +154,12 @@ def google_login(driver) -> None:
     click_google_sign_in(driver)
     enter_email_google(driver)
     email_next_click_google(driver)
-    thread.sleep(DELAY_TIME)
+    thread.sleep(DELAY_TIME)    #remove this line may lead to crashes
     enter_password_google(driver)
     password_next_click_google(driver)
     continue_page_click_google(driver)
     inbox_page_check_google(driver)
+    thread.sleep(DELAY_TIME)
+    search_for_email(driver, "cReddit support cen.")
+    thread.sleep(DELAY_TIME)
     write_to_all_files("#################### Gmail Login Complete ####################")
