@@ -7,7 +7,6 @@ from pynput.keyboard import Key, Controller
 from constants import DELAY_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
 
-
 class Subpage(Enum):
     '''
     This class is used to define the different subpages of the settings page
@@ -18,7 +17,6 @@ class Subpage(Enum):
     FEED = (3, "Feed Settings")
     NOTIFICATIONS = (4, "Notifications")
     EMAILS = (5, "Emails")
-
 
 # Constant IDs to identify the subpages
 SUBPAGES = {
@@ -38,7 +36,6 @@ URLS = {
     Subpage.NOTIFICATIONS: "http://localhost:5173/settings/notifications",
     Subpage.EMAILS: "http://localhost:5173/settings/emails"
 }
-
 
 def check_popup_notification(driver) -> None:
     '''
@@ -110,7 +107,6 @@ def goto_settings(driver) -> None:
             + " [settings() -> goto_settings() -> settings page not loaded]"
         )
 
-
 def goto_subpage(driver, subpage: Subpage) -> None:
     '''
     This function goes to a specific subpage of the settings page
@@ -152,9 +148,6 @@ def goto_subpage(driver, subpage: Subpage) -> None:
             subpage.value[1] + " button not found]"
         )
         return
-
-# Tests on the Account Subpage
-
 
 def account_subpage(driver) -> None:
     '''
@@ -678,6 +671,455 @@ def profile_subpage(driver) -> None:
     thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
+def safety_subpage(driver) -> None:
+    '''
+    This function test the safety subpage of the settings page
+    '''
+    write_to_all_files(
+        "#################### Testing Safety Subpage ####################")
+
+    try:
+        block = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.ID, "safety-block-user-input"))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", block)
+        thread.sleep(DELAY_TIME)
+        block.clear()
+        block.send_keys("Test User")
+        report_success(
+            "The block user input was found"
+            + " [settings() -> safety_subpage() -> block user input found]"
+        )
+        # Click Add
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The block user input was not found"
+            + " [settings() -> safety_subpage() -> block user input not found]"
+        )
+
+    # Try to remove users from blocked list
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[1]/h3'))
+        )
+        # Click the remove button
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[2]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The user was not found"
+            + " [settings() -> safety_subpage() -> user not found]"
+        )
+
+    # Mute Communities
+    try:
+        mute = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.ID, "safety-mute-community-input"))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", mute)
+        thread.sleep(DELAY_TIME)
+        mute.clear()
+        mute.send_keys("Test Community")
+        report_success(
+            "The mute community input was found"
+            + " [settings() -> safety_subpage() -> mute community input found]"
+        )
+        # Click Add
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[8]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The mute community input was not found"
+            + " [settings() -> safety_subpage() -> mute community input not found]"
+        )
+
+    # Try to remove communities from muted list
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[9]/div[1]/h3'))
+        )
+        # Click the remove button
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[9]/div[2]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The community was not found"
+            + " [settings() -> safety_subpage() -> community not found]"
+        )
+
+def feed_subpage(driver) -> None:
+    '''
+    This function test the feed subpage of the settings page
+    '''
+
+    write_to_all_files(
+        "#################### Testing Feed Subpage ####################")
+
+    # Test show 18+ content
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[1]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The show 18+ content button was found"
+            + " [settings() -> feed_subpage() -> show 18+ content button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The show 18+ content button was not found"
+            + " [settings() -> feed_subpage() -> show 18+ content button not found]"
+        )
+
+    # Check if the popup notification is displayed
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Test the autoplay media button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The autoplay media button was found"
+            + " [settings() -> feed_subpage() -> autoplay media button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The autoplay media button was not found"
+            + " [settings() -> feed_subpage() -> autoplay media button not found]"
+        )
+
+    # Check if the popup notification is displayed
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the community themes button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The community themes button was found"
+            + " [settings() -> feed_subpage() -> community themes button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The community themes button was not found"
+            + " [settings() -> feed_subpage() -> community themes button not found]"
+        )
+
+    # Check if the popup notification is displayed
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the community content sort dropdown list
+    # First click the dropdown list
+    try:
+        sort_option = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[4]/div[2]/div/a'))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", sort_option)
+        sort_option.click()
+        report_success(
+            "The dropdown list was found"
+            + " [settings() -> feed_subpage() -> dropdown list found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The dropdown list was not found"
+            + " [settings() -> feed_subpage() -> dropdown list not found]"
+        )
+
+    thread.sleep(DELAY_TIME)
+    # Then try to select a sort option from the expanded dropdown list
+    # First try the Hot option
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.ID, 'undefined-hot'))
+        ).click()
+        report_success(
+            "Hot option was found"
+            + " [settings() -> feed_subpage() -> Hot option found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "Hot option was not found"
+            + " [settings() -> feed_subpage() -> Hot option not found]"
+        )
+
+    # Check if the popup notification is displayed
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Make sure the dropdown shows the changed option
+    if sort_option.text == "Hot":
+        report_success(
+            "Sort option was changed"
+            + " [settings() -> feed_subpage() -> Sort option changed]"
+        )
+    else:
+        report_fail(
+            "Sort option was not changed"
+            + " [settings() -> feed_subpage() -> Sort option not changed]"
+        )
+
+    # Check the global content view dropdown list
+    # First click the dropdown list
+    try:
+        view_option = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[5]/div[2]/div/a'))
+        )
+        view_option.click()
+        report_success(
+            "The dropdown list was found"
+            + " [settings() -> feed_subpage() -> dropdown list found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The dropdown list was not found"
+            + " [settings() -> feed_subpage() -> dropdown list not found]"
+        )
+
+    thread.sleep(DELAY_TIME)
+    # Then try to select a view option from the expanded dropdown list
+    # First try the Card option
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.ID, 'undefined-card'))
+        ).click()
+        report_success(
+            "Card option was found"
+            + " [settings() -> feed_subpage() -> Card option found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "Card option was not found"
+            + " [settings() -> feed_subpage() -> Card option not found]"
+        )
+
+    # Check if the popup notification is displayed
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Make sure the dropdown shows the changed option
+    if view_option.text == "Card":
+        report_success(
+            "View option was changed"
+            + " [settings() -> feed_subpage() -> View option changed]"
+        )
+    else:
+        report_fail(
+            "View option was not changed"
+            + " [settings() -> feed_subpage() -> View option not changed]"
+        )
+
+    # Check the open posts in new tab button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[6]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The open posts in new tab button was found"
+            + " [settings() -> feed_subpage() -> open posts in new tab button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The open posts in new tab button was not found"
+            + " [settings() -> feed_subpage() -> open posts in new tab button not found]"
+        )
+
+def notifications_subpage(driver) -> None:
+    '''
+    This function test the notifications subpage of the settings page
+    '''
+    write_to_all_files(
+        "#################### Testing Notifications Subpage ####################")
+
+    # Check the mentions button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[1]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The mentions button was found"
+            + " [settings() -> notifications_subpage() -> mentions button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The mentions button was not found"
+            + " [settings() -> notifications_subpage() -> mentions button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the messages button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The messages button was found"
+            + " [settings() -> notifications_subpage() -> messages button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The messages button was not found"
+            + " [settings() -> notifications_subpage() -> messages button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the upvotes on the posts button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The upvotes posts button was found"
+            + " [settings() -> notifications_subpage() -> upvotes posts button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The upvotes posts button was not found"
+            + " [settings() -> notifications_subpage() -> upvotes posts button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the upvotes on the comments button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[4]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The upvotes comments button was found"
+            + " [settings() -> notifications_subpage() -> upvotes comments button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The upvotes comments button was not found"
+            + " [settings() -> notifications_subpage() -> upvotes comments button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the replies on the comments button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[5]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The replies comments button was found"
+            + " [settings() -> notifications_subpage() -> replies comments button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The replies comments button was not found"
+            + " [settings() -> notifications_subpage() -> replies comments button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the new followers button
+    try:
+        followers = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[6]/div[2]/label/div'))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", followers)
+        thread.sleep(DELAY_TIME)
+        followers.click()
+        report_success(
+            "The new followers button was found"
+            + " [settings() -> notifications_subpage() -> new followers button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The new followers button was not found"
+            + " [settings() -> notifications_subpage() -> new followers button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the posts you follow button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[7]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The posts you follow button was found"
+            + " [settings() -> notifications_subpage() -> posts you follow button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The posts you follow button was not found"
+            + " [settings() -> notifications_subpage() -> posts you follow button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the comments you follow button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[8]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The comments you follow button was found"
+            + " [settings() -> notifications_subpage() -> comments you follow button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The comments you follow button was not found"
+            + " [settings() -> notifications_subpage() -> comments you follow button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
 def settings(driver) -> None:
     '''
     This function test the settings page of the website
@@ -704,21 +1146,25 @@ def settings(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # Page 2: Profile
-    goto_subpage(driver, Subpage.PROFILE)
-    thread.sleep(DELAY_TIME)
-    profile_subpage(driver)
+    # goto_subpage(driver, Subpage.PROFILE)
+    # thread.sleep(DELAY_TIME)
+    # profile_subpage(driver)
 
     # Page 3: Safety & Privacy
     # goto_subpage(driver, Subpage.SAFETY)
     # thread.sleep(DELAY_TIME)
+    # safety_subpage(driver)
 
     # Page 4: Feed Settings
     # goto_subpage(driver, Subpage.FEED)
     # thread.sleep(DELAY_TIME)
+    # feed_subpage(driver)
+
 
     # Page 5: Notifications
-    # goto_subpage(driver, Subpage.NOTIFICATIONS)
-    # thread.sleep(DELAY_TIME)
+    goto_subpage(driver, Subpage.NOTIFICATIONS)
+    thread.sleep(DELAY_TIME)
+    notifications_subpage(driver)
 
     # Page 6: Emails
     # goto_subpage(driver, Subpage.EMAILS)
