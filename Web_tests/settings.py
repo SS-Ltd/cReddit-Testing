@@ -7,7 +7,6 @@ from pynput.keyboard import Key, Controller
 from constants import DELAY_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
 
-
 class Subpage(Enum):
     '''
     This class is used to define the different subpages of the settings page
@@ -18,7 +17,6 @@ class Subpage(Enum):
     FEED = (3, "Feed Settings")
     NOTIFICATIONS = (4, "Notifications")
     EMAILS = (5, "Emails")
-
 
 # Constant IDs to identify the subpages
 SUBPAGES = {
@@ -38,7 +36,6 @@ URLS = {
     Subpage.NOTIFICATIONS: "http://localhost:5173/settings/notifications",
     Subpage.EMAILS: "http://localhost:5173/settings/emails"
 }
-
 
 def check_popup_notification(driver) -> None:
     '''
@@ -110,7 +107,6 @@ def goto_settings(driver) -> None:
             + " [settings() -> goto_settings() -> settings page not loaded]"
         )
 
-
 def goto_subpage(driver, subpage: Subpage) -> None:
     '''
     This function goes to a specific subpage of the settings page
@@ -152,9 +148,6 @@ def goto_subpage(driver, subpage: Subpage) -> None:
             subpage.value[1] + " button not found]"
         )
         return
-
-# Tests on the Account Subpage
-
 
 def account_subpage(driver) -> None:
     '''
@@ -678,6 +671,96 @@ def profile_subpage(driver) -> None:
     thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
+def safety_subpage(driver) -> None:
+    '''
+    This function test the safety subpage of the settings page
+    '''
+    write_to_all_files(
+        "#################### Testing Safety Subpage ####################")
+
+    try:
+        block = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.ID, "safety-block-user-input"))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", block)
+        thread.sleep(DELAY_TIME)
+        block.clear()
+        block.send_keys("Test User")
+        report_success(
+            "The block user input was found"
+            + " [settings() -> safety_subpage() -> block user input found]"
+        )
+        # Click Add
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The block user input was not found"
+            + " [settings() -> safety_subpage() -> block user input not found]"
+        )
+
+    # Try to remove users from blocked list
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[1]/h3'))
+        )
+        # Click the remove button
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[2]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The user was not found"
+            + " [settings() -> safety_subpage() -> user not found]"
+        )
+
+    # Mute Communities
+    try:
+        mute = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.ID, "safety-mute-community-input"))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", mute)
+        thread.sleep(DELAY_TIME)
+        mute.clear()
+        mute.send_keys("Test Community")
+        report_success(
+            "The mute community input was found"
+            + " [settings() -> safety_subpage() -> mute community input found]"
+        )
+        # Click Add
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[8]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The mute community input was not found"
+            + " [settings() -> safety_subpage() -> mute community input not found]"
+        )
+
+    # Try to remove communities from muted list
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[9]/div[1]/h3'))
+        )
+        # Click the remove button
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[9]/div[2]/button'))
+        ).click()
+    except TimeoutException:
+        report_fail(
+            "The community was not found"
+            + " [settings() -> safety_subpage() -> community not found]"
+        )
+
 def settings(driver) -> None:
     '''
     This function test the settings page of the website
@@ -704,13 +787,14 @@ def settings(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # Page 2: Profile
-    goto_subpage(driver, Subpage.PROFILE)
-    thread.sleep(DELAY_TIME)
-    profile_subpage(driver)
+    # goto_subpage(driver, Subpage.PROFILE)
+    # thread.sleep(DELAY_TIME)
+    # profile_subpage(driver)
 
     # Page 3: Safety & Privacy
-    # goto_subpage(driver, Subpage.SAFETY)
-    # thread.sleep(DELAY_TIME)
+    goto_subpage(driver, Subpage.SAFETY)
+    thread.sleep(DELAY_TIME)
+    safety_subpage(driver)
 
     # Page 4: Feed Settings
     # goto_subpage(driver, Subpage.FEED)
