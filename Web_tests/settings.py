@@ -950,6 +950,175 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> open posts in new tab button not found]"
         )
 
+def notifications_subpage(driver) -> None:
+    '''
+    This function test the notifications subpage of the settings page
+    '''
+    write_to_all_files(
+        "#################### Testing Notifications Subpage ####################")
+
+    # Check the mentions button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[1]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The mentions button was found"
+            + " [settings() -> notifications_subpage() -> mentions button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The mentions button was not found"
+            + " [settings() -> notifications_subpage() -> mentions button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the messages button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The messages button was found"
+            + " [settings() -> notifications_subpage() -> messages button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The messages button was not found"
+            + " [settings() -> notifications_subpage() -> messages button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the upvotes on the posts button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The upvotes posts button was found"
+            + " [settings() -> notifications_subpage() -> upvotes posts button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The upvotes posts button was not found"
+            + " [settings() -> notifications_subpage() -> upvotes posts button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the upvotes on the comments button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[4]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The upvotes comments button was found"
+            + " [settings() -> notifications_subpage() -> upvotes comments button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The upvotes comments button was not found"
+            + " [settings() -> notifications_subpage() -> upvotes comments button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the replies on the comments button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[5]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The replies comments button was found"
+            + " [settings() -> notifications_subpage() -> replies comments button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The replies comments button was not found"
+            + " [settings() -> notifications_subpage() -> replies comments button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the new followers button
+    try:
+        followers = WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[6]/div[2]/label/div'))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", followers)
+        thread.sleep(DELAY_TIME)
+        followers.click()
+        report_success(
+            "The new followers button was found"
+            + " [settings() -> notifications_subpage() -> new followers button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The new followers button was not found"
+            + " [settings() -> notifications_subpage() -> new followers button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the posts you follow button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[7]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The posts you follow button was found"
+            + " [settings() -> notifications_subpage() -> posts you follow button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The posts you follow button was not found"
+            + " [settings() -> notifications_subpage() -> posts you follow button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the comments you follow button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[8]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The comments you follow button was found"
+            + " [settings() -> notifications_subpage() -> comments you follow button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The comments you follow button was not found"
+            + " [settings() -> notifications_subpage() -> comments you follow button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
 
 def settings(driver) -> None:
     '''
@@ -987,14 +1156,15 @@ def settings(driver) -> None:
     # safety_subpage(driver)
 
     # Page 4: Feed Settings
-    goto_subpage(driver, Subpage.FEED)
-    thread.sleep(DELAY_TIME)
-    feed_subpage(driver)
+    # goto_subpage(driver, Subpage.FEED)
+    # thread.sleep(DELAY_TIME)
+    # feed_subpage(driver)
 
 
     # Page 5: Notifications
-    # goto_subpage(driver, Subpage.NOTIFICATIONS)
-    # thread.sleep(DELAY_TIME)
+    goto_subpage(driver, Subpage.NOTIFICATIONS)
+    thread.sleep(DELAY_TIME)
+    notifications_subpage(driver)
 
     # Page 6: Emails
     # goto_subpage(driver, Subpage.EMAILS)
