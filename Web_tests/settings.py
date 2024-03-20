@@ -1120,6 +1120,73 @@ def notifications_subpage(driver) -> None:
     thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
+def emails_subpage(driver) -> None:
+    '''
+    This function test the emails subpage of the settings page
+    '''
+    write_to_all_files(
+        "#################### Testing Emails Subpage ####################")
+
+    # Check the chat requests button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[1]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The chat requests button was found"
+            + " [settings() -> emails_subpage() -> chat requests button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The chat requests button was not found"
+            + " [settings() -> emails_subpage() -> chat requests button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the new followers button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The new followers button was found"
+            + " [settings() -> emails_subpage() -> new followers button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The new followers button was not found"
+            + " [settings() -> emails_subpage() -> new followers button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
+    # Check the unsubscribe from all emails button
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[3]/div[2]/label/div'))
+        ).click()
+        report_success(
+            "The unsubscribe from all emails button was found"
+            + " [settings() -> emails_subpage() -> unsubscribe from all emails button found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The unsubscribe from all emails button was not found"
+            + " [settings() -> emails_subpage() -> unsubscribe from all emails button not found]"
+        )
+
+    # Check the popup notification
+    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
+
 def settings(driver) -> None:
     '''
     This function test the settings page of the website
@@ -1162,13 +1229,14 @@ def settings(driver) -> None:
 
 
     # Page 5: Notifications
-    goto_subpage(driver, Subpage.NOTIFICATIONS)
-    thread.sleep(DELAY_TIME)
-    notifications_subpage(driver)
+    # goto_subpage(driver, Subpage.NOTIFICATIONS)
+    # thread.sleep(DELAY_TIME)
+    # notifications_subpage(driver)
 
     # Page 6: Emails
-    # goto_subpage(driver, Subpage.EMAILS)
-    # thread.sleep(DELAY_TIME)
+    goto_subpage(driver, Subpage.EMAILS)
+    thread.sleep(DELAY_TIME)
+    emails_subpage(driver)
 
     # write_to_all_files("Settings page test completed")
     # thread.sleep(DELAY_TIME)
