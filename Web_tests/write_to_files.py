@@ -2,7 +2,9 @@
 this file is used to write the data to the output files and the console
 '''
 import datetime
-from constants import SUCCESS_FILE_PATH, FAIL_FILE_PATH, COMBINED_FILE_PATH, LOG_FILE_PATH
+from globals import increment_number_of_failed_tests, increment_number_of_passed_tests, get_number_of_failed_tests, get_number_of_passed_tests
+from constants import SUCCESS_FILE_PATH, FAIL_FILE_PATH, COMBINED_FILE_PATH, LOG_FILE_PATH,RUN_TIME_STATISTICS_FILE_PATH
+
 
 def delete_file_content(file_path):
     '''
@@ -56,11 +58,13 @@ def report_success(data : str):
     '''
     This function writes the data to the success file
     :param data: the data to write to the file
+    :param number_of_passed_tests: the number of passed tests
     :return: None
     '''
     write_to_file(data, SUCCESS_FILE_PATH)
     write_to_combined_file(data)
     print(data)
+    increment_number_of_passed_tests()
 
 def report_fail(data : str):
     '''
@@ -71,6 +75,7 @@ def report_fail(data : str):
     write_to_file(data, FAIL_FILE_PATH)
     write_to_combined_file(data)
     print(data)
+    increment_number_of_failed_tests()
 
 def write_to_all_files(data : str):
     '''
@@ -82,3 +87,14 @@ def write_to_all_files(data : str):
     write_to_file(data, SUCCESS_FILE_PATH)
     write_to_file(data, FAIL_FILE_PATH)
     print(data)
+
+def _write_run_time_statistics():
+    '''
+    This function writes the run time statistics to the log file
+    :return: None
+    '''
+    number_of_failed_tests = get_number_of_failed_tests()
+    number_of_passed_tests = get_number_of_passed_tests()
+    print("Number of passed tests: " + str(number_of_passed_tests))
+    print("Number of failed tests: " + str(number_of_failed_tests))
+    write_to_log_file("Number of passed tests: " + str(number_of_passed_tests))

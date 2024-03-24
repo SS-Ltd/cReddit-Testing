@@ -1,9 +1,8 @@
 '''
 This module is used to test the homepage and move to other connected modules.
-
 '''
 
-from login import login
+from Registration.login import login
 from settings import settings
 from write_to_files import write_to_all_files
 

@@ -2,11 +2,13 @@
 This module is used to test the login page of the website
 """
 
+import sys
+import os
 from enum import Enum
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from constants import DELAY_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
-
 
 class Hyperlink(Enum):
     '''

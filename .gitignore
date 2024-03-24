@@ -4,6 +4,7 @@
 /Web_Text_Files/success_file.txt
 /Web_Text_Files/Usefulinfo.txt
 /Web_Tests/__pycache__
+/Web_Tests/Registration/__pycache__
 /Web_Text_Files/credentials.env
 /Mobile_Tests/node_modules
 /Mobile_Tests/package-lock.json
