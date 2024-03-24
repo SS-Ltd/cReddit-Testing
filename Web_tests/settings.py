@@ -2,10 +2,16 @@
 This module is used to test the settings page of the Reddit website.
 '''
 from enum import Enum
-from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from pynput.keyboard import Key, Controller
+from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from constants import DELAY_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
+from helper_functions import locate_element
+from Settings.account import account
+from Settings.profile import profile
+from Settings.privacy import privacy
+from Settings.feed import feed
+
 
 class Subpage(Enum):
     '''
@@ -17,6 +23,7 @@ class Subpage(Enum):
     FEED = (3, "Feed Settings")
     NOTIFICATIONS = (4, "Notifications")
     EMAILS = (5, "Emails")
+
 
 # Constant IDs to identify the subpages
 SUBPAGES = {
@@ -37,16 +44,15 @@ URLS = {
     Subpage.EMAILS: "http://localhost:5173/settings/emails"
 }
 
+
 def check_popup_notification(driver) -> None:
     '''
     This function checks the popup notification that appears after changing
     '''
     # Check if pop-up is displayed
+    thread.sleep(DELAY_TIME)
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//*[@id="root"]/div[1]/div'))
-        )
+        locate_element(driver, by_xpath='//*[@id="root"]/div[1]/div')
         report_success(
             "The changes pop-up was found"
             + " [settings() -> account_subpage() -> changes pop-up found]"
@@ -57,14 +63,13 @@ def check_popup_notification(driver) -> None:
             + " [settings() -> account_subpage() -> changes pop-up not found]"
         )
 
+
 def goto_settings(driver) -> None:
     '''
     This function goes to the settings page from the homepage
     '''
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, "navbar_profile"))).click()
-        # EC.presence_of_element_located((By.ID, "expand-user-drawer-button"))).click()
+        locate_element(driver, by_id="navbar_profile").click()
         report_success(
             "The element with the ID 'navbar_profile' was found"
             + " [settings() -> goto_settings() -> profile button found]"
@@ -79,9 +84,7 @@ def goto_settings(driver) -> None:
     thread.sleep(DELAY_TIME)
 
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, "profile_settings"))).click()
-        # EC.presence_of_element_located((By.XPATH, '//*[@id="user-drawer-content"]/ul[3]/faceplate-tracker/li/a'))).click()
+        locate_element(driver, by_id="profile_settings").click()
         report_success(
             "The element with the ID 'profile_settings' was found"
             + " [settings() -> goto_settings() -> settings button found]"
@@ -96,7 +99,6 @@ def goto_settings(driver) -> None:
     # Check if the settings page is loaded
     thread.sleep(DELAY_TIME)
     if driver.current_url == "http://localhost:5173/settings":
-        # if driver.current_url == "https://www.reddit.com/settings":
         report_success(
             "The settings page was loaded"
             + " [settings() -> goto_settings() -> settings page loaded]"
@@ -107,16 +109,14 @@ def goto_settings(driver) -> None:
             + " [settings() -> goto_settings() -> settings page not loaded]"
         )
 
+
 def goto_subpage(driver, subpage: Subpage) -> None:
     '''
     This function goes to a specific subpage of the settings page
 
     '''
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located(
-                (By.ID, SUBPAGES[subpage]))
-        ).click()
+        locate_element(driver, by_id=SUBPAGES[subpage]).click()
         report_success(
             "The " + subpage.value[1] + " subpage button was found"
             + " [settings() -> goto_subpage() -> " +
@@ -126,7 +126,6 @@ def goto_subpage(driver, subpage: Subpage) -> None:
         # Wait for the page to load
         thread.sleep(DELAY_TIME)
 
-        # TOBEUPDATED!!!!!!!!!
         if driver.current_url == URLS[subpage]:
             report_success(
                 "The " + subpage.value[1] + " subpage was loaded"
@@ -149,6 +148,7 @@ def goto_subpage(driver, subpage: Subpage) -> None:
         )
         return
 
+
 def account_subpage(driver) -> None:
     '''
     This function test the account subpage of the settings page
@@ -159,10 +159,7 @@ def account_subpage(driver) -> None:
 
     # Test the change email button
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located(
-                (By.ID, "settings-change-email-button"))
-        ).click()
+        locate_element(driver, by_id="settings-change-email-button").click()
         report_success(
             "The change email button was found"
             + " [settings() -> account_subpage() -> change email button found]"
@@ -174,15 +171,12 @@ def account_subpage(driver) -> None:
         )
 
     check_popup_notification(driver)
-    thread.sleep(DELAY_TIME)
 
     # Test the Gender dropdown list
     # First click the dropdown list
     try:
-        gender_option = WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/div[2]/div/a'))
-        )
+        gender_option = locate_element(
+            driver, by_xpath='//*[@id="root"]/div[2]/div[3]/div[3]/div/div[2]/div[2]/div/a')
         gender_option.click()
         report_success(
             "The dropdown list was found"
@@ -244,7 +238,6 @@ def account_subpage(driver) -> None:
         )
 
     check_popup_notification(driver)
-    thread.sleep(DELAY_TIME)
 
     # Test the country dropdown list
     # First click the dropdown list
@@ -368,6 +361,7 @@ def account_subpage(driver) -> None:
             "The delete account button was not found"
             + " [settings() -> account_subpage() -> delete account button not found]"
         )
+
 
 def profile_subpage(driver) -> None:
     '''
@@ -564,7 +558,8 @@ def profile_subpage(driver) -> None:
 
     keyboard = Controller()
 
-    keyboard.type('C:\\Users\\abdal\\Pictures\\Screenshot 2024-03-19 195003.png')
+    keyboard.type(
+        'C:\\Users\\abdal\\Pictures\\Screenshot 2024-03-19 195003.png')
     thread.sleep(DELAY_TIME)
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
@@ -590,8 +585,6 @@ def profile_subpage(driver) -> None:
             + " [settings() -> profile_subpage() -> NSFW button found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the 'Allow people to follow you'
@@ -610,8 +603,6 @@ def profile_subpage(driver) -> None:
             + " [settings() -> profile_subpage() -> Allow people to follow you button found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the 'Content Visibility' button
@@ -630,8 +621,6 @@ def profile_subpage(driver) -> None:
             + " [settings() -> profile_subpage() -> Content Visibility button found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check if 'Active in communities visibility' button
@@ -667,9 +656,8 @@ def profile_subpage(driver) -> None:
             + " [settings() -> profile_subpage() -> Clear history button found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
+
 
 def safety_subpage(driver) -> None:
     '''
@@ -761,6 +749,7 @@ def safety_subpage(driver) -> None:
             + " [settings() -> safety_subpage() -> community not found]"
         )
 
+
 def feed_subpage(driver) -> None:
     '''
     This function test the feed subpage of the settings page
@@ -785,8 +774,6 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> show 18+ content button not found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Test the autoplay media button
@@ -805,8 +792,6 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> autoplay media button not found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the community themes button
@@ -825,8 +810,6 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> community themes button not found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the community content sort dropdown list
@@ -866,8 +849,6 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> Hot option not found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Make sure the dropdown shows the changed option
@@ -918,8 +899,6 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> Card option not found]"
         )
 
-    # Check if the popup notification is displayed
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Make sure the dropdown shows the changed option
@@ -950,6 +929,7 @@ def feed_subpage(driver) -> None:
             + " [settings() -> feed_subpage() -> open posts in new tab button not found]"
         )
 
+
 def notifications_subpage(driver) -> None:
     '''
     This function test the notifications subpage of the settings page
@@ -973,8 +953,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> mentions button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the messages button
@@ -993,8 +971,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> messages button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the upvotes on the posts button
@@ -1013,8 +989,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> upvotes posts button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the upvotes on the comments button
@@ -1033,8 +1007,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> upvotes comments button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the replies on the comments button
@@ -1053,8 +1025,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> replies comments button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the new followers button
@@ -1076,8 +1046,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> new followers button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the posts you follow button
@@ -1096,8 +1064,6 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> posts you follow button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the comments you follow button
@@ -1116,9 +1082,8 @@ def notifications_subpage(driver) -> None:
             + " [settings() -> notifications_subpage() -> comments you follow button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
+
 
 def emails_subpage(driver) -> None:
     '''
@@ -1143,8 +1108,6 @@ def emails_subpage(driver) -> None:
             + " [settings() -> emails_subpage() -> chat requests button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the new followers button
@@ -1163,8 +1126,6 @@ def emails_subpage(driver) -> None:
             + " [settings() -> emails_subpage() -> new followers button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
     # Check the unsubscribe from all emails button
@@ -1183,9 +1144,8 @@ def emails_subpage(driver) -> None:
             + " [settings() -> emails_subpage() -> unsubscribe from all emails button not found]"
         )
 
-    # Check the popup notification
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
+
 
 def settings(driver) -> None:
     '''
@@ -1197,46 +1157,45 @@ def settings(driver) -> None:
     goto_settings(driver)
     # thread.sleep(DELAY_TIME)
 
-    # # Scroll down a little bit
-    # driver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.PAGE_DOWN)
-    # driver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.PAGE_DOWN)
-    # driver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.PAGE_DOWN)
-    # driver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.PAGE_DOWN)
-    # driver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.PAGE_DOWN)
-    # thread.sleep(5)
-
     # Test each subpage of the settings page
     # Page 1: Account
     # goto_subpage(driver, Subpage.ACCOUNT)
     # thread.sleep(DELAY_TIME)
     # account_subpage(driver)
+    # account(driver)
     # thread.sleep(DELAY_TIME)
 
     # Page 2: Profile
     # goto_subpage(driver, Subpage.PROFILE)
     # thread.sleep(DELAY_TIME)
     # profile_subpage(driver)
+    # profile(driver)
+    # thread.sleep(DELAY_TIME)
 
-    # Page 3: Safety & Privacy
-    # goto_subpage(driver, Subpage.SAFETY)
+    # # Page 3: Safety & Privacy
+    goto_subpage(driver, Subpage.SAFETY)
     # thread.sleep(DELAY_TIME)
     # safety_subpage(driver)
+    privacy(driver)
+    thread.sleep(DELAY_TIME)
 
-    # Page 4: Feed Settings
+    # # Page 4: Feed Settings
     # goto_subpage(driver, Subpage.FEED)
     # thread.sleep(DELAY_TIME)
     # feed_subpage(driver)
+    # thread.sleep(DELAY_TIME)
 
-
-    # Page 5: Notifications
+    # # Page 5: Notifications
     # goto_subpage(driver, Subpage.NOTIFICATIONS)
     # thread.sleep(DELAY_TIME)
     # notifications_subpage(driver)
-
-    # Page 6: Emails
-    goto_subpage(driver, Subpage.EMAILS)
-    thread.sleep(DELAY_TIME)
-    emails_subpage(driver)
-
-    # write_to_all_files("Settings page test completed")
     # thread.sleep(DELAY_TIME)
+
+    # # Page 6: Emails
+    # goto_subpage(driver, Subpage.EMAILS)
+    # thread.sleep(DELAY_TIME)
+    # emails_subpage(driver)
+    # thread.sleep(DELAY_TIME)
+
+    write_to_all_files("Settings page test completed")
+    thread.sleep(DELAY_TIME)
