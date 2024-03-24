@@ -9,6 +9,7 @@ from my_imports import WebDriverWait, EC, By, thread
 from write_to_files import delete_all_files_content
 from home_page import home_page
 from google_login import google_login
+from Registration.login import login
 # Prepare the log files
 delete_all_files_content()
 
@@ -26,5 +27,6 @@ thread.sleep(2)
 
 # Start all necessary tests
 #home_page(driver)
-google_login(driver)
+login(driver)
+google_login(driver, "cReddit support center")
 driver.quit()

@@ -144,7 +144,7 @@ def inbox_page_check_google(driver) -> None:
     report_success("The title of the Inbox page was found"
         + "[google_login() -> Inbox Page found]")
 
-def google_login(driver) -> None:
+def google_login(driver,text : str) -> None:
     '''
     This function navigates to google Gmail and logs in
     @param driver: The driver to use
@@ -160,6 +160,6 @@ def google_login(driver) -> None:
     continue_page_click_google(driver)
     inbox_page_check_google(driver)
     thread.sleep(DELAY_TIME)
-    search_for_email(driver, "cReddit support cen.")
+    search_for_email(driver, text)
     thread.sleep(DELAY_TIME)
     write_to_all_files("#################### Gmail Login Complete ####################")
