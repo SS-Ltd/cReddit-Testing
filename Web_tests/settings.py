@@ -11,6 +11,7 @@ from Settings.account import account
 from Settings.profile import profile
 from Settings.privacy import privacy
 from Settings.feed import feed
+from Settings.notifications import notifications
 
 
 class Subpage(Enum):
@@ -1180,16 +1181,17 @@ def settings(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # # Page 4: Feed Settings
-    goto_subpage(driver, Subpage.FEED)
+    # goto_subpage(driver, Subpage.FEED)
     # thread.sleep(DELAY_TIME)
     # feed_subpage(driver)
-    feed(driver)
+    # feed(driver)
     # thread.sleep(DELAY_TIME)
 
     # # Page 5: Notifications
-    # goto_subpage(driver, Subpage.NOTIFICATIONS)
+    goto_subpage(driver, Subpage.NOTIFICATIONS)
     # thread.sleep(DELAY_TIME)
     # notifications_subpage(driver)
+    notifications(driver)
     # thread.sleep(DELAY_TIME)
 
     # # Page 6: Emails
