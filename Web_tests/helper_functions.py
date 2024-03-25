@@ -29,3 +29,25 @@ def check_popup_notification(driver) -> None:
     thread.sleep(DELAY_TIME)
     popup = locate_element(driver, by_xpath='//*[contains(@id, "popup")]')
     assert popup is not None, report_fail("Popup not found")
+
+def check_checkbox(driver, *, by_xpath=None, by_id=None, name) -> None:
+    '''
+    This function checks the toggle buttons
+    '''
+    # Locate the button
+    button_element = locate_element(driver, by_xpath=by_xpath, by_id=by_id)
+    assert button_element is not None, report_fail(
+        name + " Button not found")
+    driver.execute_script("arguments[0].scrollIntoView();", button_element)
+    selected = button_element.is_selected()
+    driver.execute_script("arguments[0].click();", button_element)
+    # check_popup_notification(driver)
+    thread.sleep(DELAY_TIME)
+    driver.refresh()
+    thread.sleep(DELAY_TIME)
+    button_element = locate_element(driver, by_xpath=by_xpath, by_id=by_id)
+    assert button_element is not None, report_fail(
+        name + " Button not found")
+    driver.execute_script("arguments[0].scrollIntoView();", button_element)
+    assert button_element.is_selected() != selected, report_fail(
+        name + " Button not working")
