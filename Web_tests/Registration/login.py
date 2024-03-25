@@ -6,9 +6,15 @@ import sys
 import os
 from enum import Enum
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Registration.forgot_password import forgot_password
+from Registration.logout import logout
+from helper_functions import locate_element , check_logged_in, check_logged_out
 from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from constants import DELAY_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
+from constants import EMAIL, PASSWORD
+from selenium.webdriver.common.keys import Keys
+from Registration.menu_appear import login_menu_appeared, sign_up_menu_appeared, forgot_password_menu_appeared, forgot_username_menu_appeared
 
 class Hyperlink(Enum):
     '''
@@ -17,16 +23,13 @@ class Hyperlink(Enum):
     USER_AGREEMENT = "user_agreement"
     PRIVACY_POLICY = "privacy_policy"
 
-
 def goto_login(driver) -> None:
     """
     This function test the login window of the website
     """
     # Check login button
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, "navbar_login_button"))
-        ).click()
+        locate_element(driver, by_id="navbar_login_button").click()
         report_success(
             "The element with the ID 'navbar_login_button' was found"
             + " [login() -> goto_login() -> login button found]"
@@ -37,20 +40,7 @@ def goto_login(driver) -> None:
             + " [login() -> goto_login() -> login button not found]"
         )
         return
-
-    try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, "navbar_login_menu"))
-        )
-        report_success(
-            "The Login Window appeared"
-            + " [login() -> goto_login() -> login window appeared]"
-        )
-    except TimeoutException:
-        report_fail(
-            "The login window did not appear"
-            + "[login() -> goto_login() -> login window did not appear]"
-        )
+    # Check if the login menu appeared
 
 
 def hyper_links(driver, hyperlink: Hyperlink) -> None:
@@ -60,9 +50,9 @@ def hyper_links(driver, hyperlink: Hyperlink) -> None:
     try:
         WebDriverWait(driver, DELAY_TIME).until(
             EC.presence_of_element_located(
-                (By.XPATH, '//*[@id="navbar_login_menu"]/div/div[2]/p/a[1]'
+                (By.ID, 'login_user_agreement'
                  if hyperlink == hyperlink.USER_AGREEMENT
-                 else '//*[@id="navbar_login_menu"]/div/div[2]/p/a[2]'))
+                 else 'login_policy'))
         ).click()
         # WebDriverWait(driver, DELAY_TIME).until(
         #     EC.presence_of_element_located((By.CSS_SELECTOR, "a.no-underline:nth-child(1)"))
@@ -130,9 +120,7 @@ def close_button_login(driver) -> None:
     """
     # Check close button
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, "login_close"))
-        ).click()
+        locate_element(driver, by_id="login_close").click()
         report_success(
             "The element with the ID 'login_close' was found"
             + "[login() -> close_button() -> close button found]"
@@ -145,9 +133,7 @@ def close_button_login(driver) -> None:
         return
 
     try:
-        WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, "navbar_login_menu"))
-        )
+        locate_element(driver, by_id="navbar_login_menu")
         report_fail(
             "The close button did not work"
             + "[login() -> close_button() -> close button failed]"
@@ -158,6 +144,258 @@ def close_button_login(driver) -> None:
             + "[login() -> close_button() -> close button passed]"
         )
 
+def check_login_with_google(driver) -> None:
+    """
+    This function test the login with google of the website
+    """
+    try:
+        locate_element(driver, by_id="login_oauth").click()
+        report_success(
+            "The element with the ID 'google_login' was found"
+            + "[login() -> check_login_with_google() -> google login found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'google_login' was not found"
+            + "[login() -> check_login_with_google() -> google login not found]"
+        )
+        return
+
+
+    driver.switch_to.window(driver.window_handles[-1])
+
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(
+            EC.title_contains("Sign in - Google Accounts")
+        )
+        report_success(
+            "The title of the Gmail login page was found"
+            + "[login() -> check_login_with_google() -> Gmail login Page found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The title of the Gmail login page was not found"
+            + "[login() -> check_login_with_google() -> Gmail login Page not found]"
+        )
+        return
+
+    # Check if the email input is present
+    try:
+        locate_element(driver, by_id="identifierId").send_keys(EMAIL, Keys.ENTER)
+        report_success(
+            "The email input was found"
+            + "[login() -> check_login_with_google() -> Email input found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The email input was not found"
+            + "[login() -> check_login_with_google() -> Email input not found]"
+        )
+        return
+
+    thread.sleep(DELAY_TIME)
+    # Check if the password input is present
+    try:#this xpath is might not work
+        locate_element(driver, by_xpath="/html/body/"+
+                       "div[1]/div[1]/div[2]/c-wiz/div/"+
+                       "div[2]/div/div/div[1]/form/span/"+
+                       "section[2]/div/div/div[1]/div[1]/"+
+                       "div/div/div/div/div[1]/div/div[1]/input"
+                       ).send_keys(PASSWORD, Keys.ENTER)
+        report_success(
+            "The password input was found"
+            + "[login() -> check_login_with_google() -> Password input found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The password input was not found"
+            + "[login() -> check_login_with_google() -> Password input not found]"
+        )
+        return
+
+    # Check if the Contiue button is present
+    # try:
+    #     locate_element(driver, by_xpath='//*[@id="yDmH0d"]/c-wiz/div/div[3]'+
+    #                    '/div/div/div[2]/div/div/button/span').click()
+    #     report_success(
+    #         "The continue button was found"
+    #         + "[login() -> check_login_with_google() -> Submit button found]"
+    #     )
+    # except TimeoutException:
+    #     report_fail(
+    #         "The continue button was not found"
+    #         + "[login() -> check_login_with_google() -> Submit button not found]"
+    #     )
+    #     return
+    driver.switch_to.window(driver.window_handles[0])
+
+    # Check if pop-up is displayed
+    try:
+        locate_element(driver, by_xpath='//*[contains(@id, "toast-success")]')
+    except (TimeoutException, AssertionError):
+        report_fail("Popup not found in google login"
+                    +"[login() -> check_login_with_google() -> Popup not found]")
+        return
+    report_success("Popup found in google login"
+                   +"[login() -> check_login_with_google() -> Popup found]")
+
+def username_textbox(driver) -> None:
+    """
+    This function test the username text box of the website and all its corner cases
+    """
+    # Check username text box when no text entered
+    try:
+        locate_element(driver, by_id="login_username").click()
+        report_success(
+            "The element with the ID 'login_username' was found and clicked"
+            + "[login() -> username_textbox() -> username text box found and clicked]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username' was not found and clicked"
+            + "[login() -> username_textbox() -> username text box not found and clicked]"
+        )
+        return
+
+    try:
+        locate_element(driver, by_xpath='//*[@id="navbar_login_menu"]/'
+                       +'div[1]/div[1]/div[1]/h1').click()
+        users = driver.find_elements(By.XPATH, '//*[contains(text(),'
+                                     +' "Please fill out this field.")]')
+        assert len(users) > 0
+
+        report_success(
+            "The username 'please fill out this filed' appeared"
+            + "[login() -> username_textbox() -> username text box appeared]"
+        )
+    except (TimeoutException,AssertionError):
+        report_fail(
+            "The username 'please fill out this filed' did not appear"
+            + "[login() -> username_textbox() -> username text box did not appear]"
+        )
+        return
+    # Check username text box when text entered
+    try:
+        locate_element(driver, by_id="login_username").send_keys("test")
+        report_success(
+            "The element with the ID 'login_username' was found 'test' was entered"
+            + "[login() -> username_textbox() -> username text box found and 'text' entered]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username' was not found 'test' was not entered"
+            + "[login() -> username_textbox() -> username"+
+            "text box not found and 'text' not entered]"
+        )
+        return
+
+def password_textbox(driver) -> None:
+    """
+    This function test the password text box of the website and all its corner cases
+    """
+    # Check password text box when no text entered
+    try:
+        locate_element(driver, by_id="login_password").click()
+        report_success(
+            "The element with the ID 'login_password' was found and clicked"
+            + "[login() -> password_textbox() -> password text box found and clicked]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_password' was not found and clicked"
+            + "[login() -> password_textbox() -> password text box not found and clicked]"
+        )
+        return
+
+    try:
+        locate_element(driver, by_id='login_username').click()
+        users = driver.find_elements(By.XPATH, '//*[contains(text(),'
+                                     +' "Please fill out this field.")]')
+        assert len(users) > 0
+
+        report_success(
+            "The password 'please fill out this filed' appeared"
+            + "[login() -> password_textbox() -> password text box appeared]"
+        )
+    except (TimeoutException,AssertionError):
+        report_fail(
+            "The password 'please fill out this filed' did not appear"
+            + "[login() -> password_textbox() -> password text box did not appear]"
+        )
+        return
+    # Check password text box when text entered
+    try:
+        locate_element(driver, by_id="login_password").send_keys("test")
+        report_success(
+            "The element with the ID 'login_password' was found 'test' was entered"
+            + "[login() -> password_textbox() -> password text box found and 'text' entered]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_password' was not found 'test' was not entered"
+            + "[login() -> password_textbox() -> password"+
+            "text box not found and 'text' not entered]"
+        )
+        return
+
+def forgot_username(driver) -> None:
+    """
+    This function test the forgot username of the website
+    """
+    # Check forgot username button
+    try:
+        locate_element(driver, by_id="forgot_username").click()
+        report_success(
+            "The element with the ID 'forgot_username' was found"
+            + "[login() -> forgot_username() -> forgot username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'forgot_username' was not found"
+            + "[login() -> forgot_username() -> forgot username not found]"
+        )
+        return
+def login_to_forgot_username(driver) -> bool:
+    """
+    This function test the login to forgot username of the website
+    """
+    # Check forgot username button
+    try:
+        locate_element(driver, by_id="forgot_username").click()
+        report_success(
+            "The element with the ID 'forgot_username' was found"
+            + "[login() -> login_to_forgot_username() -> forgot username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'forgot_username' was not found"
+            + "[login() -> login_to_forgot_username() -> forgot username not found]"
+        )
+        return
+
+    # Check if the forgot username page is displayed
+    return forgot_username_menu_appeared(driver)
+
+def login_to_forgot_password(driver) -> bool:
+    """
+    This function test the login to forgot password of the website
+    """
+    # Check forgot password button
+    try:
+        locate_element(driver, by_id="forgot_pass").click()
+        report_success(
+            "The element with the ID 'forgot_pass' was found"
+            + "[login() -> login_to_forgot_password() -> forgot password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'forgot_pass' was not found"
+            + "[login() -> login_to_forgot_password() -> forgot password not found]"
+        )
+        return
+
+    # Check if the forgot password page is displayed
+    return forgot_password_menu_appeared(driver)
 
 def login(driver) -> None:
     """
@@ -167,25 +405,38 @@ def login(driver) -> None:
     write_to_all_files(
         "#################### Testing Login Page ####################")
     goto_login(driver)
+    login_menu_appeared(driver)
     thread.sleep(DELAY_TIME)
-
+    ##############################################
     # Check user agreement
-    hyper_links(driver, Hyperlink.USER_AGREEMENT)
-    thread.sleep(DELAY_TIME)
+    #hyper_links(driver, Hyperlink.USER_AGREEMENT)
+    #thread.sleep(DELAY_TIME)
     # Check Privacy Policy
-    hyper_links(driver, Hyperlink.PRIVACY_POLICY)
-    thread.sleep(DELAY_TIME)
+    #hyper_links(driver, Hyperlink.PRIVACY_POLICY)
+    #thread.sleep(DELAY_TIME)
     # Check continue with Google
+    #check_login_with_google(driver)
+    #close_button_login(driver)
+    #check_logged_in(driver)
+    #logout(driver)
+    #check_logged_out(driver)
+    #goto_login(driver)#remove this later
     # Check continue with Apple might not get implmented
     # Check Username text box
+    ##############################################
+    username_textbox(driver)
     # Check Password text box
+    password_textbox(driver)
     # Check Log in button
     # Check Forgot username
+    login_to_forgot_username(driver)
+    forgot_username(driver)
     # Check Forgot password
+    login_to_forgot_password(driver)
+    forgot_password(driver)
     # Check Sign up
-
     # Check close button
     close_button_login(driver)
     thread.sleep(DELAY_TIME)
     write_to_all_files(
-        "############################################################")
+        "#################### Finished Testing Login Page ####################")

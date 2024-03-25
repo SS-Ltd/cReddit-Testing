@@ -5,7 +5,7 @@
 /Web_Text_Files/Usefulinfo.txt
 /Web_Tests/__pycache__
 /Web_Tests/Registration/__pycache__
-/Web_Text_Files/credentials.env
+/Web_Text_Files/.env
 /Mobile_Tests/node_modules
 /Mobile_Tests/package-lock.json
 /Mobile_Tests/package.json
