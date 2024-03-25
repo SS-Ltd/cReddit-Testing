@@ -24,6 +24,7 @@ def users_block(driver: WebDriver) -> None:
     locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[2]/button').click()
     check_popup_notification(driver)
     thread.sleep(DELAY_TIME)
+    input_field.clear()
     # Check that the user has been added to the list of blocked users
     users = driver.find_elements(By.XPATH, '//*[contains(text(), "Test User")]')
     # check if users is not empty
@@ -58,6 +59,7 @@ def communities_mute(driver) -> None:
     locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[8]/button').click()
     check_popup_notification(driver)
     thread.sleep(DELAY_TIME)
+    input_field.clear()
     # Check that the community has been added to the list of muted communities
     communities = driver.find_elements(By.XPATH, '//*[contains(text(), "Test Community")]')
     # check if communities is not empty
