@@ -218,20 +218,7 @@ def check_login_with_google(driver) -> None:
         )
         return
 
-    # Check if the Contiue button is present
-    # try:
-    #     locate_element(driver, by_xpath='//*[@id="yDmH0d"]/c-wiz/div/div[3]'+
-    #                    '/div/div/div[2]/div/div/button/span').click()
-    #     report_success(
-    #         "The continue button was found"
-    #         + "[login() -> check_login_with_google() -> Submit button found]"
-    #     )
-    # except TimeoutException:
-    #     report_fail(
-    #         "The continue button was not found"
-    #         + "[login() -> check_login_with_google() -> Submit button not found]"
-    #     )
-    #     return
+ 
     driver.switch_to.window(driver.window_handles[0])
 
     # Check if pop-up is displayed
@@ -398,10 +385,10 @@ def login(driver) -> None:
     thread.sleep(DELAY_TIME)
     ##############################################
     # Check user agreement
-    #hyper_links(driver, Hyperlink.USER_AGREEMENT)
+    hyper_links(driver, Hyperlink.USER_AGREEMENT)
     #thread.sleep(DELAY_TIME)
     # Check Privacy Policy
-    #hyper_links(driver, Hyperlink.PRIVACY_POLICY)
+    hyper_links(driver, Hyperlink.PRIVACY_POLICY)
     #thread.sleep(DELAY_TIME)
     # Check continue with Google
     #check_login_with_google(driver)
