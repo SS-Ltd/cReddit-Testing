@@ -167,10 +167,10 @@ def email_textbox(driver):
 
 
 def senario_wrong_credentials(driver):
-    """
+    '''
     This function tests the forgot password
     functionality of the website in case of wrong credentials
-    """
+    '''
     try:
         locate_element(driver, by_id="reset_password_username").clear()
         locate_element(driver, by_id="reset_password_username").send_keys("false")

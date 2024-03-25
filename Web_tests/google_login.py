@@ -6,6 +6,8 @@ from my_imports import WebDriverWait, EC, By, TimeoutException , thread
 from write_to_files import write_to_all_files, report_fail, report_success
 from constants import EMAIL, PASSWORD ,DELAY_TIME
 from globals import set_first_login, get_first_login
+
+
 def search_for_email(driver, text :str) -> bool:
     '''
     This function searches for an email in the Gmail inbox

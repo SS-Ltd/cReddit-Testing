@@ -13,8 +13,13 @@ from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from constants import DELAY_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
 from constants import EMAIL, PASSWORD
+from Registration.forgot_username import forgot_username
 from selenium.webdriver.common.keys import Keys
-from Registration.menu_appear import login_menu_appeared, sign_up_menu_appeared, forgot_password_menu_appeared, forgot_username_menu_appeared
+from Registration.menu_appear import (login_menu_appeared, 
+                                      sign_up_menu_appeared, 
+                                      forgot_password_menu_appeared,
+                                      forgot_username_menu_appeared
+                                      )
 
 class Hyperlink(Enum):
     '''
@@ -338,23 +343,7 @@ def password_textbox(driver) -> None:
         )
         return
 
-def forgot_username(driver) -> None:
-    """
-    This function test the forgot username of the website
-    """
-    # Check forgot username button
-    try:
-        locate_element(driver, by_id="forgot_username").click()
-        report_success(
-            "The element with the ID 'forgot_username' was found"
-            + "[login() -> forgot_username() -> forgot username found]"
-        )
-    except TimeoutException:
-        report_fail(
-            "The element with the ID 'forgot_username' was not found"
-            + "[login() -> forgot_username() -> forgot username not found]"
-        )
-        return
+
 def login_to_forgot_username(driver) -> bool:
     """
     This function test the login to forgot username of the website
