@@ -23,10 +23,12 @@ print(driver.title)
 
 # Wait for the site to load
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+driver.maximize_window()
 thread.sleep(2)
 
-# Start all necessary tests
-home_page(driver)
-# login(driver)
-# google_login(driver, "cReddit support center")
+
+#home_page(driver)
+login(driver)
+#google_login(driver, "cReddit support center")
+
 driver.quit()
