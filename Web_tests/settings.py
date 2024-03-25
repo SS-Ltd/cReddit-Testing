@@ -1173,16 +1173,17 @@ def settings(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # # Page 3: Safety & Privacy
-    goto_subpage(driver, Subpage.SAFETY)
+    # goto_subpage(driver, Subpage.SAFETY)
     # thread.sleep(DELAY_TIME)
     # safety_subpage(driver)
-    privacy(driver)
-    thread.sleep(DELAY_TIME)
+    # privacy(driver)
+    # thread.sleep(DELAY_TIME)
 
     # # Page 4: Feed Settings
-    # goto_subpage(driver, Subpage.FEED)
+    goto_subpage(driver, Subpage.FEED)
     # thread.sleep(DELAY_TIME)
     # feed_subpage(driver)
+    feed(driver)
     # thread.sleep(DELAY_TIME)
 
     # # Page 5: Notifications
