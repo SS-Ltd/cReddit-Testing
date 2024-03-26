@@ -3317,7 +3317,6 @@
 2024-03-25 18:00:44.599729 : The back to login button worked[forgot_password() -> check_back_to_login() -> back to login button worked]
 2024-03-25 18:00:44.699731 : The element with the ID 'login_close' was found[login() -> close_button() -> close button found]
 2024-03-25 18:00:48.755922 : The close button worked[login() -> close_button() -> close button passed]
-<<<<<<< HEAD
 2024-03-26 00:01:12.992081 : The element with the ID 'navbar_profile' was found [settings() -> goto_settings() -> profile button found]
 2024-03-26 00:01:17.065688 : The element with the ID 'profile_settings' was found [settings() -> goto_settings() -> settings button found]
 2024-03-26 00:01:21.074559 : The settings page was loaded [settings() -> goto_settings() -> settings page loaded]
@@ -3381,7 +3380,6 @@
 2024-03-26 01:42:16.107462 : The settings page was loaded [settings() -> goto_settings() -> settings page loaded]
 2024-03-26 01:42:16.183585 : The Profile subpage button was found [settings() -> goto_subpage() -> Profile button found]
 2024-03-26 01:42:20.192789 : The Profile subpage was loaded [settings() -> goto_subpage() -> Profile page loaded]
-=======
 2024-03-25 23:31:17.810078 : The element with the ID 'navbar_login_button' was found [login() -> goto_login() -> login button found]
 2024-03-25 23:31:17.831075 : The Login Window appeared [menu_appear.py -> login_menu_appeared() -> login window appeared]
 2024-03-25 23:31:21.934228 : The element with the link text 'USER_AGREEMENT' was found[login() -> hyper_links() -> USER_AGREEMENT found]
@@ -4272,4 +4270,3 @@
 2024-03-26 17:24:37.151514 : The element with the ID 'login_password' was found 'test' was entered[login() -> scenario_wrong_username() -> wrong password found]
 2024-03-26 17:24:37.218515 : The element with the ID 'login_submit' was found[login() -> scenario_wrong_username() -> submit found]
 2024-03-26 17:24:37.252514 : The element with the text 'Invalid username or password.' was found[login() -> scenario_wrong_username() -> wrong username found]
->>>>>>> a2dc437a8b171ca196a823f0bf07f91f969930a5
