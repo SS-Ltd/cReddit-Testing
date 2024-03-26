@@ -283,7 +283,7 @@ def email_textbox_signup(driver)-> bool:
 
 def continue_button_email_signup(driver) -> bool:
     """
-    This function tests the continue button of the forgot password page
+    This function tests the continue button of the signup email page 
     """
     try:
         locate_element(driver, by_id="signup_email_continue").click()
@@ -301,6 +301,26 @@ def continue_button_email_signup(driver) -> bool:
     if sign_up_menu_appeared_username(driver):
         return True
     return False
+
+
+def submit_button_signup(driver) -> bool:
+    """
+    This function tests the submit button of the signup email page 
+    """
+    try:
+        locate_element(driver, by_id="signup_submit").click()
+    except TimeoutException:
+        report_fail(
+            "The submit button was not found"
+            + "[signup() -> submit_button_signup() -> submit button not found]"
+        )
+        return False
+    report_success(
+        "The submit button was found"
+        + "[signup() -> submit_button_signup() -> submit button found]"
+    )
+
+    return check_logged_in(driver)
 
 def username_textbox_signup(driver) -> bool:
     """
@@ -412,8 +432,36 @@ def password_textbox_signup(driver) -> bool:
     thread.sleep(SEE_TIME)
 
     return True
+
+
 def gender_drop_down(driver)->bool:
-    
+    '''
+    This function tests the gender functionality
+    '''
+    dropdown = locate_element(
+        driver, by_id='gender_dropdown_button')
+    assert dropdown is not None, report_fail(
+        "Gender Dropdown not found")
+    dropdown.click()
+    thread.sleep(DELAY_TIME)
+
+    # Choose a random element from the dropdown
+    random = locate_element(
+        driver, by_id='gender_man')
+    assert random is not None, report_fail("Random Element not found")
+    report_success("Random Element found")
+    random_text = random.text
+    random.click()
+
+    dropdown = locate_element(
+        driver,by_id='gender_dropdown_button')
+    assert dropdown is not None, report_fail(
+        "Gender Dropdown not found")
+    assert dropdown.text == random_text, report_fail(
+        "Gender Dropdown not working")
+    report_success("Gender Dropdown working")
+    return True
+
 def close_button_signup_email_signup(driver, page_id : str) -> bool:
     """
     This function test the close button of the website
@@ -491,6 +539,17 @@ def signup(driver) -> None:
         return False
     thread.sleep(SEE_TIME)
 
+    if not gender_drop_down(driver):
+        return False
+    thread.sleep(SEE_TIME)
+
+    if not submit_button_signup(driver):
+        return False
+    thread.sleep(SEE_TIME)
+
+    if check_logged_in(driver):
+        logout(driver)
+    thread.sleep(SEE_TIME)
 
 
     return True
