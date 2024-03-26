@@ -29,7 +29,7 @@ def login_menu_appeared(driver) -> bool:
         )
         return False
 
-def sign_up_menu_appeared(driver) -> bool:
+def sign_up_menu_appeared_email(driver) -> bool:
     '''
     This function checks if the sign up menu appeared
     @param driver: The driver to use
@@ -39,13 +39,34 @@ def sign_up_menu_appeared(driver) -> bool:
         locate_element(driver, by_id="navbar_signup_menu")
         report_success(
             "The Sign Up Window appeared"
-            + " [menu_appear.py -> sign_up_menu_appeared() -> sign up window appeared]"
+            + " [menu_appear.py -> sign_up_menu_appeared_email() -> sign up window appeared]"
         )
         return True
     except TimeoutException:
         report_fail(
             "The sign up window did not appear"
-            + "[menu_appear.py -> sign_up_menu_appeared() -> sign up window did not appear]"
+            + "[menu_appear.py -> sign_up_menu_appeared_email() -> sign up window did not appear]"
+        )
+        return False
+
+def sign_up_menu_appeared_username(driver) -> bool:
+    '''
+    This function checks if the sign up menu appeared
+    @param driver: The driver to use
+    @return: True if the sign up menu appeared, False otherwise
+    '''
+    try:
+        locate_element(driver, by_id="signup_username")
+        report_success(
+            "The Sign Up Window appeared"
+            + " [menu_appear.py -> sign_up_menu_appeared_username() -> sign up window appeared]"
+        )
+        return True
+    except TimeoutException:
+        report_fail(
+            "The sign up window did not appear"
+            + "[menu_appear.py -> sign_up_menu_appeared_username() ->"
+            + " sign up window did not appear]"
         )
         return False
 

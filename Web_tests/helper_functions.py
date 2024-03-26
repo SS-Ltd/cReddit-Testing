@@ -6,6 +6,19 @@ from constants import DELAY_TIME
 from my_imports import WebDriverWait, EC, By, thread, TimeoutException
 from write_to_files import report_fail
 
+def element_dissapeared(driver, by_id=None, by_xpath=None) -> bool:
+    '''
+    This function checks if an element has disappeared
+    '''
+    if by_id:
+        return WebDriverWait(driver, DELAY_TIME).until(
+            EC.invisibility_of_element_located((By.ID, by_id))
+            )
+    if by_xpath:
+        return WebDriverWait(driver, DELAY_TIME).until(
+            EC.invisibility_of_element_located((By.ID, by_xpath))
+            )
+    return None
 
 def locate_element(driver, *, by_id=None, by_xpath=None) -> WebDriverWait:
     '''
@@ -71,7 +84,7 @@ def check_logged_out(driver) -> bool:
     '''
     try:
         WebDriverWait(driver, DELAY_TIME).until(EC.presence_of_element_located(
-            (By.ID, "navbar_logout_button")))
+            (By.ID, "navbar_login_button")))
     except TimeoutException:
-        return True
-    return False
+        return False
+    return True

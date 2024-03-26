@@ -2,7 +2,7 @@
 This module is used to navigate to the google Gmail and log in to the account 
 '''
 
-from my_imports import WebDriverWait, EC, By, TimeoutException , thread
+from my_imports import WebDriverWait, EC, By, TimeoutException , thread ,NoSuchWindowException
 from write_to_files import write_to_all_files, report_fail, report_success
 from constants import EMAIL, PASSWORD ,DELAY_TIME
 from globals import set_first_login, get_first_login
@@ -199,7 +199,7 @@ def google_login(driver) -> None:
         set_first_login(False)
         continue_page_click_google(driver)
     else:
+        thread.sleep(DELAY_TIME)#wait for loading because it crashes
         go_to_inbox(driver)
     inbox_page_check_google(driver)
-    thread.sleep(DELAY_TIME)
     write_to_all_files("#################### Gmail Login Complete ####################")
