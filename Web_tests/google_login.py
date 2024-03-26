@@ -5,16 +5,38 @@ This module is used to navigate to the google Gmail and log in to the account
 from my_imports import WebDriverWait, EC, By, TimeoutException , thread
 from write_to_files import write_to_all_files, report_fail, report_success
 from constants import EMAIL, PASSWORD ,DELAY_TIME
-def search_for_email(driver, text :str) -> None:
+from globals import set_first_login, get_first_login
+
+
+def search_for_email(driver, text :str) -> bool:
     '''
     This function searches for an email in the Gmail inbox
+    if the email is found it clicks on it
     @param driver: The driver to use
     @param Text: The text to search for
+    @return: True if the email was found, False otherwise
     '''
     a = driver.find_elements(By.XPATH, "//*[@class='yW']/span")
     for i in a:
         if i.text == text:
             i.click()
+            return True
+    return False
+
+def delete_open_email(driver) -> None:
+    '''
+    This function deletes the email that is open
+    @param driver: The driver to use
+    '''
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(EC.presence_of_element_located(
+            (By.XPATH, '//*[@id=":4"]/div[2]/div[1]/div/div[2]/div[3]'))).click()
+    except TimeoutException:
+        report_fail("The delete button was not found"
+            + "[google_login() -> delete_open_email() -> Delete button not found]")
+        return
+    report_success("The delete button was found"
+        + "[google_login() -> delete_open_email() -> Delete button found]")
 
 def goto_google(driver) -> None:
     '''
@@ -129,6 +151,22 @@ def continue_page_click_google(driver) -> None:
              +'/div/div/div[3]/div/div[2]/div/div/button/span'))).click()
     except TimeoutException:
         print("The Conitue page did not appear")
+def go_to_inbox(driver) -> None:
+    '''
+    This function navigates to the inbox page
+    @param driver: The driver to use
+    '''
+    driver.execute_script("window.open('https://mail.google.com/mail/u/0/#inbox', '_blank')")
+    driver.switch_to.window(driver.window_handles[1])
+    try:
+        WebDriverWait(driver, DELAY_TIME).until(EC.title_contains("Inbox"))
+    except TimeoutException:
+        report_fail("The title of the Inbox page was not found"
+            + "[google_login() -> Inbox Page not found]")
+        return
+    report_success("The title of the Inbox page was found"
+        + "[google_login() -> Inbox Page found]")
+    thread.sleep(DELAY_TIME)
 
 def inbox_page_check_google(driver) -> None:
     '''
@@ -144,22 +182,24 @@ def inbox_page_check_google(driver) -> None:
     report_success("The title of the Inbox page was found"
         + "[google_login() -> Inbox Page found]")
 
-def google_login(driver,text : str) -> None:
+def google_login(driver) -> None:
     '''
     This function navigates to google Gmail and logs in
     @param driver: The driver to use
     '''
     write_to_all_files("#################### Login To Gmail ####################")
-    goto_google(driver)
-    click_google_sign_in(driver)
-    enter_email_google(driver)
-    email_next_click_google(driver)
-    thread.sleep(DELAY_TIME)    #remove this line may lead to crashes
-    enter_password_google(driver)
-    password_next_click_google(driver)
-    continue_page_click_google(driver)
+    if get_first_login():
+        goto_google(driver)
+        click_google_sign_in(driver)
+        enter_email_google(driver)
+        email_next_click_google(driver)
+        thread.sleep(DELAY_TIME)    #remove this line may lead to crashes
+        enter_password_google(driver)
+        password_next_click_google(driver)
+        set_first_login(False)
+        continue_page_click_google(driver)
+    else:
+        go_to_inbox(driver)
     inbox_page_check_google(driver)
-    thread.sleep(DELAY_TIME)
-    search_for_email(driver, text)
     thread.sleep(DELAY_TIME)
     write_to_all_files("#################### Gmail Login Complete ####################")
