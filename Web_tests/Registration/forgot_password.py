@@ -166,7 +166,7 @@ def email_textbox(driver):
     )
 
 
-def senario_wrong_credentials(driver):
+def scenario_wrong_credentials(driver):
     '''
     This function tests the forgot password
     functionality of the website in case of wrong credentials
@@ -179,15 +179,15 @@ def senario_wrong_credentials(driver):
         locate_element(driver, by_id="reset_password_email_me").click()
     except TimeoutException:
         report_fail(
-            "The forgot senario_wrong_credentials did not work"
-            + "[forgot_password() -> senario_wrong_credentials() ->"
-            + " forgot password senario_wrong_credentials did not work]"
+            "The forgot scenario_wrong_credentials did not work"
+            + "[forgot_password() -> scenario_wrong_credentials() ->"
+            + " forgot password scenario_wrong_credentials did not work]"
         )
         return
     report_success(
-        "The forgot password senario_wrong_credentials worked"
-        + "[forgot_password() -> senario_wrong_credentials() ->"
-        + " forgot password senario_wrong_credentials worked]"
+        "The forgot password scenario_wrong_credentials worked"
+        + "[forgot_password() -> scenario_wrong_credentials() ->"
+        + " forgot password scenario_wrong_credentials worked]"
     )
 
     google_login(driver)
@@ -195,13 +195,13 @@ def senario_wrong_credentials(driver):
     if not found:
         report_success(
             "The email was not found"
-            + "[forgot_password() -> senario_wrong_credentials() ->"
+            + "[forgot_password() -> scenario_wrong_credentials() ->"
             + " forgot password email not found]"
         )
     else:
         report_fail(
             "The email was found"
-            + "[forgot_password() -> senario_wrong_credentials() ->"
+            + "[forgot_password() -> scenario_wrong_credentials() ->"
             + " forgot password email found]"
         )
 
@@ -211,15 +211,15 @@ def senario_wrong_credentials(driver):
     except TimeoutException:
         report_fail(
             "The tab was not switched back to the original tab"
-            + "[forgot_password() -> senario_correct_credentials() -> tab not switched back]"
+            + "[forgot_password() -> scenario_correct_credentials() -> tab not switched back]"
         )
         return
     report_success(
         "The tab was switched back to the original tab"
-        + "[forgot_password() -> senario_correct_credentials() -> tab switched back]"
+        + "[forgot_password() -> scenario_correct_credentials() -> tab switched back]"
     )
 
-def senario_correct_credentials(driver):
+def scenario_correct_credentials(driver):
     """
     This function tests the forgot password
     functionality of the website in case of correct credentials
@@ -232,15 +232,15 @@ def senario_correct_credentials(driver):
         locate_element(driver, by_id="reset_password_email_me").click()
     except TimeoutException:
         report_fail(
-            "The forgot senario_correct_credentials did not work"
-            + "[forgot_password() -> senario_correct_credentials() ->"
-            + " forgot password senario_correct_credentials did not work]"
+            "The forgot scenario_correct_credentials did not work"
+            + "[forgot_password() -> scenario_correct_credentials() ->"
+            + " forgot password scenario_correct_credentials did not work]"
         )
         return
     report_success(
-        "The forgot password senario_correct_credentials worked"
-        + "[forgot_password() -> senario_correct_credentials() ->"
-        + " forgot password senario_correct_credentials worked]"
+        "The forgot password scenario_correct_credentials worked"
+        + "[forgot_password() -> scenario_correct_credentials() ->"
+        + " forgot password scenario_correct_credentials worked]"
     )
 
     google_login(driver)
@@ -248,13 +248,13 @@ def senario_correct_credentials(driver):
     if emailfound:
         report_success(
             "The email was found"
-            + "[forgot_password() -> senario_correct_credentials() ->"
+            + "[forgot_password() -> scenario_correct_credentials() ->"
             + " forgot password email found]"
         )
     else:
         report_fail(
             "The email was not found"
-            + "[forgot_password() -> senario_correct_credentials() ->"
+            + "[forgot_password() -> scenario_correct_credentials() ->"
             + " forgot password email not found]"
         )
     try:
@@ -262,13 +262,13 @@ def senario_correct_credentials(driver):
     except TimeoutException:
         report_fail(
             "The forgot password link was not found"
-            + "[forgot_password() -> senario_correct_credentials() ->"
+            + "[forgot_password() -> scenario_correct_credentials() ->"
             + " forgot password link not found]"
         )
         return
     report_success(
         "The forgot password link was found"
-        + "[forgot_password() -> senario_correct_credentials() ->"
+        + "[forgot_password() -> scenario_correct_credentials() ->"
         + " forgot password link found]"
     )
 
@@ -277,7 +277,7 @@ def senario_correct_credentials(driver):
         WebDriverWait(driver, DELAY_TIME).until(EC.number_of_windows_to_be(3))
         report_success(
             "A new tab was opened"
-            + "[forgot_password() -> senario_correct_credentials() -> new tab opened]"
+            + "[forgot_password() -> scenario_correct_credentials() -> new tab opened]"
         )
 
         # Wait for the new tab to load
@@ -295,20 +295,20 @@ def senario_correct_credentials(driver):
             report_success(
                 "The url contains the "
                 + expected_url
-                + "[forgot_password() -> senario_correct_credentials()"
+                + "[forgot_password() -> scenario_correct_credentials()"
                 + " -> url contains the expected url]"
             )
         else:
             report_fail(
                 "The url does not contain the "
                 + expected_url
-                + "[forgot_password() -> senario_correct_credentials()"
+                + "[forgot_password() -> scenario_correct_credentials()"
                 + " -> url does not contain the expected url]"
             )
     except TimeoutException:
         report_fail(
             "A new tab was not opened"
-            + "[forgot_password() -> senario_correct_credentials() -> new tab not opened]"
+            + "[forgot_password() -> scenario_correct_credentials() -> new tab not opened]"
         )
         return
     # TODO: should  test the page
@@ -321,12 +321,12 @@ def senario_correct_credentials(driver):
     except TimeoutException:
         report_fail(
             "The tab was not switched back to the original tab"
-            + "[forgot_password() -> senario_correct_credentials() -> tab not switched back]"
+            + "[forgot_password() -> scenario_correct_credentials() -> tab not switched back]"
         )
         return
     report_success(
         "The tab was switched back to the original tab"
-        + "[forgot_password() -> senario_correct_credentials() -> tab switched back]"
+        + "[forgot_password() -> scenario_correct_credentials() -> tab switched back]"
     )
 
     delete_open_email(driver)
@@ -338,12 +338,12 @@ def senario_correct_credentials(driver):
     except TimeoutException:
         report_fail(
             "The tab was not switched back to the original tab"
-            + "[forgot_password() -> senario_correct_credentials() -> tab not switched back]"
+            + "[forgot_password() -> scenario_correct_credentials() -> tab not switched back]"
         )
         return
     report_success(
         "The tab was switched back to the original tab"
-        + "[forgot_password() -> senario_correct_credentials() -> tab switched back]"
+        + "[forgot_password() -> scenario_correct_credentials() -> tab switched back]"
     )
 
 def check_back_to_login(driver):
@@ -383,7 +383,7 @@ def forgot_password(driver):
     username_textbox(driver)
     email_textbox(driver)
     email_me_button_is_enabled(driver)
-    #senario_wrong_credentials(driver)
-    #senario_correct_credentials(driver)#carefull this fuction deletes the email
+    #scenario_wrong_credentials(driver)
+    #scenario_correct_credentials(driver)#carefull this fuction deletes the email
     check_back_to_login(driver)
     write_to_all_files("#################### End Forgot Password ####################")

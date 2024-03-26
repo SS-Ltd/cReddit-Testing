@@ -8,3 +8,4 @@
 /Mobile_Tests/package-lock.json
 /Mobile_Tests/package.json
 **/__pycache__/
+**/*.pyc

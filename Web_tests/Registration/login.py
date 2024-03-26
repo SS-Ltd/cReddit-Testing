@@ -8,11 +8,10 @@ from enum import Enum
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Registration.forgot_password import forgot_password
 from Registration.logout import logout
-from helper_functions import locate_element , check_logged_in, check_logged_out
-from my_imports import WebDriverWait, EC, By, TimeoutException, thread
-from constants import DELAY_TIME
+from helper_functions import locate_element , check_logged_in, check_logged_out , element_dissapeared
+from my_imports import WebDriverWait, EC, By, TimeoutException, thread 
+from constants import DELAY_TIME,EMAIL, PASSWORD, USERNAME, SEE_TIME
 from write_to_files import write_to_all_files, report_fail, report_success
-from constants import EMAIL, PASSWORD
 from Registration.forgot_username import forgot_username
 from selenium.webdriver.common.keys import Keys
 from Registration.menu_appear import (login_menu_appeared, 
@@ -20,6 +19,8 @@ from Registration.menu_appear import (login_menu_appeared,
                                       forgot_password_menu_appeared,
                                       forgot_username_menu_appeared
                                       )
+from google_login import google_login
+from globals import set_first_login, get_first_login
 
 class Hyperlink(Enum):
     '''
@@ -28,7 +29,7 @@ class Hyperlink(Enum):
     USER_AGREEMENT = "user_agreement"
     PRIVACY_POLICY = "privacy_policy"
 
-def goto_login(driver) -> None:
+def goto_login(driver) -> bool:
     """
     This function test the login window of the website
     """
@@ -44,8 +45,10 @@ def goto_login(driver) -> None:
             "The element with the ID 'navbar_login_button' was not found"
             + " [login() -> goto_login() -> login button not found]"
         )
-        return
+        return False
     # Check if the login menu appeared
+    return login_menu_appeared(driver)
+
 
 
 def hyper_links(driver, hyperlink: Hyperlink) -> None:
@@ -149,25 +152,37 @@ def close_button_login(driver) -> None:
             + "[login() -> close_button() -> close button passed]"
         )
 
-def check_login_with_google(driver) -> None:
+def check_login_with_google(driver) -> bool:
     """
     This function test the login with google of the website
     """
+
     try:
         locate_element(driver, by_id="login_oauth").click()
         report_success(
-            "The element with the ID 'google_login' was found"
+            "The element with the ID 'login_oauth' was found"
             + "[login() -> check_login_with_google() -> google login found]"
         )
     except TimeoutException:
         report_fail(
-            "The element with the ID 'google_login' was not found"
+            "The element with the ID 'login_oauth' was not found"
             + "[login() -> check_login_with_google() -> google login not found]"
         )
-        return
-
+        return False
+    thread.sleep(SEE_TIME)
 
     driver.switch_to.window(driver.window_handles[-1])
+    if not get_first_login():
+        try:
+            locate_element(driver, by_xpath="/html/body/div[1]/div[1]/div[2]/"
+                           + "div/div/div[2]/div/div/div[1]/form/span/section/"
+                           + "div/div/div/div/ul/li[1]/div/div[1]/div/div[2]/div[2]"
+                           ).click() #hope this won't crash TODO: fix this
+            driver.switch_to.window(driver.window_handles[0])
+            thread.sleep(DELAY_TIME)
+            return check_logged_in(driver)
+        except TimeoutException:
+            pass
 
     try:
         WebDriverWait(driver, DELAY_TIME).until(
@@ -182,7 +197,8 @@ def check_login_with_google(driver) -> None:
             "The title of the Gmail login page was not found"
             + "[login() -> check_login_with_google() -> Gmail login Page not found]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
 
     # Check if the email input is present
     try:
@@ -196,7 +212,8 @@ def check_login_with_google(driver) -> None:
             "The email input was not found"
             + "[login() -> check_login_with_google() -> Email input not found]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
 
     thread.sleep(DELAY_TIME)
     # Check if the password input is present
@@ -216,9 +233,10 @@ def check_login_with_google(driver) -> None:
             "The password input was not found"
             + "[login() -> check_login_with_google() -> Password input not found]"
         )
-        return
+        return False
 
- 
+    thread.sleep(SEE_TIME)
+    set_first_login(False)
     driver.switch_to.window(driver.window_handles[0])
 
     # Check if pop-up is displayed
@@ -227,11 +245,14 @@ def check_login_with_google(driver) -> None:
     except (TimeoutException, AssertionError):
         report_fail("Popup not found in google login"
                     +"[login() -> check_login_with_google() -> Popup not found]")
-        return
+        return False
     report_success("Popup found in google login"
                    +"[login() -> check_login_with_google() -> Popup found]")
+    thread.sleep(SEE_TIME)
 
-def username_textbox(driver) -> None:
+    return True
+
+def username_textbox(driver) -> bool:
     """
     This function test the username text box of the website and all its corner cases
     """
@@ -247,7 +268,8 @@ def username_textbox(driver) -> None:
             "The element with the ID 'login_username' was not found and clicked"
             + "[login() -> username_textbox() -> username text box not found and clicked]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
 
     try:
         locate_element(driver, by_xpath='//*[@id="navbar_login_menu"]/'
@@ -265,7 +287,9 @@ def username_textbox(driver) -> None:
             "The username 'please fill out this filed' did not appear"
             + "[login() -> username_textbox() -> username text box did not appear]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
+
     # Check username text box when text entered
     try:
         locate_element(driver, by_id="login_username").send_keys("test")
@@ -279,9 +303,12 @@ def username_textbox(driver) -> None:
             + "[login() -> username_textbox() -> username"+
             "text box not found and 'text' not entered]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
 
-def password_textbox(driver) -> None:
+    return True
+
+def password_textbox(driver) -> bool:
     """
     This function test the password text box of the website and all its corner cases
     """
@@ -297,7 +324,8 @@ def password_textbox(driver) -> None:
             "The element with the ID 'login_password' was not found and clicked"
             + "[login() -> password_textbox() -> password text box not found and clicked]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
 
     try:
         locate_element(driver, by_id='login_username').click()
@@ -314,7 +342,9 @@ def password_textbox(driver) -> None:
             "The password 'please fill out this filed' did not appear"
             + "[login() -> password_textbox() -> password text box did not appear]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
+
     # Check password text box when text entered
     try:
         locate_element(driver, by_id="login_password").send_keys("test")
@@ -328,7 +358,10 @@ def password_textbox(driver) -> None:
             + "[login() -> password_textbox() -> password"+
             "text box not found and 'text' not entered]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
+
+    return True
 
 
 def login_to_forgot_username(driver) -> bool:
@@ -347,7 +380,8 @@ def login_to_forgot_username(driver) -> bool:
             "The element with the ID 'forgot_username' was not found"
             + "[login() -> login_to_forgot_username() -> forgot username not found]"
         )
-        return
+        return False
+    thread.sleep(SEE_TIME)
 
     # Check if the forgot username page is displayed
     return forgot_username_menu_appeared(driver)
@@ -369,50 +403,390 @@ def login_to_forgot_password(driver) -> bool:
             + "[login() -> login_to_forgot_password() -> forgot password not found]"
         )
         return
+    thread.sleep(SEE_TIME)
 
     # Check if the forgot password page is displayed
     return forgot_password_menu_appeared(driver)
 
-def login(driver) -> None:
+def login_to_sign_up(driver) -> bool:
+    """
+    This function test the login to sign up button of the website
+    """
+    # Check sign up button
+    try:
+        locate_element(driver, by_id="login_signup").click()
+        report_success(
+            "The element with the ID 'login_signup' was found"
+            + "[login() -> login_to_sign_up() -> sign up found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_signup' was not found"
+            + "[login() -> login_to_sign_up() -> sign up not found]"
+        )
+        return False
+
+    # Check if the sign up page is displayed
+    return sign_up_menu_appeared(driver)
+
+def sign_up_to_login(driver) -> bool:
+    """
+    This function test the sign up to login button of the website
+    """
+    # Check login button
+    try:
+        locate_element(driver, by_id="signup_login").click()
+        report_success(
+            "The element with the ID 'signup_login' was found"
+            + "[login() -> sign_up_to_login() -> login found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'signup_login' was not found"
+            + "[login() -> sign_up_to_login() -> login not found]"
+        )
+        return False
+
+    # Check if the login page is displayed
+    return login_menu_appeared(driver)
+
+def scenario_wrong_username(driver) -> bool:
+    """
+    This function tests entering a wrong username to the website
+    """
+    # Check wrong username
+    try:
+        locate_element(driver, by_id="login_username").clear()
+        locate_element(driver, by_id="login_username").send_keys("wrong")
+        report_success(
+            "The element with the ID 'login_username' was found 'test' was entered"
+            + "[login() -> scenario_wrong_username() -> wrong username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username' was not found 'test' was not entered"
+            + "[login() -> scenario_wrong_username() -> wrong username not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_password").send_keys(PASSWORD)
+        report_success(
+            "The element with the ID 'login_password' was found 'test' was entered"
+            + "[login() -> scenario_wrong_username() -> wrong password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_password' was not found 'test' was not entered"
+            + "[login() -> scenario_wrong_username() -> wrong password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_submit").click()
+        report_success(
+            "The element with the ID 'login_submit' was found"
+            + "[login() -> scenario_wrong_username() -> submit found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_submit' was not found"
+            + "[login() -> scenario_wrong_username() -> submit not found]"
+        )
+        return False
+
+    try:
+        popup = locate_element(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+        assert popup is not None, report_fail("Popup not found")
+        report_success(
+            "The element with the text 'Invalid username or password.' was found"
+            + "[login() -> scenario_wrong_username() -> wrong username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the text 'Invalid username or password.' was not found"
+            + "[login() -> scenario_wrong_username() -> wrong username not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    return True
+
+def scenario_wrong_password(driver) -> bool:
+    """
+    This function tests entering a wrong password to the website
+    """
+    # Check wrong password
+    try:
+        locate_element(driver, by_id="login_username").clear()
+        locate_element(driver, by_id="login_username").send_keys(USERNAME)
+        report_success(
+            "The element with the ID 'login_username' was found 'test' was entered"
+            + "[login() -> scenario_wrong_password() -> wrong username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username' was not found 'test' was not entered"
+            + "[login() -> scenario_wrong_password() -> wrong username not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_password").clear()
+        locate_element(driver, by_id="login_password").send_keys("wrong")
+        report_success(
+            "The element with the ID 'login_password' was found 'test' was entered"
+            + "[login() -> scenario_wrong_password() -> wrong password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_password' was not found 'test' was not entered"
+            + "[login() -> scenario_wrong_password() -> wrong password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_submit").click()
+        report_success(
+            "The element with the ID 'login_submit' was found"
+            + "[login() -> scenario_wrong_password() -> submit found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_submit' was not found"
+            + "[login() -> scenario_wrong_password() -> submit not found]"
+        )
+        return False
+
+    try:
+        popup = locate_element(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+        assert popup is not None, report_fail("Popup not found")
+        report_success(
+            "The element with the text 'Invalid username or password.' was found"
+            + "[login() -> scenario_wrong_password() -> wrong password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the text 'Invalid username or password.' was not found"
+            + "[login() -> scenario_wrong_password() -> wrong password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    return True
+
+def scenario_wrong_username_password(driver) -> bool:
+    """
+    This function tests entering a wrong username and password to the website
+    """
+    # Check wrong username and password
+    try:
+        locate_element(driver, by_id="login_username").clear()
+        locate_element(driver, by_id="login_username").send_keys("wrong")
+        report_success(
+            "The element with the ID 'login_username' was found 'test' was entered"
+            + "[login() -> scenario_wrong_username_password() -> wrong username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username' was not found 'test' was not entered"
+            + "[login() -> scenario_wrong_username_password() -> wrong username not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_password").clear()
+        locate_element(driver, by_id="login_password").send_keys("wrong")
+        report_success(
+            "The element with the ID 'login_password' was found 'test' was entered"
+            + "[login() -> scenario_wrong_username_password() -> wrong password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_password' was not found 'test' was not entered"
+            + "[login() -> scenario_wrong_username_password() -> wrong password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_submit").click()
+        report_success(
+            "The element with the ID 'login_submit' was found"
+            + "[login() -> scenario_wrong_username_password() -> submit found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_submit' was not found"
+            + "[login() -> scenario_wrong_username_password() -> submit not found]"
+        )
+        return False
+
+    try:
+        popup = locate_element(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+        assert popup is not None, report_fail("Popup not found")
+        report_success(
+            "The element with the text 'Invalid username or password.' was found"
+            + "[login() -> scenario_wrong_username_password() -> wrong username and password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the text 'Invalid username or password.' was not found"
+            + "[login() -> scenario_wrong_username_password() ->"
+            + " wrong username and password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    return True
+
+def scenario_correct_username_password(driver) -> bool:
+    """
+    This function tests entering a correct username and password to the website
+    """
+    # Check correct username and password
+    try:
+        locate_element(driver, by_id="login_username").clear()
+        locate_element(driver, by_id="login_username").send_keys(USERNAME)
+        report_success(
+            "The element with the ID 'login_username' was found 'test' was entered"
+            + "[login() -> scenario_correct_username_password() -> correct username found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username' was not found 'test' was not entered"
+            + "[login() -> scenario_correct_username_password() -> correct username not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_password").clear()
+        locate_element(driver, by_id="login_password").send_keys(PASSWORD)
+        report_success(
+            "The element with the ID 'login_password' was found 'test' was entered"
+            + "[login() -> scenario_correct_username_password() -> correct password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_password' was not found 'test' was not entered"
+            + "[login() -> scenario_correct_username_password() -> correct password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    try:
+        locate_element(driver, by_id="login_submit").click()
+        report_success(
+            "The element with the ID 'login_submit' was found"
+            + "[login() -> scenario_correct_username_password() -> submit found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_submit' was not found"
+            + "[login() -> scenario_correct_username_password() -> submit not found]"
+        )
+        return False
+
+    try:
+        popup = locate_element(driver, by_xpath='//*[contains(@id, "login-toast-success")]')
+        assert popup is not None, report_fail("Popup not found")
+        report_success(
+            "The element with the text 'Successfully logged in.' was found"
+            + "[login() -> scenario_correct_username_password() ->"
+            + " correct username and password found]"
+        )
+    except TimeoutException:
+        report_fail(
+            "The element with the text 'Successfully logged in.' was not found"
+            + "[login() -> scenario_correct_username_password() ->"
+            + " correct username and password not found]"
+        )
+        return False
+    thread.sleep(SEE_TIME)
+
+    return check_logged_in(driver)
+
+def login(driver) -> bool:
     """
     This function test the login page of the website
     """
 
     write_to_all_files(
         "#################### Testing Login Page ####################")
-    goto_login(driver)
-    login_menu_appeared(driver)
-    thread.sleep(DELAY_TIME)
+    if not goto_login(driver):
+        return False
+    thread.sleep(SEE_TIME)
     ##############################################
+
     # Check user agreement
     hyper_links(driver, Hyperlink.USER_AGREEMENT)
-    #thread.sleep(DELAY_TIME)
+    thread.sleep(SEE_TIME)
+
     # Check Privacy Policy
     hyper_links(driver, Hyperlink.PRIVACY_POLICY)
-    #thread.sleep(DELAY_TIME)
-    # Check continue with Google
-    #check_login_with_google(driver)
+    thread.sleep(SEE_TIME)
+
     #close_button_login(driver)
     #check_logged_in(driver)
     #logout(driver)
     #check_logged_out(driver)
     #goto_login(driver)#remove this later
     # Check continue with Apple might not get implmented
-    # Check Username text box
     ##############################################
-    username_textbox(driver)
+
+    #Check continue with Google
+    if check_login_with_google(driver):
+        if check_logged_in(driver):
+            logout(driver)
+        goto_login(driver)
+    thread.sleep(SEE_TIME)
+
+    # Check Username text box
+    if not username_textbox(driver):
+        return False
+    thread.sleep(SEE_TIME)
+
     # Check Password text box
-    password_textbox(driver)
-    # Check Log in button
+    if not password_textbox(driver):
+        return False
+    thread.sleep(SEE_TIME)
+
+
     # Check Forgot username
-    login_to_forgot_username(driver)
-    forgot_username(driver)
+    if login_to_forgot_username(driver):
+        forgot_username(driver)
+    thread.sleep(SEE_TIME)
+
     # Check Forgot password
-    login_to_forgot_password(driver)
-    forgot_password(driver)
-    # Check Sign up
+    if login_to_forgot_password(driver):
+        forgot_password(driver)
+    thread.sleep(SEE_TIME)
+
+    # checks all scenarios of login
+    if scenario_wrong_username(driver):
+        element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+        if scenario_wrong_password(driver):
+            element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+            if scenario_wrong_username_password(driver):
+                element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+                if scenario_correct_username_password(driver):
+                    if check_logged_in(driver):
+                        logout(driver)
+                    #goto_login(driver)
+
+    # Check Sign up button
+    if login_to_sign_up(driver):
+        sign_up_to_login(driver)
+    thread.sleep(SEE_TIME)
     # Check close button
     close_button_login(driver)
+
     thread.sleep(DELAY_TIME)
     write_to_all_files(
         "#################### Finished Testing Login Page ####################")
