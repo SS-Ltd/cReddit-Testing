@@ -27,8 +27,8 @@ driver.maximize_window()
 thread.sleep(2)
 
 
-#home_page(driver)
-login(driver)
+home_page(driver)
+# login(driver)
 #google_login(driver, "cReddit support center")
 
 driver.quit()
