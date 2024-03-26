@@ -45,4 +45,3 @@ def search_for_email(driver, text :str) -> bool:
             i.click()
             return True
     return False
-

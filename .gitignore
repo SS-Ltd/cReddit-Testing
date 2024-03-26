@@ -11,3 +11,6 @@
 **/*.pyc
 /Mobile_Tests/__pycache__
 /Web_Text_Files/.env
+
+/Mobile_Tests/__pycache__
+/Web_Text_Files/.env
