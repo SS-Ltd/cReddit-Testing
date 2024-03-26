@@ -9,3 +9,5 @@
 /Mobile_Tests/package.json
 **/__pycache__/
 **/*.pyc
+/Mobile_Tests/__pycache__
+/Web_Text_Files/.env
