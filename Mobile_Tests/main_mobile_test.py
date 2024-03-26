@@ -4,11 +4,13 @@ This is the main test script for the mobile application.
 from my_imports import webdriver, AppiumOptions, thread, Dict, Any
 from helper_functions import locate_element
 from constants import DELAY_TIME
+from close_app import close_app
+from google_login import gmail_login, search_for_email
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
     "automationName": "UiAutomator2",
-    "deviceName": "emulator-5556",
+    "deviceName": "emulator-5554",
     "appPackage": "com.example.reddit_clone",
     "appActivity": "com.example.reddit_clone.MainActivity",
     "language": "en",
@@ -21,6 +23,7 @@ print("Starting the Appium Test")
 driver = webdriver.Remote(URL, options=AppiumOptions().load_capabilities(cap))
 # Check if the app is launched
 print(driver.current_activity)
+#gmail_login(driver)
 
 print("App launched")
 
@@ -86,6 +89,11 @@ print(driver.context)
 content_policy.click()
 print("Clicked on the content policy button")
 thread.sleep(DELAY_TIME)
+
+close_app(driver)
+gmail_login(driver)
+search_for_email(driver, "cReddit support center")
+
 print(driver.contexts)
 print(driver.context)
 
