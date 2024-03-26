@@ -199,6 +199,7 @@ def google_login(driver) -> None:
         set_first_login(False)
         continue_page_click_google(driver)
     else:
+        thread.sleep(DELAY_TIME)#wait for loading because it crashes
         go_to_inbox(driver)
     inbox_page_check_google(driver)
     write_to_all_files("#################### Gmail Login Complete ####################")

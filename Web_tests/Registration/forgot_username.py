@@ -21,12 +21,12 @@ def email_textbox_forgot_username(driver):
     except TimeoutException:
         report_fail(
             "The email textbox was not found"
-            + "[forgot_username() -> email_textbox() -> username text box not found]"
+            + "[forgot_username() -> email_textbox() -> email text box not found]"
         )
         return
     report_success(
         "The email textbox was found"
-        + "[forgot_username() -> email_textbox() -> username text box found]"
+        + "[forgot_username() -> email_textbox() -> email text box found]"
     )
 
     try:
@@ -37,14 +37,14 @@ def email_textbox_forgot_username(driver):
         assert len(users) > 0
     except (TimeoutException, AssertionError):
         report_fail(
-            "The username 'please fill out this filed' did not appear"
+            "The email 'please fill out this filed' did not appear"
             + "[forgot_username() -> email_textbox() ->"
-            + " username text box Please enter a valid  appeared]"
+            + " email text box Please enter a valid  appeared]"
         )
         return
     report_success(
-        "The username 'please fill out this field' appeared"
-        + "[forgot_username() -> email_textbox() -> username text box appeared]"
+        "The email 'please fill out this field' appeared"
+        + "[forgot_username() -> email_textbox() -> email text box appeared]"
     )
 
     try:
@@ -56,14 +56,14 @@ def email_textbox_forgot_username(driver):
         assert len(users) > 0
     except (TimeoutException, AssertionError):
         report_fail(
-            "The username 'please enter a valid email' Please enter a valid appeared"
+            "The email 'please enter a valid email' Please enter a valid appeared"
             + "[forgot_username() -> email_textbox() ->"
-            + " username text box Please enter a valid appeared]"
+            + " email text box Please enter a valid appeared]"
         )
         return
     report_success(
-        "The username 'please enter a valid email' appeared"
-        + "[forgot_username() -> email_textbox() -> username text box appeared]"
+        "The email 'please enter a valid email' appeared"
+        + "[forgot_username() -> email_textbox() -> email text box appeared]"
     )
 
     try:
@@ -75,14 +75,14 @@ def email_textbox_forgot_username(driver):
         assert len(users) == 0
     except (TimeoutException, AssertionError):
         report_fail(
-            "entered a valid username and did not get the expected result"
+            "entered a valid email and did not get the expected result"
             + "[forgot_username() -> email_textbox() ->"
-            + " username text box entered a valid username]"
+            + " email text box entered a valid email]"
         )
         return
     report_success(
-        "entered a valid username and got the expected result"
-        + "[forgot_username() -> email_textbox() -> username text box entered a valid username]"
+        "entered a valid email and got the expected result"
+        + "[forgot_username() -> email_textbox() -> email text box entered a valid email]"
     )
 
 def scenario_wrong_email(driver):
@@ -100,15 +100,16 @@ def scenario_wrong_email(driver):
         assert len(users) > 0
     except (TimeoutException, AssertionError):
         report_fail(
-            "The username 'Email Does not Exist' did not appear"
+            "The email 'Email Does not Exist' did not appear"
             + "[forgot_username() -> email_textbox() ->"
-            + " username text box Email Does not Exist]"
+            + " email text box Email Does not Exist]"
         )
         return
     report_success(
-        "The username 'Email Does not Exist' appeared"
-        + "[forgot_username() -> email_textbox() -> username text box Email Does not Exist]"
+        "The email 'Email Does not Exist' appeared"
+        + "[forgot_username() -> email_textbox() -> email text box Email Does not Exist]"
     )
+    
     google_login(driver)
     found = search_for_email(driver, "cReddit support cen.")
     if found:
@@ -151,14 +152,14 @@ def scenario_correct_email(driver):
         assert len(users) == 0
     except (TimeoutException, AssertionError):
         report_fail(
-            "The username 'Email Does not Exist' appeared"
+            "The email 'Email Does not Exist' appeared"
             + "[forgot_username() -> scenario_correct_email() ->"
-            + " username text box Email Does not Exist]"
+            + " email text box Email Does not Exist]"
         )
         return
     report_success(
-        "The username 'Email Does not Exist' did not appear"
-        + "[forgot_username() -> scenario_correct_email() -> username text box Email Does not Exist]"
+        "The email 'Email Does not Exist' did not appear"
+        + "[forgot_username() -> scenario_correct_email() -> email text box Email Does not Exist]"
     )
     google_login(driver)
     found = search_for_email(driver, "cReddit support cen.")

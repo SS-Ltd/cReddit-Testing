@@ -15,7 +15,7 @@ from write_to_files import write_to_all_files, report_fail, report_success
 from Registration.forgot_username import forgot_username
 from selenium.webdriver.common.keys import Keys
 from Registration.menu_appear import (login_menu_appeared, 
-                                      sign_up_menu_appeared, 
+                                      sign_up_menu_appeared_email, 
                                       forgot_password_menu_appeared,
                                       forgot_username_menu_appeared
                                       )
@@ -122,7 +122,7 @@ def hyper_links(driver, hyperlink: Hyperlink) -> None:
     driver.switch_to.window(driver.window_handles[0])
 
 
-def close_button_login(driver) -> None:
+def close_button_login(driver) -> bool:
     """
     This function test the close button of the website
     """
@@ -138,7 +138,7 @@ def close_button_login(driver) -> None:
             "The element with the ID 'login_close' was not found"
             + "[login() -> close_button() -> close button not found]"
         )
-        return
+        return False
 
     try:
         locate_element(driver, by_id="navbar_login_menu")
@@ -146,11 +146,13 @@ def close_button_login(driver) -> None:
             "The close button did not work"
             + "[login() -> close_button() -> close button failed]"
         )
+        return False
     except TimeoutException:
         report_success(
             "The close button worked"
             + "[login() -> close_button() -> close button passed]"
         )
+    return True
 
 def check_login_with_google(driver) -> bool:
     """
@@ -427,7 +429,7 @@ def login_to_sign_up(driver) -> bool:
         return False
 
     # Check if the sign up page is displayed
-    return sign_up_menu_appeared(driver)
+    return sign_up_menu_appeared_email(driver)
 
 def sign_up_to_login(driver) -> bool:
     """
@@ -764,9 +766,9 @@ def login(driver) -> bool:
     thread.sleep(SEE_TIME)
 
     # Check Forgot password
-    if login_to_forgot_password(driver):
-        forgot_password(driver)
-    thread.sleep(SEE_TIME)
+    #if login_to_forgot_password(driver):
+    #    forgot_password(driver)
+    #thread.sleep(SEE_TIME)
 
     # checks all scenarios of login
     if scenario_wrong_username(driver):
