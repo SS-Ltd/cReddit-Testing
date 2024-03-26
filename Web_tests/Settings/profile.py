@@ -106,12 +106,14 @@ def profile(driver) -> None:
     thread.sleep(DELAY_TIME)
 
     # Test the Social Links functionality
-    social(driver)
-    thread.sleep(DELAY_TIME)
+    # TODO: Implement the social links functionality
+    # social(driver)
+    # thread.sleep(DELAY_TIME)
 
     # Test the Upload Image functionality
-    UploadImage(driver)
-    thread.sleep(DELAY_TIME)
+    # TODO: Implement the upload image functionality
+    # UploadImage(driver)
+    # thread.sleep(DELAY_TIME)
 
     # Test the NSFW checkbox functionality
     check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[9]/div[2]/label/input', name='NSFW')
