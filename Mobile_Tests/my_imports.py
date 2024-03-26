@@ -1,6 +1,12 @@
 '''
 This module contains all the imports that are used throughout the project
 '''
+import unittest
+import argparse
+import json
+import re
+
+from appium import webdriver
 import time as thread
 from typing import Any, Dict
 from appium import webdriver

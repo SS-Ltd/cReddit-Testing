@@ -9,3 +9,5 @@
 /Mobile_Tests/node_modules
 /Mobile_Tests/package-lock.json
 /Mobile_Tests/package.json
+/Mobile_Tests/__pycache__
+/Web_Text_Files/.env
