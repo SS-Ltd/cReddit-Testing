@@ -21,6 +21,7 @@ from Registration.menu_appear import (login_menu_appeared,
                                       )
 from google_login import google_login
 from globals import set_first_login, get_first_login
+from selenium.webdriver.common.action_chains import ActionChains
 
 class Hyperlink(Enum):
     '''
@@ -712,7 +713,27 @@ def scenario_correct_username_password(driver) -> bool:
         return False
     thread.sleep(SEE_TIME)
 
+
     return check_logged_in(driver)
+
+def hover_over_username(driver) -> bool:
+    '''
+    This function tests the username login button
+    '''
+    try:
+        hoverable = locate_element(driver,by_id="login_username_button")
+        ActionChains(driver).move_to_element(hoverable).perform()
+    except TimeoutException:
+        report_fail(
+            "The element with the ID 'login_username_button' was not found"
+            + "[login() -> hover_over_username() -> username login button not found]"
+        )
+        return False
+    report_success(
+        "The element with the ID 'login_username_button' was found"
+        + "[login() -> hover_over_username() -> username login button found]"
+    )
+    return True
 
 def login(driver) -> bool:
     """
@@ -744,7 +765,8 @@ def login(driver) -> bool:
 
     #Check continue with Google
     if check_login_with_google(driver):
-        if check_logged_in(driver):
+        thread.sleep(DELAY_TIME*2)
+        if check_logged_in(driver) and element_dissapeared(driver, by_id='navbar_login_menu'):
             logout(driver)
         goto_login(driver)
     thread.sleep(SEE_TIME)
@@ -766,17 +788,21 @@ def login(driver) -> bool:
     thread.sleep(SEE_TIME)
 
     # Check Forgot password
-    #if login_to_forgot_password(driver):
-    #    forgot_password(driver)
-    #thread.sleep(SEE_TIME)
+    if login_to_forgot_password(driver):
+        forgot_password(driver)
+    thread.sleep(SEE_TIME)
 
     # checks all scenarios of login
     if scenario_wrong_username(driver):
-        element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+        hover_over_username(driver)
+        thread.sleep(5)
         if scenario_wrong_password(driver):
-            element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+            hover_over_username(driver)
+            thread.sleep(5)
             if scenario_wrong_username_password(driver):
-                element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
+                hover_over_username(driver)
+                thread.sleep(5)
+                #element_dissapeared(driver, by_xpath='//*[contains(@id, "login-toast-error")]')
                 if scenario_correct_username_password(driver):
                     if check_logged_in(driver):
                         logout(driver)

@@ -3,6 +3,8 @@ this file is used to write the data to the output files and the console
 """
 
 import datetime
+from table2ascii import table2ascii
+
 from globals import (
     increment_number_of_failed_tests,
     increment_number_of_passed_tests,
@@ -108,13 +110,29 @@ def write_to_all_files(data: str):
     print(data)
 
 
-def _write_run_time_statistics():
+def write_run_time_statistics():
     """
     This function writes the run time statistics to the log file
     :return: None
     """
     number_of_failed_tests = get_number_of_failed_tests()
     number_of_passed_tests = get_number_of_passed_tests()
-    print("Number of passed tests: " + str(number_of_passed_tests))
-    print("Number of failed tests: " + str(number_of_failed_tests))
-    write_to_log_file("Number of passed tests: " + str(number_of_passed_tests))
+    print()
+    percentage = int((number_of_passed_tests 
+                      / (number_of_passed_tests + number_of_failed_tests)) * 10)
+    footer = []
+    for i in range(26):
+        if i < percentage:
+            footer.append("X")
+        else:
+            footer.append("-")
+
+    output = table2ascii(
+        header=["Total number of tests: " + str(number_of_passed_tests
+                                                + number_of_failed_tests)],
+        body=[["Number of passed tests: " + str(number_of_passed_tests)]
+              , ["Number of failed tests: " + str(number_of_failed_tests)]],
+        footer=footer,
+    )
+
+    print(output)

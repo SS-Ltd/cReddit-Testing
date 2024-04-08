@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from helper_functions import locate_element
 from write_to_files import write_to_all_files, report_fail, report_success
-from constants import DELAY_TIME,EMAIL,USERNAME
+from constants import DELAY_TIME,EMAIL,USERNAME,SEE_TIME
 from Registration.menu_appear import forgot_username_menu_appeared , login_menu_appeared
 from google_login import google_login, search_for_email, delete_open_email
 
@@ -236,7 +236,14 @@ def forgot_username(driver) -> None:
     '''
     write_to_all_files("#################### Forgot Username ####################")
     email_textbox_forgot_username(driver)
+    thread.sleep(SEE_TIME)
+
     scenario_wrong_email(driver)
+    thread.sleep(SEE_TIME)
+    
     scenario_correct_email(driver)#carefull this fuction deletes the email
+    thread.sleep(SEE_TIME)
+
     check_back_to_login(driver)
+    thread.sleep(SEE_TIME)
     write_to_all_files("#################### end Forgot Username ####################")
