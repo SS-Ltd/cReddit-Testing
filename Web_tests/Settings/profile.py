@@ -19,7 +19,7 @@ def check_text_field(driver, *, by_id=None, by_xpath=None, length, field_name) -
     write_to_all_files(f"Testing {field_name}")
     field = locate_element(driver, by_id=by_id, by_xpath=by_xpath)
     assert field is not None, report_fail(f"{field_name} input field not found")
-    driver.execute_script("arguments[0].scrollIntoView();", field)
+#    driver.execute_script("arguments[0].scrollIntoView();", field)
     field.clear()
     # Limit is <length> characters, try to send more than <length> characters
     field.send_keys('a' * (length + 1))

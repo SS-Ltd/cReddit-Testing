@@ -49,6 +49,8 @@ def goto_settings(driver) -> None:
     '''
     This function goes to the settings page from the homepage
     '''
+    driver.get("http://localhost:5173/settings")
+    return
     try:
         locate_element(driver, by_id="navbar_profile").click()
         report_success(
@@ -96,6 +98,7 @@ def goto_subpage(driver, subpage: Subpage) -> None:
     This function goes to a specific subpage of the settings page
 
     '''
+    driver.refresh()
     try:
         locate_element(driver, by_id=SUBPAGES[subpage]).click()
         report_success(

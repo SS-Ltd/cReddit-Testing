@@ -137,7 +137,7 @@ def change_gender(driver) -> None:
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[2]/div/a')
     assert dropdown is not None, report_fail(
         "Gender Dropdown not found")
-    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
+#    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
     dropdown.click()
     thread.sleep(DELAY_TIME)
 
@@ -154,7 +154,7 @@ def change_gender(driver) -> None:
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[2]/div/a')
     assert dropdown is not None, report_fail(
         "Gender Dropdown not found")
-    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
+#    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
     # assert dropdown.text == random_text, report_fail(
     #     "Gender Dropdown not working")
     write_to_all_files("Test Change Gender Successful")
@@ -276,7 +276,7 @@ def change_country(driver) -> None:
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[4]/div[2]/div/a')
     assert dropdown is not None, report_fail(
         "Country Dropdown not found")
-    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
+#    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
     dropdown.click()
     thread.sleep(DELAY_TIME)
 
@@ -293,7 +293,7 @@ def change_country(driver) -> None:
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[4]/div[2]/div/a')
     assert dropdown is not None, report_fail(
         "Country Dropdown not found")
-    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
+#    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
     # assert dropdown.text == random_text, report_fail(
     #     "Country Dropdown not working")
     write_to_all_files('Country Test Completed Successfully')

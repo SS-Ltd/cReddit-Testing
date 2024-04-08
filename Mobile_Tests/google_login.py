@@ -4,7 +4,7 @@ This file contains the function that logs into Gmail
 #from my_imports import webdriver, AppiumOptions, thread, Dict, Any
 from appium import webdriver
 from typing import Dict, Any
-#from appium.webdriver.common.touch_action import TouchAction
+from appium.webdriver.common.touch_action import TouchAction
 from appium.options.common import AppiumOptions
 from appium.webdriver.common.appiumby import AppiumBy
 from close_app import close_app
