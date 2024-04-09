@@ -20,18 +20,25 @@ def element_dissapeared(driver, by_id=None, by_xpath=None) -> bool:
             )
     return None
 
-def locate_element(driver, *, by_id=None, by_xpath=None) -> WebDriverWait:
+def locate_element(driver, *, by_id=None, by_xpath=None, by_classname=None) -> WebDriverWait:
     '''
     This function is used to locate an element
     '''
-    if by_id:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, by_id))
-            )
-    if by_xpath:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.XPATH, by_xpath))
-            )
+    try:
+        if by_id:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.ID, by_id))
+                )
+        if by_xpath:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.XPATH, by_xpath))
+                )
+        if by_classname:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.CLASS_NAME, by_classname))
+                )
+    except TimeoutException:
+        return None
     return None
 
 def check_popup_notification(driver) -> None:
