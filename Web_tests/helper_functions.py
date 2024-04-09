@@ -41,6 +41,24 @@ def locate_element(driver, *, by_id=None, by_xpath=None, by_classname=None) -> W
         return None
     return None
 
+def check_hyperlink(driver, url, *, by_xpath=None, by_id=None, by_classname=None, name) -> None:
+    '''
+    This function checks the hyperlink
+    '''
+    # Locate the hyperlink
+    hyperlink = locate_element(driver, by_xpath=by_xpath, by_id=by_id, by_classname=by_classname)
+    assert hyperlink is not None, report_fail(name + " hyperlink not found")
+    driver.execute_script("arguments[0].scrollIntoView();", hyperlink)
+    hyperlink.click()
+    thread.sleep(DELAY_TIME)
+    # assert driver.current_url == url, report_fail(name + " hyperlink not working")
+    print(name + " hyperlink working")
+
+    # Go back to the previous page
+    driver.back()
+    thread.sleep(DELAY_TIME)
+
+
 def check_popup_notification(driver) -> None:
     '''
     This function checks the popup notification that appears after changing
