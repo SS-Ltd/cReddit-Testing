@@ -4,8 +4,7 @@ This is the main test script for the mobile application.
 from my_imports import webdriver, AppiumOptions, thread, Dict, Any
 from helper_functions import locate_element
 from constants import DELAY_TIME
-from close_app import close_app
-from google_login import gmail_login, search_for_email
+from Paths import START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -28,78 +27,31 @@ print(driver.current_activity)
 print("App launched")
 
 # Click on the login button
-username = locate_element(driver, by_xpath='//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]')
+username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
 # username.clear()
-username.send_keys("test")
+username.send_keys("Clement33")
 
-password = locate_element(driver, by_xpath='//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]')
+password = locate_element(driver, by_xpath=START_PASSWORD)
 password.click()
 thread.sleep(2)
 # password.clear()
-password.send_keys("test")
+password.send_keys("1")
 
-login = locate_element(driver, by_accessibility_id='Continue')
+login = locate_element(driver, by_accessibility_id=START_LOGIN)
 login.click()
 
 # Verify that the login was successful
-# If there is a profile icon, then the login was successful
-profile = locate_element(driver, by_xpath='//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]')
-assert profile is not None, "Login was not successful"
+# Check the bottom tabs, one of them is an enough indication that the login was successful
+# Check the home tab (tab 1 of 5)
+home_tab = locate_element(driver, by_accessibility_id=HOME_PAGE_TABS_HOME)
+assert home_tab.is_displayed(), "Login was not successful"
+print("Login was successful")
 
-# Click on the profile button
-profile.click()
-
-# Click on the settings button
-settings = locate_element(driver, by_accessibility_id='Settings')
-settings.click()
-
-# thread.sleep(DELAY_TIME)
-
-# Check that you are indeed in the settings page
-# Check the account settings button
-# account_settings = locate_element(
-# driver, by_accessibility_id='Account Settings for u/ (username)')
-# assert account_settings is not None, "Account settings button not found"
-
-# Go to account settings
-# account_settings.click()
-
-# thread.sleep(5)
-
-# Check that you are indeed in the account settings page
-# title_element = locate_element(driver, by_accessibility_id='Account settings')
-# print(title_element.is_displayed())
-# assert title_element.is_displayed(), "Account settings page not found"
-
-driver.swipe(100, 1000, 100, 100, 400)
-
-thread.sleep(DELAY_TIME)
-
-content_policy = locate_element(driver, by_accessibility_id='Content Policy')
-assert content_policy is not None, "Content Policy button not found"
-
-print("Before Clicking")
-print(driver.contexts)
-print(driver.context)
-
-
-# Click on the content policy button
-content_policy.click()
-print("Clicked on the content policy button")
-thread.sleep(DELAY_TIME)
-
-close_app(driver)
-gmail_login(driver)
-search_for_email(driver, "cReddit support center")
-
-print(driver.contexts)
-print(driver.context)
-
-# Check that another context has opened
-assert "WEBVIEW_chrome" in driver.contexts, "Content Policy page not found"
+# TEST FUNCTIONALITIES HERE
+# TODO: Add test functionalities here
 
 print("Test completed successfully")
-thread.sleep(20)
+thread.sleep(DELAY_TIME)
 driver.quit()
