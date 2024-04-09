@@ -11,7 +11,6 @@ from home_page import home_page
 from google_login import google_login
 from Registration.login import login
 from helper_functions import locate_element
-from create_post import create_post
 
 # Prepare the log files
 delete_all_files_content()
@@ -38,9 +37,7 @@ locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 # Wait for the site to load
 thread.sleep(DELAY_TIME)
 
-create_post(driver)
-
-#home_page(driver)
+home_page(driver)
 # login(driver)
 #google_login(driver, "cReddit support center")
 
