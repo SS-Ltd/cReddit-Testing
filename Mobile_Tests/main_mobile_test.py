@@ -5,6 +5,7 @@ from my_imports import webdriver, AppiumOptions, thread, Dict, Any
 from helper_functions import locate_element
 from constants import DELAY_TIME
 from paths import START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME
+from home_page import home_page
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -50,7 +51,8 @@ assert home_tab.is_displayed(), "Login was not successful"
 print("Login was successful")
 
 # TEST FUNCTIONALITIES HERE
-# TODO: Add test functionalities here
+# TODO: Test Settings
+home_page(driver)
 
 print("Test completed successfully")
 thread.sleep(DELAY_TIME)

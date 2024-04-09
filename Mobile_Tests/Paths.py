@@ -8,5 +8,9 @@ START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"
 START_LOGIN = 'Continue'
 
 # Home page
+# Profile Icon
+HOME_PAGE_PROFILE_ICON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[4]'
+# Within Profile Window
+PROFILE_SETTINGS = 'Settings'
 # Bottom tabs
 HOME_PAGE_TABS_HOME = 'Home\nTab 1 of 5'
