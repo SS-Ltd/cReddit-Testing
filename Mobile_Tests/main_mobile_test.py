@@ -62,7 +62,8 @@ assert home_tab.is_displayed(), "Login was not successful"
 print("Login was successful")
 
 # TEST FUNCTIONALITIES HERE
-# TODO: Add test functionalities here
+# TODO: Test Settings
+home_page(driver)
 
 print("Test completed successfully")
 thread.sleep(DELAY_TIME)
