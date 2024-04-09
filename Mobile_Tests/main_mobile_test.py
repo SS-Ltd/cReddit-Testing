@@ -5,7 +5,6 @@ from my_imports import webdriver, AppiumOptions, thread, Dict, Any
 from helper_functions import locate_element
 from constants import DELAY_TIME
 from Paths import START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME
-from home_page import home_page
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
