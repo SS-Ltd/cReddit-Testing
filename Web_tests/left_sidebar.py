@@ -4,7 +4,7 @@ This module is used to test the left sidebar of the website.
 
 from my_imports import thread
 from constants import DELAY_TIME
-from helper_functions import locate_element
+from helper_functions import locate_element, check_hyperlink
 
 
 def create_community(driver) -> None:
@@ -66,4 +66,9 @@ def left_sidebar(driver) -> None:
     # assert dropdown is not None, "Recent communities not displayed"
 
     # Create a community
-    create_community(driver)
+    # create_community(driver)
+
+    # Check Resources
+    check_hyperlink(driver, 'https://www.redditinc.com/', by_id='sidebar_resources_about_reddit', name="About Reddit")
+    check_hyperlink(driver, 'https://accounts.reddit.com/adsregister?dest=https%3A%2F%2Fads.reddit.com%2F&referrer=https%3A%2F%2Fwww.reddit.com%2F&utm_source=web3x_consumer&utm_name=left_nav_cta', by_id='sidebar_resources_advertise', name="Advertise")
+    check_hyperlink(driver, 'https://support.reddithelp.com/hc/en-us', by_id='sidebar_resources_help_center', name="Help Center")
