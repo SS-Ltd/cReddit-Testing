@@ -5197,3 +5197,4 @@
 2024-03-30 16:45:36.542165 : The element with the ID 'login_username' was not found 'test' was not entered[login() -> scenario_wrong_username() -> wrong username not found]
 2024-03-30 16:45:40.598385 : The element with the ID 'login_signup' was not found[login() -> login_to_sign_up() -> sign up not found]
 2024-03-30 16:45:44.668496 : The element with the ID 'login_close' was not found[login() -> close_button() -> close button not found]
+2024-04-10 00:38:49.206908 : Advertise hyperlink not found
