@@ -6,7 +6,7 @@ from my_imports import thread
 from constants import DELAY_TIME
 from Paths import HOME_PAGE_PROFILE_ICON, PROFILE_SETTINGS
 from helper_functions import locate_element
-from Settings.settings import settings
+from settings import settings
 
 def home_page(driver) -> None:
     '''
