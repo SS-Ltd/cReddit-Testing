@@ -6,6 +6,7 @@ from helper_functions import locate_element
 from constants import DELAY_TIME
 from Pathsaths import START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME
 from home_page import home_page
+from Registration.login import login
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -26,6 +27,8 @@ print(driver.current_activity)
 #gmail_login(driver)
 
 print("App launched")
+
+# Test the login functionality
 
 # Click on the login button
 username = locate_element(driver, by_xpath=START_USERNAME)
