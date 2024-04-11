@@ -33,6 +33,8 @@ print(driver.current_activity)
 print("App launched")
 
 # Test the login functionality
+
+# Test the login functionality
 #login(driver)
 # Click on the login button
 thread.sleep(5)
