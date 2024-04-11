@@ -4,7 +4,9 @@ This module checks the functionalities of the login module of the mobile applica
 
 from my_imports import thread
 from constants import DELAY_TIME, EMAIL, PASSWORD_CREDDIT, EMAIL_SIGNUP, USERNAME, SEE_TIME
-from paths import START_FORGOT_PASSWORD, RESET_PASSWORD_EMAIL_TEXTBOX, RESET_PASSWORD_BUTTON, RESET_PASSWORD_RESEND, RESET_PASSWORD_OPEN_EMAIL_APP
+from Paths import (START_FORGOT_PASSWORD, RESET_PASSWORD_EMAIL_TEXTBOX, RESET_PASSWORD_BUTTON
+                   , RESET_PASSWORD_RESEND, RESET_PASSWORD_OPEN_EMAIL_APP, RESET_PASSWORD_HELP_BUTTON
+                   , RESET_PASSWORD_CLOSE_TAB_BUTTON)
 from helper_functions import locate_element
 
 def login(driver) -> None:
@@ -21,7 +23,7 @@ def login(driver) -> None:
     print(driver.contexts)
     print(driver.context)
 
-
+    ####################################################forgot password########################################################
     # Click on the forgot password button
     forgot_password.click()
     print("Clicked on the forgot password button")
@@ -46,13 +48,30 @@ def login(driver) -> None:
     reset_password_resend.click()
     print("Reset password resend button clicked")
     thread.sleep(SEE_TIME)
+    reset_password_help_button = locate_element(
+        driver, by_accessibility_id=RESET_PASSWORD_RESEND)
+    assert reset_password_help_button is not None, "Reset password help button not found"
+    reset_password_help_button.click()
+    print("Reset password help button clicked")
+    thread.sleep(SEE_TIME)
+    reset_password_close_tab_button = locate_element(
+        driver, by_accessibility_id=RESET_PASSWORD_CLOSE_TAB_BUTTON)
+    assert reset_password_close_tab_button is not None, "Reset password close tab button not found"
+    reset_password_close_tab_button.click()
+    print("Reset password close tab button clicked")
+    thread.sleep(SEE_TIME)
+
     reset_password_open_email_app = locate_element(
         driver, by_accessibility_id=RESET_PASSWORD_OPEN_EMAIL_APP)
     assert reset_password_open_email_app is not None,"Reset password open email app button not found"
     reset_password_open_email_app.click()
     print("Reset password open email app button clicked")
     thread.sleep(SEE_TIME)
+    #TODO: Add the code to check the email and reset the password
 
+
+
+    ####################################################end of forgot password########################################################
     # Check that another context has opened
     assert "WEBVIEW_chrome" in driver.contexts, "Content Policy page not found"
     print("Content Policy page found")
