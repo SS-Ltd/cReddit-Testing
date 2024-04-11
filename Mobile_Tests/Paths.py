@@ -34,6 +34,7 @@ SETTINGS_VISIT_REDDIT_MOBILE = 'Visit r/redditmobile'
 
 # Account settings page
 ACCOUNT_UPDATE_EMAIL = '//android.widget.Button[@content-desc="Update email address\nGloria.Grady@hotmail.com"]'
+ACCOUNT_UPDATE_PASSWORD = 'Change password'
 
 # Update Email page
 UPDATE_EMAIL_USERNAME = 'u/username'
@@ -46,6 +47,15 @@ UPDATE_EMAIL_ERROR_EMAIL_EMPTY = 'Please enter an email address.'
 UPDATE_EMAIL_ERROR_EMAIL_INVALID = 'Please enter a valid email address.'
 UPDATE_EMAIL_ERROR_PASSWORD_EMPTY = 'Please enter your password'
 UPDATE_EMAIL_ERROR_PASSWORD_INVALID = 'Password must be at least 8 characters long'
+
+# Update Password page
+UPDATE_PASSWORD_USERNAME = 'u/username'
+UPDATE_PASSWORD_CURRENT_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]'
+UPDATE_PASSWORD_NEW_PASSWORD = '//android.widget.ScrollView/android.widget.EditText[2]'
+UPDATE_PASSWORD_CONFIRM_PASSWORD = '//android.widget.ScrollView/android.widget.EditText[3]'
+UPDATE_PASSWORD_SAVE = 'Save'
+UPDATE_PASSWORD_FORGOT_PASSWORD = 'Forgot password?'
+
 
 # Forgot Password page
 FORGOT_PASSWORD_WINDOW = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View'
