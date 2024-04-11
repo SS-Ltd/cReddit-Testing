@@ -4,9 +4,9 @@ This module checks the functionalities of the home page of the mobile applicatio
 
 from my_imports import thread
 from constants import DELAY_TIME
-from paths import HOME_PAGE_PROFILE_ICON, PROFILE_SETTINGS
+from Paths import HOME_PAGE_PROFILE_ICON, PROFILE_SETTINGS
 from helper_functions import locate_element
-from Settings.settings import settings
+from settings import settings
 
 def home_page(driver) -> None:
     '''
