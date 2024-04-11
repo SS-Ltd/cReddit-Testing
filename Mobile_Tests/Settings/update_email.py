@@ -4,8 +4,7 @@ This module checks the functionalities of the update email page of the mobile ap
 
 from my_imports import thread, webdriver
 from constants import DELAY_TIME
-from helper_functions import locate_element
-from settings import check_hyperlink
+from helper_functions import locate_element, check_hyperlink
 from Paths import UPDATE_EMAIL_EMAIL, UPDATE_EMAIL_PASSWORD, UPDATE_EMAIL_SAVE
 from Paths import UPDATE_EMAIL_ERROR_EMAIL_EMPTY, UPDATE_EMAIL_ERROR_EMAIL_INVALID
 from Paths import UPDATE_EMAIL_ERROR_PASSWORD_EMPTY, UPDATE_EMAIL_ERROR_PASSWORD_INVALID
