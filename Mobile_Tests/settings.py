@@ -7,10 +7,11 @@ from constants import DELAY_TIME
 from helper_functions import locate_element
 # from Paths import SETTINGS_CONTENT_POLICY, SETTINGS_PRIVACY_POLICY, SETTINGS_USER_AGREEMENT
 # from Paths import SETTINGS_HELP_CENTER, SETTINGS_VISIT_REDDIT_MOBILE
-from Paths import UPDATE_EMAIL_USERNAME
+from Paths import UPDATE_EMAIL_USERNAME, UPDATE_PASSWORD_USERNAME
 from Paths import SETTINGS_ACCOUNT
-from Paths import ACCOUNT_UPDATE_EMAIL
+from Paths import ACCOUNT_UPDATE_EMAIL, ACCOUNT_UPDATE_PASSWORD
 from Settings.update_email import update_email
+from Settings.update_password import update_password
 
 
 def check_hyperlink(driver, hyperlink: str) -> None:
@@ -54,13 +55,22 @@ def account_settings(driver) -> None:
     This function checks the functionalities of the update email page of the mobile application.
     '''
 
-    locate_element(driver, by_xpath=ACCOUNT_UPDATE_EMAIL).click()
-    thread.sleep(DELAY_TIME)
-    print("Update Email clicked")
+    # locate_element(driver, by_xpath=ACCOUNT_UPDATE_EMAIL).click()
+    # thread.sleep(DELAY_TIME)
+    # print("Update Email clicked")
     # Check that you are in the update email page
-    temp = locate_element(driver, by_accessibility_id=UPDATE_EMAIL_USERNAME)
-    assert temp is not None, "Update Email page not found"
-    update_email(driver)
+    # temp = locate_element(driver, by_accessibility_id=UPDATE_EMAIL_USERNAME)
+    # assert temp is not None, "Update Email page not found"
+    # update_email(driver)
+
+    # Check the functionalities of the update password page
+    locate_element(driver, by_accessibility_id=ACCOUNT_UPDATE_PASSWORD).click()
+    thread.sleep(DELAY_TIME)
+    print("Update Password clicked")
+    # Check that you are in the update password page
+    temp = locate_element(driver, by_accessibility_id=UPDATE_PASSWORD_USERNAME)
+    assert temp is not None, "Update Password page not found"
+    update_password(driver)
 
 
 
