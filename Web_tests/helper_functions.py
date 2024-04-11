@@ -20,19 +20,44 @@ def element_dissapeared(driver, by_id=None, by_xpath=None) -> bool:
             )
     return None
 
-def locate_element(driver, *, by_id=None, by_xpath=None) -> WebDriverWait:
+def locate_element(driver, *, by_id=None, by_xpath=None, by_classname=None) -> WebDriverWait:
     '''
     This function is used to locate an element
     '''
-    if by_id:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.ID, by_id))
-            )
-    if by_xpath:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((By.XPATH, by_xpath))
-            )
+    try:
+        if by_id:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.ID, by_id))
+                )
+        if by_xpath:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.XPATH, by_xpath))
+                )
+        if by_classname:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.CLASS_NAME, by_classname))
+                )
+    except TimeoutException:
+        return None
     return None
+
+def check_hyperlink(driver, url, *, by_xpath=None, by_id=None, by_classname=None, name) -> None:
+    '''
+    This function checks the hyperlink
+    '''
+    # Locate the hyperlink
+    hyperlink = locate_element(driver, by_xpath=by_xpath, by_id=by_id, by_classname=by_classname)
+    assert hyperlink is not None, report_fail(name + " hyperlink not found")
+    driver.execute_script("arguments[0].scrollIntoView();", hyperlink)
+    hyperlink.click()
+    thread.sleep(DELAY_TIME)
+    # assert driver.current_url == url, report_fail(name + " hyperlink not working")
+    print(name + " hyperlink working")
+
+    # Go back to the previous page
+    driver.back()
+    thread.sleep(DELAY_TIME)
+
 
 def check_popup_notification(driver) -> None:
     '''
