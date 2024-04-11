@@ -6,6 +6,12 @@ This module contains all the xPaths and accessibility IDs for the mobile applica
 START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
 START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
 START_LOGIN = 'Continue'
+START_FORGOT_PASSWORD = 'Forgot Password?'
+#reset password for the mobile application
+RESET_PASSWORD_EMAIL_TEXTBOX = '//android.widget.EditText'
+RESET_PASSWORD_BUTTON = 'Reset Password'
+RESET_PASSWORD_RESEND = 'Resend'
+RESET_PASSWORD_OPEN_EMAIL_APP = "Open email app"
 
 # Home page
 # Profile Icon
