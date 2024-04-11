@@ -4,7 +4,7 @@ This module checks the functionalities of the settings page of the mobile applic
 
 from my_imports import thread
 from constants import DELAY_TIME
-from helper_functions import locate_element
+from helper_functions import locate_element, check_hyperlink
 # from Paths import SETTINGS_CONTENT_POLICY, SETTINGS_PRIVACY_POLICY, SETTINGS_USER_AGREEMENT
 # from Paths import SETTINGS_HELP_CENTER, SETTINGS_VISIT_REDDIT_MOBILE
 from Paths import UPDATE_EMAIL_USERNAME, UPDATE_PASSWORD_USERNAME
@@ -12,43 +12,6 @@ from Paths import SETTINGS_ACCOUNT
 from Paths import ACCOUNT_UPDATE_EMAIL, ACCOUNT_UPDATE_PASSWORD
 from Settings.update_email import update_email
 from Settings.update_password import update_password
-
-
-def check_hyperlink(driver, hyperlink: str) -> None:
-    '''
-    This function checks the functionalities of the hyperlink on the settings page.
-    '''
-
-    print(f"Checking {hyperlink} hyperlink")
-
-    button = locate_element(driver, by_accessibility_id=hyperlink)
-    assert button is not None, f"{hyperlink} button not found"
-
-    print("Before Clicking")
-    print(driver.contexts)
-    print(driver.context)
-
-    # Click on the hyperlink
-    button.click()
-    print(f"Clicked on the {hyperlink} hyperlink")
-    thread.sleep(10)
-
-    print(driver.contexts)
-    print(driver.context)
-
-    # Check that another context has opened
-    assert "WEBVIEW_chrome" in driver.contexts, f"{hyperlink} page not found"
-    print(f"{hyperlink} page found")
-
-    # Go back to the settings page
-    driver.back()
-    thread.sleep(DELAY_TIME)
-
-    print(f"Back to the settings page from {hyperlink}")
-
-    # Swipe randomly
-    driver.swipe(100, 1000, 100, 100, 200)
-    thread.sleep(DELAY_TIME)
 
 def account_settings(driver) -> None:
     '''
