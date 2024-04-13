@@ -1,11 +1,15 @@
 '''
 This module contains all the xPaths and accessibility IDs for the mobile application.
 '''
-
+# RID = Resource ID
+# XPATH = Xpath
+# AID = Accessibility ID
 # Starting page for the mobile application
 START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
 START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
+START_SIGNUP = 'Sign Up'
 START_LOGIN = 'Continue'
+START_COUNTINUE_WITH_GOOGLE = 'Continue with Google'
 START_FORGOT_PASSWORD = 'Forgot Password?'
 #reset password for the mobile application
 RESET_PASSWORD_EMAIL_TEXTBOX = '//android.widget.EditText'
@@ -14,17 +18,36 @@ RESET_PASSWORD_RESEND = 'Resend'
 RESET_PASSWORD_OPEN_EMAIL_APP = "Open email app"
 RESET_PASSWORD_HELP_BUTTON = "Help"
 RESET_PASSWORD_CLOSE_TAB_BUTTON = "Close tab"
-
+# login continue with google
+CONTINUE_WITH_GOOGLE_EMAIL = '(//android.widget.LinearLayout[@resource-id="com.google.android.gms:id/container"])[1]'
+# signup 
+SIGNUP_EMAIL = 'signup_email_field'                     #RID
+SIGNUP_PASSWORD = 'signup_password_fields'              #RID
+SIGNUP_LOGIN = 'Log In'                                 #AID
+SIGNUP_CONTINUE = 'Continue'                            #AID
+#signup continue with google
+SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
 # Home page
+# Custom Navigation Bar
+NAVIGATION_BAR_HOME = 'Home Tab 1 of 5'                 #AID
+NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
+NAVIGATION_BAR_CREATE_POST = 'Create Tab 3 of 5'        #AID
+NAVIGATION_BAR_CHAT = 'Chat Tab 4 of 5'                 #AID
+NAVIGATION_BAR_INBOX = 'Inbox Tab 5 of 5'               #AID
 
 # Profile Icon
 HOME_PAGE_PROFILE_ICON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[4]'
 
 # Within Profile Window
+PROFILE_WINDOW_PROFILE = 'My Profile'
+PROFILE_WINDOW_CREATE_COMMUNITY = 'Create a Community'
+PROFILE_WINDOW_SAVED = 'Saved'
+PROFILE_WINDOW_HISTORY = 'History'
+PROFILE_WINDOW_SETTINGS = 'Settings'
 PROFILE_SETTINGS = 'Settings'
 
 # Bottom tabs
-HOME_PAGE_TABS_HOME = 'Home\nTab 1 of 5'
+HOME_PAGE_TABS_HOME = 'Home\nTab 1 of 5'#i added these above
 
 # Settings page
 SETTINGS_ACCOUNT = '//android.widget.Button[@content-desc="Account Settings u/Claudine"]'
@@ -62,3 +85,58 @@ UPDATE_PASSWORD_FORGOT_PASSWORD = 'Forgot password?'
 # Forgot Password page
 FORGOT_PASSWORD_WINDOW = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View'
 FORGOT_PASSWORD_HAVING_TROUBLE = 'Having Trouble?'
+
+# profile page
+PROFILE_PAGE_EDIT_PROFILE = 'Edit'              #AID
+PROFILE_PAGE_POSTS = 'Posts'                    #AID
+PROFILE_PAGE_COMMENTS = 'Comments'              #AID
+PROFILE_PAGE_ABOUT = 'About'                    #AID
+PROFILE_PAGE_SHARE = 'profile share'            #RID
+PROFILE_PAGE_SEARCH = 'profile search'          #RID
+PROFILE_PAGE_MENU = 'profile menu'              #RID        #Might not work
+
+# about user popup/Profile card
+CREATE_YOUR_OWN_AVATAR = 'Create Your Own Avatar'           #AID        #not in project scope
+ABOUT_USER_VIEW_PROFILE = 'View Profile'                    #AID
+ABOUT_USER_SEND_MESSAGE = 'Send Message'                    #AID
+ABOUT_USER_BLOCK_ACCOUNT = 'Block Account'                  #AID
+#subreddit page
+SUBREDDIT_PAGE_JOIN = 'Join'                                #AID
+SUBREDDIT_PAGE_LEAVE = 'Joined'                             #AID
+SUBREDDIT_PAGE_SORT_HOT = 'Hot'                             #AID
+SUBREDDIT_PAGE_SORT_NEW = 'New'                             #AID
+SUBREDDIT_PAGE_SORT_TOP = 'Top'                             #AID
+SUBREDDIT_PAGE_SORT_OPTIONS = 'subreddit sorting options'   #RID    #Might not work
+SUBREDDIT_PAGE_SEARCH = 'search subreddit'                  #RID    #Might not work
+SUBREDDIT_PAGE_SHARE = 'share subreddit'                    #RID    #Might not work
+SUBREDDIT_PAGE_OPTIONS = 'subreddit options'                #RID    #Might not work
+#TOP COMMUNITIES
+TOP_COMMUNITIES_JOIN_LEAVE = 'join or disjoin subreddit'
+#CREATE COMMUNITY
+CREATE_COMMUNITY_NAME = 'Community Name'#RID
+CREATE_COMMUNITY_TYPE = 'Community Type'#RID
+CREATE_COMMUNITY_TYPE_PUBLIC = 'Public Anyone can view, post, and comment to this community.'#AID
+CREATE_COMMUNITY_TYPE_RESTRICTED = 'Restricted Anyone can view this community, but only approved users can post.'#AID
+CREATE_COMMUNITY_TYPE_PRIVATE = 'Private Only approved users can view and submit to this community.'#AID
+CREATE_COMMUNITY_18   = '18+ Community' #RID
+CREATE_COMMUNITY_BUTTON = 'Create Community'#AID
+CREATE_COMMUNITY_BACK = 'Back'          #AID
+# posts all resource IDS except stated
+POST_UPVOTE      = 'post upvote'        #RID
+POST_VOTES       = 'post votes'         #RID        # Might not work
+POST_DOWNVOTE    = 'post downvote'      #RID
+POST_COMMENTS    = 'post comment'       #RID
+POST_USERNAME    = 'post username'      #RID        # POST USERNAME and POST SUBREDDIT together form the some reason
+POST_SUBREDDIT   = 'post subreddit'     #RID        # Might not work
+POST_TITLE       = 'post title'         #RID
+POST_SHARE       = 'post share'         #RID
+# Create Post
+
+# Comments all resource IDS
+COMMENT_UPVOTE   = 'comment upvote'     #RID
+COMMENT_VOTES    = 'comment votes'      #RID        # Might not work
+COMMENT_DOWNVOTE = 'comment downvote'   #RID
+COMMENT_OPTIONS  = 'comment options'    #RID
+COMMENT_REPLY    = 'comment reply'      #RID
+COMMENT_USERNAME = 'comment username'   #RID
+COMMENT_CONTENT  = 'comment content'    #RID
