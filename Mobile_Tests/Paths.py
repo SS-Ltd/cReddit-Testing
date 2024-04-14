@@ -4,6 +4,7 @@ This module contains all the xPaths and accessibility IDs for the mobile applica
 # RID = Resource ID
 # XPATH = Xpath
 # AID = Accessibility ID
+# end of text button
 # Starting page for the mobile application
 START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
 START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
@@ -20,11 +21,14 @@ RESET_PASSWORD_HELP_BUTTON = "Help"
 RESET_PASSWORD_CLOSE_TAB_BUTTON = "Close tab"
 # login continue with google
 CONTINUE_WITH_GOOGLE_EMAIL = '(//android.widget.LinearLayout[@resource-id="com.google.android.gms:id/container"])[1]'
-# signup 
+# signup
 SIGNUP_EMAIL = 'signup_email_field'                     #RID
 SIGNUP_PASSWORD = 'signup_password_fields'              #RID
 SIGNUP_LOGIN = 'Log In'                                 #AID
 SIGNUP_CONTINUE = 'Continue'                            #AID
+SIGNUP_USERNAME = 'signup_username_field'               #RID
+SIGNUP_CONTINUE2 = 'Continue'                           #AID#might need to update this
+SIGNUP_GENDER_MAN = 'Man'                               #AID
 #signup continue with google
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
 # Home page
@@ -140,3 +144,17 @@ COMMENT_OPTIONS  = 'comment options'    #RID
 COMMENT_REPLY    = 'comment reply'      #RID
 COMMENT_USERNAME = 'comment username'   #RID
 COMMENT_CONTENT  = 'comment content'    #RID
+COMMENT_CREATE   = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View'             #XPath
+COMMENT_WRITE    = '//android.widget.EditText'
+COMMENT_POST = 'Post'                   #AID
+#AIDS
+COMMENT_EDIT    = 'Edit comment'        #AID
+COMMENT_SHARE   = 'Share'               #AID
+COMMENT_SAVE    = 'Save'                #AID
+COMMENT_UNSAVE  = 'Unsave'              #AID
+COMMENT_GET_REPLY_NOTIFICATIONS = 'Get reply notifications' #AID
+COMMENT_COPY_TEXT = 'Copy text'         #AID
+COMMENT_COLAPSE_THREAD = 'Collapse thread'#AID
+COMMENT_BLOCK_ACCOUNT = 'Block account' #AID
+COMMENT_REPORT  = 'Report'              #AID
+COMMENT_DELETE  = 'Delete comment'              #AID

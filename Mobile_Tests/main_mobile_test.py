@@ -2,11 +2,12 @@
 This is the main test script for the mobile application.
 '''
 from my_imports import webdriver, AppiumOptions, thread, Dict, Any
-from helper_functions import locate_element
+from helper_functions import locate_element, end_text
 from constants import DELAY_TIME
-from Paths import START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME
+from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME, POST_COMMENTS
+                   , COMMENT_WRITE)
 from home_page import home_page
-from Registration.login import login
+from Comments.comments import comment
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -30,8 +31,9 @@ print(driver.current_activity)
 print("App launched")
 
 # Test the login functionality
-login(driver)
+#login(driver)
 # Click on the login button
+thread.sleep(5)
 username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
@@ -42,10 +44,14 @@ password = locate_element(driver, by_xpath=START_PASSWORD)
 password.click()
 thread.sleep(2)
 # password.clear()
-password.send_keys("1\n")
+password.send_keys("1")
+end_text(driver)
+thread.sleep(2)
+locate_element(driver, by_accessibility_id=START_LOGIN).click()
+#locate_element(driver, by_id=POST_COMMENTS).click()
+comment(driver)
 
-login_element = locate_element(driver, by_accessibility_id=START_LOGIN)
-login_element.click()
+
 
 # Verify that the login was successful
 # Check the bottom tabs, one of them is an enough indication that the login was successful

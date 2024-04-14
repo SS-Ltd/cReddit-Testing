@@ -116,7 +116,7 @@ def signup_continue_with_google(driver) -> None:
     assert home_tab.is_displayed(), "Login was not successful"
     print("Login was successful")
 
-def signup(driver, email:str = "Fake@email.no") -> None:
+def signup(driver, email:str = "Fake@email.no"+datetime.datetime.now().strftime("%Y%m%d%H%M%S")) -> None:
     '''
     This function checks the functionalities of the signup module of the mobile application.
     '''
