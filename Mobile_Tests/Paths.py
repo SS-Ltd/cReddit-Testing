@@ -142,6 +142,20 @@ COMMENT_OPTIONS  = 'comment options'    #RID
 COMMENT_REPLY    = 'comment reply'      #RID
 COMMENT_USERNAME = 'comment username'   #RID
 COMMENT_CONTENT  = 'comment content'    #RID
+COMMENT_CREATE   = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View'             #XPath
+COMMENT_WRITE    = '//android.widget.EditText'
+COMMENT_POST = 'Post'                   #AID
+#AIDS
+COMMENT_EDIT    = 'Edit comment'        #AID
+COMMENT_SHARE   = 'Share'               #AID
+COMMENT_SAVE    = 'Save'                #AID
+COMMENT_UNSAVE  = 'Unsave'              #AID
+COMMENT_GET_REPLY_NOTIFICATIONS = 'Get reply notifications' #AID
+COMMENT_COPY_TEXT = 'Copy text'         #AID
+COMMENT_COLAPSE_THREAD = 'Collapse thread'#AID
+COMMENT_BLOCK_ACCOUNT = 'Block account' #AID
+COMMENT_REPORT  = 'Report'              #AID
+COMMENT_DELETE  = 'Delete comment'              #AID
 
 # Create Post
 CREATE_POST_TITLE = 'Create Post Title'                                                     #RID
