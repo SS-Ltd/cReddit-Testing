@@ -95,7 +95,7 @@ PROFILE_PAGE_ABOUT = 'About'                    #AID
 PROFILE_PAGE_SHARE = 'profile share'            #RID
 PROFILE_PAGE_SEARCH = 'profile search'          #RID
 PROFILE_PAGE_MENU = 'profile menu'              #RID        #Might not work
-
+PROFILE_PAGE_BACK = 'Back'                      #AID
 # about user popup/Profile card
 CREATE_YOUR_OWN_AVATAR = 'Create Your Own Avatar'           #AID        #not in project scope
 ABOUT_USER_VIEW_PROFILE = 'View Profile'                    #AID

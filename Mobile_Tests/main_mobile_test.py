@@ -7,7 +7,7 @@ from constants import DELAY_TIME
 from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME, POST_COMMENTS
                    , COMMENT_WRITE)
 from home_page import home_page
-from Comments.comments import comment
+from Profile.profile_page import profile_page
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -49,8 +49,7 @@ end_text(driver)
 thread.sleep(2)
 locate_element(driver, by_accessibility_id=START_LOGIN).click()
 #locate_element(driver, by_id=POST_COMMENTS).click()
-comment(driver)
-
+profile_page(driver)
 
 
 # Verify that the login was successful
