@@ -15,7 +15,8 @@ cap: Dict[str, Any] = {
     "appPackage": "com.example.reddit_clone",
     "appActivity": "com.example.reddit_clone.MainActivity",
     "language": "en",
-    "locale": "US"
+    "locale": "US",
+    "appium:disableIdLocatorAutocompletion":True
 }
 
 URL = "http://localhost:4724"
@@ -35,13 +36,13 @@ username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
 # username.clear()
-username.send_keys("Clement33")
+username.send_keys("Trevor11")
 
 password = locate_element(driver, by_xpath=START_PASSWORD)
 password.click()
 thread.sleep(2)
 # password.clear()
-password.send_keys("1")
+password.send_keys("1\n")
 
 login_element = locate_element(driver, by_accessibility_id=START_LOGIN)
 login_element.click()

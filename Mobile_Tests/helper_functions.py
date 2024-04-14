@@ -5,11 +5,14 @@ This file contains all the helper functions that are used throughout the project
 from my_imports import webdriver, WebDriverWait, EC, AppiumBy, thread
 from constants import DELAY_TIME
 
-
-def locate_element(driver: webdriver, *, by_accessibility_id=None, by_xpath=None, by_class_name=None) -> WebDriverWait:
+def locate_element(driver: webdriver, *, by_accessibility_id=None, by_xpath=None, by_class_name=None, by_id = None) -> WebDriverWait:
     '''
     This function locates an element on the page
     '''
+    if by_id:
+        return WebDriverWait(driver, DELAY_TIME).until(
+            EC.presence_of_element_located((AppiumBy.ID, by_id))
+        )
     if by_accessibility_id:
         return WebDriverWait(driver, DELAY_TIME).until(
             EC.presence_of_element_located(
@@ -25,6 +28,14 @@ def locate_element(driver: webdriver, *, by_accessibility_id=None, by_xpath=None
                 (AppiumBy.CLASS_NAME, by_class_name))
         )
     return None
+
+def end_text(driver: webdriver) -> None:
+    '''
+    clicks the correct button after typing text
+    '''
+    driver.hide_keyboard()
+
+    thread.sleep(2)
 
 def check_hyperlink(driver, hyperlink: str) -> None:
     '''
