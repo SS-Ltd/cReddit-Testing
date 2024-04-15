@@ -29,9 +29,9 @@ SIGNUP_CONTINUE = 'Continue'                            #AID
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
 # Home page
 # Custom Navigation Bar
-NAVIGATION_BAR_HOME = 'Home Tab 1 of 5'                 #AID
+NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                 #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
-NAVIGATION_BAR_CREATE_POST = 'Create Tab 3 of 5'        #AID
+NAVIGATION_BAR_CREATE_POST = 'Create\nTab 3 of 5'       #AID
 NAVIGATION_BAR_CHAT = 'Chat Tab 4 of 5'                 #AID
 NAVIGATION_BAR_INBOX = 'Inbox Tab 5 of 5'               #AID
 
@@ -45,9 +45,6 @@ PROFILE_WINDOW_SAVED = 'Saved'
 PROFILE_WINDOW_HISTORY = 'History'
 PROFILE_WINDOW_SETTINGS = 'Settings'
 PROFILE_SETTINGS = 'Settings'
-
-# Bottom tabs
-HOME_PAGE_TABS_HOME = 'Home\nTab 1 of 5'#i added these above
 
 # Settings page
 SETTINGS_ACCOUNT = '//android.widget.Button[@content-desc="Account Settings u/Claudine"]'
@@ -140,3 +137,25 @@ COMMENT_OPTIONS  = 'comment options'    #RID
 COMMENT_REPLY    = 'comment reply'      #RID
 COMMENT_USERNAME = 'comment username'   #RID
 COMMENT_CONTENT  = 'comment content'    #RID
+
+
+# Create Post
+CREATE_POST_TITLE = 'Create Post Title'                                                     #RID
+CREATE_POST_NEXT = 'Next'                                                                   #AID
+CREATE_POST_POST_TO = 'Post to'                                                             #AID
+CREATE_POST_ADD_TAGS = 'Add tags & flair'                                                   #AID
+CREATE_POST_POST = 'Post'                                                                   #AID
+CREATE_POST_BODY = 'Create Post Body'                                                       #RID
+CREATE_POST_ADD_LINK = 'add link'                                                           #AID
+CREATE_POST_LINK_BODY = 'Insert Link'                                                       #RID
+CREATE_POST_ADD_IMAGE = 'add image'                                                         #AID
+CREATE_POST_IMAGE = 'com.google.android.providers.media.module:id/icon_thumbnail'           #RID
+CREATE_POST_ADD_POLL = 'add poll'                                                           #AID
+CREATE_POST_DURATION_POLL = 'Poll ends in 2 Day'                                            #AID
+CREATE_POST_DURATION_POLL_5 = '5 Day'                                                       #AID
+CREATE_POST_DURATION_POLL_NEW = 'Poll ends in 5 Day'                                        #AID
+CREATE_POST_POLL_OPTION_1 = 'Option 1'                                                      #RID
+CREATE_POST_POLL_OPTION_2 = 'Option 2'                                                      #RID
+CREATE_POST_POLL_ADD_OPTION = 'Add option'                                                  #AID
+CREATE_POST_POLL_OPTION_3 = 'Option 3'                                                      #RID
+CREATE_POST_CLOSE_POLL_3 = 'close option 3'                                                 #AID
