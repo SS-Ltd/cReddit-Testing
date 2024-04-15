@@ -30,7 +30,7 @@ thread.sleep(DELAY_TIME)
 
 # Login
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
-locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Clement33")
+locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Trevor11")
 locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 
