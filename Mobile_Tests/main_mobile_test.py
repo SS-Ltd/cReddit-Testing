@@ -2,10 +2,12 @@
 This is the main test script for the mobile application.
 '''
 from my_imports import webdriver, AppiumOptions, thread, Dict, Any
-from helper_functions import locate_element
+from helper_functions import locate_element, end_text
 from constants import DELAY_TIME
-from Paths import START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME
+from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME, POST_COMMENTS
+                   , COMMENT_WRITE)
 from home_page import home_page
+from Profile.profile_page import profile_page
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -14,7 +16,8 @@ cap: Dict[str, Any] = {
     "appPackage": "com.example.reddit_clone",
     "appActivity": "com.example.reddit_clone.MainActivity",
     "language": "en",
-    "locale": "US"
+    "locale": "US",
+    "appium:disableIdLocatorAutocompletion":True
 }
 
 URL = "http://localhost:4724"
@@ -27,21 +30,27 @@ print(driver.current_activity)
 
 print("App launched")
 
+# Test the login functionality
+#login(driver)
 # Click on the login button
+thread.sleep(5)
 username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
 # username.clear()
-username.send_keys("Clement33")
+username.send_keys("Trevor11")
 
 password = locate_element(driver, by_xpath=START_PASSWORD)
 password.click()
 thread.sleep(2)
 # password.clear()
 password.send_keys("1")
+end_text(driver)
+thread.sleep(2)
+locate_element(driver, by_accessibility_id=START_LOGIN).click()
+#locate_element(driver, by_id=POST_COMMENTS).click()
+profile_page(driver)
 
-login = locate_element(driver, by_accessibility_id=START_LOGIN)
-login.click()
 
 # Verify that the login was successful
 # Check the bottom tabs, one of them is an enough indication that the login was successful
