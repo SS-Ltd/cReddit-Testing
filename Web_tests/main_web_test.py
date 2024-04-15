@@ -11,7 +11,7 @@ from home_page import home_page
 from google_login import google_login
 from Registration.sign_up import signup
 from helper_functions import locate_element
-from Community.create_community import create_community
+from comments import comment
 
 # Prepare the log files
 delete_all_files_content()
@@ -31,11 +31,11 @@ thread.sleep(DELAY_TIME)
 
 # Login
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
-locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("thegoodtester")
-locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("Verygoodpassword1")
+locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Malek")
+locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("12345678Mm")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 thread.sleep(DELAY_TIME)
-create_community(driver)
+comment(driver)
 
 # Wait for the site to load
 thread.sleep(DELAY_TIME)
