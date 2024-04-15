@@ -4,6 +4,7 @@ This module contains all the xPaths and accessibility IDs for the mobile applica
 # RID = Resource ID
 # XPATH = Xpath
 # AID = Accessibility ID
+# end of text button
 # Starting page for the mobile application
 START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
 START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
@@ -20,11 +21,14 @@ RESET_PASSWORD_HELP_BUTTON = "Help"
 RESET_PASSWORD_CLOSE_TAB_BUTTON = "Close tab"
 # login continue with google
 CONTINUE_WITH_GOOGLE_EMAIL = '(//android.widget.LinearLayout[@resource-id="com.google.android.gms:id/container"])[1]'
-# signup 
+# signup
 SIGNUP_EMAIL = 'signup_email_field'                     #RID
 SIGNUP_PASSWORD = 'signup_password_fields'              #RID
 SIGNUP_LOGIN = 'Log In'                                 #AID
 SIGNUP_CONTINUE = 'Continue'                            #AID
+SIGNUP_USERNAME = 'signup_username_field'               #RID
+SIGNUP_CONTINUE2 = 'Continue'                           #AID#might need to update this
+SIGNUP_GENDER_MAN = 'Man'                               #AID
 #signup continue with google
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
 # Home page
@@ -91,7 +95,7 @@ PROFILE_PAGE_ABOUT = 'About'                    #AID
 PROFILE_PAGE_SHARE = 'profile share'            #RID
 PROFILE_PAGE_SEARCH = 'profile search'          #RID
 PROFILE_PAGE_MENU = 'profile menu'              #RID        #Might not work
-
+PROFILE_PAGE_BACK = 'Back'                      #AID
 # about user popup/Profile card
 CREATE_YOUR_OWN_AVATAR = 'Create Your Own Avatar'           #AID        #not in project scope
 ABOUT_USER_VIEW_PROFILE = 'View Profile'                    #AID
@@ -138,7 +142,6 @@ COMMENT_REPLY    = 'comment reply'      #RID
 COMMENT_USERNAME = 'comment username'   #RID
 COMMENT_CONTENT  = 'comment content'    #RID
 
-
 # Create Post
 CREATE_POST_TITLE = 'Create Post Title'                                                     #RID
 CREATE_POST_NEXT = 'Next'                                                                   #AID
@@ -159,3 +162,17 @@ CREATE_POST_POLL_OPTION_2 = 'Option 2'                                          
 CREATE_POST_POLL_ADD_OPTION = 'Add option'                                                  #AID
 CREATE_POST_POLL_OPTION_3 = 'Option 3'                                                      #RID
 CREATE_POST_CLOSE_POLL_3 = 'close option 3'                                                 #AID
+COMMENT_CREATE   = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View'             #XPath
+COMMENT_WRITE    = '//android.widget.EditText'
+COMMENT_POST = 'Post'                   #AID
+#AIDS
+COMMENT_EDIT    = 'Edit comment'        #AID
+COMMENT_SHARE   = 'Share'               #AID
+COMMENT_SAVE    = 'Save'                #AID
+COMMENT_UNSAVE  = 'Unsave'              #AID
+COMMENT_GET_REPLY_NOTIFICATIONS = 'Get reply notifications' #AID
+COMMENT_COPY_TEXT = 'Copy text'         #AID
+COMMENT_COLAPSE_THREAD = 'Collapse thread'#AID
+COMMENT_BLOCK_ACCOUNT = 'Block account' #AID
+COMMENT_REPORT  = 'Report'              #AID
+COMMENT_DELETE  = 'Delete comment'              #AID
