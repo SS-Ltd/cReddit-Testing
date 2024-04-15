@@ -9,24 +9,27 @@ def locate_element(driver: webdriver, *, by_accessibility_id=None, by_xpath=None
     '''
     This function locates an element on the page
     '''
-    if by_id:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((AppiumBy.ID, by_id))
-        )
-    if by_accessibility_id:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located(
-                (AppiumBy.ACCESSIBILITY_ID, by_accessibility_id))
-        )
-    if by_xpath:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located((AppiumBy.XPATH, by_xpath))
-        )
-    if by_class_name:
-        return WebDriverWait(driver, DELAY_TIME).until(
-            EC.presence_of_element_located(
-                (AppiumBy.CLASS_NAME, by_class_name))
-        )
+    try:
+        if by_id:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((AppiumBy.ID, by_id))
+            )
+        if by_accessibility_id:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located(
+                    (AppiumBy.ACCESSIBILITY_ID, by_accessibility_id))
+            )
+        if by_xpath:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((AppiumBy.XPATH, by_xpath))
+            )
+        if by_class_name:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located(
+                    (AppiumBy.CLASS_NAME, by_class_name))
+            )
+    except Exception as e:
+        print(e)
     return None
 
 def end_text(driver: webdriver) -> None:
