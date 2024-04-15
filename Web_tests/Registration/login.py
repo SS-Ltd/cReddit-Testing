@@ -10,7 +10,7 @@ from Registration.forgot_password import forgot_password
 from Registration.logout import logout
 from helper_functions import locate_element , check_logged_in, check_logged_out , element_dissapeared
 from my_imports import WebDriverWait, EC, By, TimeoutException, thread 
-from constants import DELAY_TIME,EMAIL, PASSWORD, USERNAME, SEE_TIME
+from constants import DELAY_TIME,EMAIL, PASSWORD, USERNAME, SEE_TIME,CREDDIT_PASSWORD
 from write_to_files import write_to_all_files, report_fail, report_success
 from Registration.forgot_username import forgot_username
 from selenium.webdriver.common.keys import Keys
@@ -474,7 +474,7 @@ def scenario_wrong_username(driver) -> bool:
     thread.sleep(SEE_TIME)
 
     try:
-        locate_element(driver, by_id="login_password").send_keys(PASSWORD)
+        locate_element(driver, by_id="login_password").send_keys(CREDDIT_PASSWORD)
         report_success(
             "The element with the ID 'login_password' was found 'test' was entered"
             + "[login() -> scenario_wrong_username() -> wrong password found]"
@@ -670,7 +670,7 @@ def scenario_correct_username_password(driver) -> bool:
 
     try:
         locate_element(driver, by_id="login_password").clear()
-        locate_element(driver, by_id="login_password").send_keys(PASSWORD)
+        locate_element(driver, by_id="login_password").send_keys(CREDDIT_PASSWORD)
         report_success(
             "The element with the ID 'login_password' was found 'test' was entered"
             + "[login() -> scenario_correct_username_password() -> correct password found]"
@@ -723,7 +723,7 @@ def hover_over_username(driver) -> bool:
     try:
         hoverable = locate_element(driver,by_id="login_username_button")
         ActionChains(driver).move_to_element(hoverable).perform()
-    except TimeoutException:
+    except (TimeoutException,AttributeError):
         report_fail(
             "The element with the ID 'login_username_button' was not found"
             + "[login() -> hover_over_username() -> username login button not found]"

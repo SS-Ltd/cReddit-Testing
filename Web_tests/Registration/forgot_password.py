@@ -384,6 +384,6 @@ def forgot_password(driver):
     email_textbox(driver)
     email_me_button_is_enabled(driver)
     scenario_wrong_credentials(driver)
-    #scenario_correct_credentials(driver)#carefull this fuction deletes the email
+    scenario_correct_credentials(driver)#carefull this fuction deletes the email
     check_back_to_login(driver)
     write_to_all_files("#################### End Forgot Password ####################")
