@@ -33,7 +33,7 @@ SIGNUP_GENDER_MAN = 'Man'                               #AID
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
 # Home page
 # Custom Navigation Bar
-NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                 #AID
+NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
 NAVIGATION_BAR_CREATE_POST = 'Create\nTab 3 of 5'       #AID
 NAVIGATION_BAR_CHAT = 'Chat Tab 4 of 5'                 #AID
@@ -44,7 +44,7 @@ HOME_PAGE_PROFILE_ICON = '//android.widget.FrameLayout[@resource-id="android:id/
 
 # Within Profile Window
 PROFILE_WINDOW_PROFILE = 'My Profile'
-PROFILE_WINDOW_CREATE_COMMUNITY = 'Create a Community'
+PROFILE_WINDOW_CREATE_COMMUNITY = 'Create a Community'  #AID
 PROFILE_WINDOW_SAVED = 'Saved'
 PROFILE_WINDOW_HISTORY = 'History'
 PROFILE_WINDOW_SETTINGS = 'Settings'
@@ -118,10 +118,12 @@ CREATE_COMMUNITY_NAME = 'Community Name'#RID
 CREATE_COMMUNITY_TYPE = 'Community Type'#RID
 CREATE_COMMUNITY_TYPE_PUBLIC = 'Public Anyone can view, post, and comment to this community.'#AID
 CREATE_COMMUNITY_TYPE_RESTRICTED = 'Restricted Anyone can view this community, but only approved users can post.'#AID
-CREATE_COMMUNITY_TYPE_PRIVATE = 'Private Only approved users can view and submit to this community.'#AID
+CREATE_COMMUNITY_TYPE_PRIVATE = 'Private\nOnly approved users can view and submit to this community.'
+CREATE_COMMUNITY_TYPE_PRIVATE_DESC = 'Only approved users can view and submit to this community.'   #AID
 CREATE_COMMUNITY_18   = '18+ Community' #RID
 CREATE_COMMUNITY_BUTTON = 'Create Community'#AID
 CREATE_COMMUNITY_BACK = 'Back'          #AID
+CREATE_COMMUNITY_ALREADY_EXISTS = 'Subreddit already exists'    #AID
 # posts all resource IDS except stated
 POST_UPVOTE      = 'post upvote'        #RID
 POST_VOTES       = 'post votes'         #RID        # Might not work
@@ -131,7 +133,6 @@ POST_USERNAME    = 'post username'      #RID        # POST USERNAME and POST SUB
 POST_SUBREDDIT   = 'post subreddit'     #RID        # Might not work
 POST_TITLE       = 'post title'         #RID
 POST_SHARE       = 'post share'         #RID
-# Create Post
 
 # Comments all resource IDS
 COMMENT_UPVOTE   = 'comment upvote'     #RID
