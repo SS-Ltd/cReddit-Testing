@@ -8,9 +8,9 @@ from constants import DELAY_TIME, EMAIL, PASSWORD_CREDDIT, EMAIL_SIGNUP, USERNAM
 from Paths import (START_FORGOT_PASSWORD, RESET_PASSWORD_EMAIL_TEXTBOX, RESET_PASSWORD_BUTTON
                    , RESET_PASSWORD_RESEND, RESET_PASSWORD_OPEN_EMAIL_APP, RESET_PASSWORD_HELP_BUTTON
                    , RESET_PASSWORD_CLOSE_TAB_BUTTON, CONTINUE_WITH_GOOGLE_EMAIL,START_COUNTINUE_WITH_GOOGLE
-                   , HOME_PAGE_TABS_HOME,SIGNUP_CONTINUE_WITH_GOOGLE,SIGNUP_EMAIL,SIGNUP_PASSWORD,SIGNUP_LOGIN
+                   , NAVIGATION_BAR_HOME,SIGNUP_CONTINUE_WITH_GOOGLE,SIGNUP_EMAIL,SIGNUP_PASSWORD,SIGNUP_LOGIN
                    , SIGNUP_CONTINUE, START_SIGNUP,SIGNUP_USERNAME,SIGNUP_CONTINUE2,START_USERNAME,START_PASSWORD
-                   , START_LOGIN, HOME_PAGE_TABS_HOME,SIGNUP_GENDER_MAN)
+                   , START_LOGIN,SIGNUP_GENDER_MAN)
 from helper_functions import locate_element, end_text
 def forgot_password(driver) -> None:
     '''
@@ -92,7 +92,7 @@ def login_continue_with_google(driver) -> None:
     print("Continue with google email clicked")
     thread.sleep(SEE_TIME)
     thread.sleep(10)
-    home_tab = locate_element(driver, by_accessibility_id=HOME_PAGE_TABS_HOME)
+    home_tab = locate_element(driver, by_accessibility_id=NAVIGATION_BAR_HOME)
     assert home_tab.is_displayed(), "Login was not successful"
     print("Login was successful")
 
@@ -112,7 +112,7 @@ def signup_continue_with_google(driver) -> None:
     print("Continue with google email clicked")
     thread.sleep(SEE_TIME)
     thread.sleep(10)
-    home_tab = locate_element(driver, by_accessibility_id=HOME_PAGE_TABS_HOME)
+    home_tab = locate_element(driver, by_accessibility_id=NAVIGATION_BAR_HOME)
     assert home_tab.is_displayed(), "Login was not successful"
     print("Login was successful")
 
@@ -182,7 +182,7 @@ def signup(driver, email:str = "Fake"+datetime.datetime.now().strftime("%Y%m%d%H
     assert geneder_man is not None, "signup man button not found"
     geneder_man.click()
     thread.sleep(10)
-    home_tab = locate_element(driver, by_accessibility_id=HOME_PAGE_TABS_HOME)
+    home_tab = locate_element(driver, by_accessibility_id=NAVIGATION_BAR_HOME)
     assert home_tab.is_displayed(), "Login was not successful"
     print("Login was successful")
     ####################################end of senario############################################
@@ -213,7 +213,7 @@ def login_wrong_password(driver) -> None:
     # Verify that the login was successful
     # Check the bottom tabs, one of them is an enough indication that the login was successful
     # Check the home tab (tab 1 of 5)
-    home_tab = locate_element(driver, by_accessibility_id=HOME_PAGE_TABS_HOME)
+    home_tab = locate_element(driver, by_accessibility_id=NAVIGATION_BAR_HOME)
     assert not home_tab.is_displayed(), "Login was successful"
     print("Login was not successful")
 
