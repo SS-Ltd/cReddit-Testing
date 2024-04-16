@@ -1,3 +1,7 @@
+'''
+This file contains all the paths for the web tests.
+'''
+# Comments
 COMMENT_CONTENT = ""
 COMMENT_DOWNVOTE = "_downvote_comment"
 COMMENT_UPVOTE = "upvote_comment"
@@ -20,3 +24,7 @@ COMMENT_BLOCK_ACCOUNT = ""
 COMMENT_SHARE = "_share_comment"
 COMMENT_UNSAVE = "_save"
 COMMENT_DELETE = ""
+# Right Side Bar
+RIGHT_SIDE_BAR_CLEAR = "recent_posts_clear"
+RIGHT_SIDE_BAR_COMMUNITY_NAME = "_community_recent"
+RIGHT_SIDE_BAR_POST_TITLE = "_post_header"
