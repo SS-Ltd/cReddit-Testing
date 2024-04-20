@@ -8,8 +8,8 @@ from my_imports import WebDriverWait, EC, By, TimeoutException, thread
 from constants import DELAY_TIME, EMAIL, PASSWORD, SEE_TIME, EMAIL_SIGNUP , USERNAME
 from write_to_files import write_to_all_files, report_fail, report_success
 from selenium.webdriver.common.keys import Keys
-from menu_appear import signup_menu_appeared, sign_up_menu_appeared_email, sign_up_menu_appeared_username
-from globals import set_first_signup, get_first_signup
+from Registration.menu_appear import  sign_up_menu_appeared_email, sign_up_menu_appeared_username
+from globals import set_first_login, get_first_login
 
 def goto_sign_up(driver) -> None:
     '''
@@ -112,21 +112,21 @@ def check_signup_with_google(driver) -> bool:
     """
 
     try:
-        locate_element(driver, by_id="signup_oauth").click()
+        locate_element(driver, by_id="login_oauth").click()
         report_success(
-            "The element with the ID 'signup_oauth' was found"
+            "The element with the ID 'login_oauth' was found"
             + "[signup() -> check_signup_with_google() -> google signup found]"
         )
     except TimeoutException:
         report_fail(
-            "The element with the ID 'signup_oauth' was not found"
+            "The element with the ID 'login_oauth' was not found"
             + "[signup() -> check_signup_with_google() -> google signup not found]"
         )
         return False
     thread.sleep(SEE_TIME)
 
     driver.switch_to.window(driver.window_handles[-1])
-    if not get_first_signup():
+    if not get_first_login():
         try:
             locate_element(driver, by_xpath="/html/body/div[1]/div[1]/div[2]/"
                            + "div/div/div[2]/div/div/div[1]/form/span/section/"
@@ -190,7 +190,7 @@ def check_signup_with_google(driver) -> bool:
         return False
 
     thread.sleep(SEE_TIME)
-    set_first_signup(False)
+    set_first_login(False)
     driver.switch_to.window(driver.window_handles[0])
 
     # Check if pop-up is displayed
@@ -262,7 +262,7 @@ def email_textbox_signup(driver)-> bool:
 
     try:
         locate_element(driver, by_id="signup_email").clear()
-        locate_element(driver, by_id="signup_email_continue").send_keys(EMAIL_SIGNUP)
+        locate_element(driver, by_id="signup_email").send_keys(EMAIL_SIGNUP)
         users = driver.find_elements(
             By.XPATH, "//*[contains(text()," + ' "Please enter a valid")]'
         )
@@ -509,10 +509,10 @@ def signup(driver) -> None:
     hyper_links(driver, Hyperlink.PRIVACY_POLICY,"")
     thread.sleep(SEE_TIME)
 
-    check_signup_with_google(driver)
+    #check_signup_with_google(driver)
     thread.sleep(SEE_TIME)
 
-    if check_logged_in():
+    if check_logged_in(driver):
         logout(driver)
         goto_sign_up(driver)
         thread.sleep(SEE_TIME)
