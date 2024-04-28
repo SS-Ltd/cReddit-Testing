@@ -31,5 +31,9 @@ RIGHT_SIDE_BAR_POST_TITLE = "_post_header"
 
 # Profile Page
 PROFILE_USERNAME = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[1]/div[1]/div/p'  # xpath
+PROFILE_MAINFEED_CATEGORY_DROPDOWN = 'mainfeed_category_dropdown'                   # id
+PROFILE_MAINFEED_CATEGORY_HOT = 'mainfeed_category_hot'                             # id
+PROFILE_MAINFEED_CATEGORY_NEW = 'mainfeed_category_new'                             # id
+PROFILE_MAINFEED_CATEGORY_TOP = 'mainfeed_category_top'                             # id
 PROFILE_FEED = 'profile-buttons-row'                                                # id
 PROFILE_FIRST_COMMENT = '//*[@id="mainfeed"]/div[3]/div[1]/div/p[1]'                # xpath
