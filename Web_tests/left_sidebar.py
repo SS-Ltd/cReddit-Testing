@@ -2,37 +2,29 @@
 This module is used to test the left sidebar of the website.
 """
 
-from my_imports import thread
+from my_imports import thread, EC, By, WebDriverWait
 from constants import DELAY_TIME, SITE_NAME
 from helper_functions import locate_element, check_hyperlink
 from paths import LEFT_SIDE_BAR_HOME, LEFT_SIDE_BAR_POPULAR, LEFT_SIDE_BAR_ALL
 from paths import LEFT_SIDE_BAR_RECENT, LEFT_SIDE_BAR_RECENT_COMMUNITY, LEFT_SIDE_BAR_RECENT_COMMUNITY_TEXT
-
+from paths import LEFT_SIDE_BAR_COMMUNITY, LEFT_SIDE_BAR_CREATE_COMMUNITY, LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD
+from paths import LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS
 
 def create_community(driver) -> None:
     """
     This function test the create community functionality
     """
 
-    locate_element(
-        driver, by_xpath='//*[@id="root"]/div/div[3]/div/div[1]/div/div[5]/div'
-    ).click()
+    thread.sleep(DELAY_TIME)
+    # Locate the create community button
+    create = locate_element(driver, by_xpath=LEFT_SIDE_BAR_CREATE_COMMUNITY)
+    assert create is not None, "Create community button not found"
+    create.click()
     thread.sleep(DELAY_TIME)
 
-    locate_element(driver, by_id="sidebar_communities").click()
-    if (
-        locate_element(
-            driver, by_xpath='//*[@id="root"]/div/div[3]/div/div[1]/div/div[6]/div'
-        )
-        is None
-    ):
-        locate_element(driver, by_id="sidebar_communities").click()
-    locate_element(
-        driver, by_xpath='//*[@id="root"]/div/div[3]/div/div[1]/div/div[6]/div'
-    ).click()
-
     assert (
-        locate_element(driver, by_id="community-card") is not None
+        locate_element(
+            driver, by_id=LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD) is not None
     ), "Create community page not displayed"
 
     # Enter community name
@@ -45,18 +37,35 @@ def create_community(driver) -> None:
             driver, by_xpath='//*[@id="card-content"]/div[1]/div/div[2]/p')
         is not None
     ), "Empty field error not displayed"
-    community_name.send_keys("Test Community")
-    thread.sleep(DELAY_TIME)
+    community_name.send_keys("7aree2aInMunich")
     assert (
         locate_element(
             driver, by_xpath='//*[@id="card-content"]/div[1]/div/div[2]/p')
         is None
     ), "Empty field error displayed"
     locate_element(driver, by_id="Public-community-type").click()
-    thread.sleep(1)
-    locate_element(driver, by_id="ismature-switch-btn").click()
-    thread.sleep(1)
+    # locate_element(driver, by_id="ismature-switch-btn").click()
     locate_element(driver, by_id="name-create-community").click()
+    thread.sleep(DELAY_TIME)
+
+    # Check that the community already exists
+    assert (
+        locate_element(
+            driver, by_xpath=LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS
+        ) is not None
+    ), "Community already exists error not displayed"
+    community_name.clear()
+    community_name.send_keys("7aree2aInMunich3")
+    locate_element(driver, by_id="name-create-community").click()
+    thread.sleep(DELAY_TIME)
+
+    # Check that the community was created
+    assert (
+        "r/7aree2aInMunich3" in driver.current_url
+    ), "Community was not created"
+    print("Community created successfully")
+    thread.sleep(DELAY_TIME)
+    driver.back()
     thread.sleep(DELAY_TIME)
 
 
@@ -127,9 +136,9 @@ def left_sidebar(driver) -> None:
     # assert SITE_NAME == driver.current_url, "Home URL is incorrect"
 
     # Check Recent Communities
-    recent(driver)
+    # recent(driver)
 
-    # Locate the recent communities
+    # Locate the recent communities to minimize the thing
     dropdown_recent = locate_element(driver, by_id=LEFT_SIDE_BAR_RECENT)
     assert dropdown_recent is not None, "Recent communities not found"
     dropdown_recent.click()
