@@ -41,10 +41,10 @@ thread.sleep(DELAY_TIME)
 # Wait for the site to load
 thread.sleep(DELAY_TIME)
 
-#home_page(driver)
+home_page(driver)
 # login(driver)
 #google_login(driver, "cReddit support center")
-profile(driver)
+# profile(driver)
 
 
 # write_run_time_statistics()

@@ -28,7 +28,13 @@ COMMENT_DELETE = ""
 RIGHT_SIDE_BAR_CLEAR = "recent_posts_clear"
 RIGHT_SIDE_BAR_COMMUNITY_NAME = "_community_recent"
 RIGHT_SIDE_BAR_POST_TITLE = "_post_header"
-
+# Left Side Bar
+LEFT_SIDE_BAR_HOME = "sidebar_home"                                                                                 # id
+LEFT_SIDE_BAR_POPULAR = 'sidebar_popular'                                                                           # id
+LEFT_SIDE_BAR_ALL = 'sidebar_all'                                                                                   # id
+LEFT_SIDE_BAR_RECENT = 'sidebar_recent'                                                                             # id
+LEFT_SIDE_BAR_RECENT_COMMUNITY = 'sidebar_recent_icon0'                                                             # id
+LEFT_SIDE_BAR_RECENT_COMMUNITY_TEXT = '//*[@id="sidebar_recent_icon0"]/span[2]'                                     # xpath
 # Profile Page
 PROFILE_USERNAME = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[1]/div[1]/div/p'                                  # xpath
 PROFILE_MAINFEED_CATEGORY_DROPDOWN = 'mainfeed_category_dropdown'                                                   # id
