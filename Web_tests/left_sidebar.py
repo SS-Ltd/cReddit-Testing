@@ -8,7 +8,7 @@ from helper_functions import locate_element, check_hyperlink
 from paths import LEFT_SIDE_BAR_HOME, LEFT_SIDE_BAR_POPULAR, LEFT_SIDE_BAR_ALL
 from paths import LEFT_SIDE_BAR_RECENT, LEFT_SIDE_BAR_RECENT_COMMUNITY, LEFT_SIDE_BAR_RECENT_COMMUNITY_TEXT
 from paths import LEFT_SIDE_BAR_COMMUNITY, LEFT_SIDE_BAR_CREATE_COMMUNITY, LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD
-from paths import LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS
+from paths import LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS, LEFT_SIDE_BAR_COMMUNITY_RANDOM
 
 def create_community(driver) -> None:
     """
@@ -102,6 +102,27 @@ def recent(driver) -> None:
     driver.back()
     thread.sleep(DELAY_TIME)
 
+def community(driver) -> None:
+    '''
+    This function checks the community functionality
+    '''
+    # Locate the community button
+    random_community = locate_element(driver, by_xpath=LEFT_SIDE_BAR_COMMUNITY_RANDOM)
+    assert random_community is not None, "Community button not found"
+    # Get the href of the community
+    url = random_community.get_attribute("href")
+    print("url = ", url)
+    # Click the community
+    random_community.click()
+    thread.sleep(DELAY_TIME)
+
+    # Check the URL
+    assert url in driver.current_url, "Community URL is incorrect"
+    print("Community URL is correct")
+
+    # Go back
+    driver.back()
+    thread.sleep(DELAY_TIME)
 
 def left_sidebar(driver) -> None:
     """
@@ -145,7 +166,10 @@ def left_sidebar(driver) -> None:
     thread.sleep(1)
 
     # Create a community
-    create_community(driver)
+    # create_community(driver)
+
+    # Check Community
+    # community(driver)
 
     # Check Resources
     # check_hyperlink(
