@@ -20,10 +20,10 @@ def home_page(driver) -> None:
     # settings(driver)
 
     # TEST 3: Test the create post functionality
-    # create_post(driver)
+    create_post(driver)
 
     # TEST 4: Test the Left SideBar
-    left_sidebar(driver)
+    # left_sidebar(driver)
 
     # TEST 5: TEST the post interactions
     # post(driver)
