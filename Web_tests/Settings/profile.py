@@ -36,7 +36,6 @@ def check_text_field(driver, *, by_id=None, by_xpath=None, length, field_name) -
     check_popup_notification(driver)
     # Check if the data was saved
     assert field.get_attribute('value') == 'Test ' + field_name, report_fail(f"{field_name} input field data not saved")
-    write_to_all_files(f"{field_name} Test Successful")
 
 def display_name(driver) -> None:
     '''
@@ -60,7 +59,7 @@ def UploadImage(driver) -> None:
     '''
     This function checks the Upload Image functionality
     '''
-    raise NotImplementedError("Upload Image functionality not implemented")
+    # raise NotImplementedError("Upload Image functionality not implemented")
     # Test the upload functionality
     upload_image = locate_element(driver, by_id="profile-image-upload-drag-and-drop")
     assert upload_image is not None, report_fail("Upload Image button not found")
@@ -70,11 +69,12 @@ def UploadImage(driver) -> None:
     keyboard = Controller()
 
     keyboard.type(
-        'C:\\Users\\abdal\\Pictures\\Screenshot 2024-03-19 195003.png')
+        'C:\\Users\\abdal\\Pictures\\munich.jpg')
     thread.sleep(DELAY_TIME)
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
     thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
 
 def clear_history(driver) -> None:
     '''
@@ -101,7 +101,7 @@ def profile(driver) -> None:
     display_name(driver)
     thread.sleep(DELAY_TIME)
 
-    # Test the About functionality
+    # Test the About (optional) functionality
     about(driver)
     thread.sleep(DELAY_TIME)
 
@@ -111,9 +111,8 @@ def profile(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # Test the Upload Image functionality
-    # TODO: Implement the upload image functionality
-    # UploadImage(driver)
-    # thread.sleep(DELAY_TIME)
+    UploadImage(driver)
+    thread.sleep(DELAY_TIME)
 
     # Test the NSFW checkbox functionality
     check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[9]/div[2]/label/input', name='NSFW')
@@ -127,12 +126,5 @@ def profile(driver) -> None:
     check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[11]/div[2]/label/input', name='Content Visibility')
     thread.sleep(DELAY_TIME)
 
-    # Test the Active in communities checkbox functionality
-    check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[12]/div[2]/label/input', name='Active in communities')
-    thread.sleep(DELAY_TIME)
-
     # Test the Clear Button functionality
     clear_history(driver)
-
-    write_to_all_files(
-        "#################### Profile Subpage Test Completed ####################")

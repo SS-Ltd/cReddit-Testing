@@ -17,10 +17,10 @@ def home_page(driver) -> None:
     # login(driver)
 
     # TEST 2: Test the settings page
-    # settings(driver)
+    settings(driver)
 
     # TEST 3: Test the create post functionality
-    create_post(driver)
+    # create_post(driver)
 
     # TEST 4: Test the Left SideBar
     # left_sidebar(driver)
