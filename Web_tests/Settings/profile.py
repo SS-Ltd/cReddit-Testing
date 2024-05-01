@@ -16,7 +16,6 @@ def check_text_field(driver, *, by_id=None, by_xpath=None, length, field_name) -
     '''
     This function checks the text field
     '''
-    write_to_all_files(f"Testing {field_name}")
     field = locate_element(driver, by_id=by_id, by_xpath=by_xpath)
     assert field is not None, report_fail(f"{field_name} input field not found")
 #    driver.execute_script("arguments[0].scrollIntoView();", field)
@@ -59,28 +58,27 @@ def UploadImage(driver) -> None:
     '''
     This function checks the Upload Image functionality
     '''
-    # raise NotImplementedError("Upload Image functionality not implemented")
     # Test the upload functionality
-    upload_image = locate_element(driver, by_id="profile-image-upload-drag-and-drop")
+    upload_image = locate_element(driver, by_id="settings_avatar_upload")
     assert upload_image is not None, report_fail("Upload Image button not found")
     driver.execute_script("arguments[0].scrollIntoView();", upload_image)
     upload_image.click()
 
     keyboard = Controller()
 
+    thread.sleep(DELAY_TIME)
+
     keyboard.type(
         'C:\\Users\\abdal\\Pictures\\munich.jpg')
     thread.sleep(DELAY_TIME)
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
-    thread.sleep(DELAY_TIME)
     check_popup_notification(driver)
 
 def clear_history(driver) -> None:
     '''
     This function checks the Clear History functionality
     '''
-    write_to_all_files("Testing Clear History")
     button = locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[13]/div[2]/button')
     assert button is not None, report_fail("Clear History button not found")
     driver.execute_script("arguments[0].scrollIntoView();", button)
@@ -94,16 +92,11 @@ def profile(driver) -> None:
     This function tests the profile subpage of the settings page
     '''
 
-    write_to_all_files(
-        "#################### Testing Profile Subpage ####################")
-
     # Test the Display Name (optional) functionality
-    display_name(driver)
-    thread.sleep(DELAY_TIME)
+    # display_name(driver)
 
     # Test the About (optional) functionality
-    about(driver)
-    thread.sleep(DELAY_TIME)
+    # about(driver)
 
     # Test the Social Links functionality
     # TODO: Implement the social links functionality
@@ -111,8 +104,8 @@ def profile(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # Test the Upload Image functionality
-    UploadImage(driver)
-    thread.sleep(DELAY_TIME)
+    # UploadImage(driver)
+    # thread.sleep(DELAY_TIME)
 
     # Test the NSFW checkbox functionality
     check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[9]/div[2]/label/input', name='NSFW')

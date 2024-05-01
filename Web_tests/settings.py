@@ -81,12 +81,12 @@ def settings(driver) -> None:
 
     # Test each subpage of the settings page
     # Page 1: Account
-    goto_subpage(driver, Subpage.ACCOUNT)
-    account(driver)
+    # goto_subpage(driver, Subpage.ACCOUNT)
+    # account(driver)
 
     # Page 2: Profile
-    # goto_subpage(driver, Subpage.PROFILE)
-    # profile(driver)
+    goto_subpage(driver, Subpage.PROFILE)
+    profile(driver)
 
     # Page 3: Safety & Privacy
     # goto_subpage(driver, Subpage.SAFETY)

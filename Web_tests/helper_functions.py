@@ -75,8 +75,8 @@ def check_checkbox(driver, *, by_xpath=None, by_id=None, name) -> None:
     '''
     # Locate the button
     button_element = locate_element(driver, by_xpath=by_xpath, by_id=by_id)
-    assert button_element is not None, report_fail(
-        name + " Button not found")
+    assert button_element is not None, "Button not found"
+    print("Button found 1")
     driver.execute_script("arguments[0].scrollIntoView();", button_element)
     selected = button_element.is_selected()
     driver.execute_script("arguments[0].click();", button_element)
@@ -85,12 +85,9 @@ def check_checkbox(driver, *, by_xpath=None, by_id=None, name) -> None:
     driver.refresh()
     thread.sleep(DELAY_TIME)
     button_element = locate_element(driver, by_xpath=by_xpath, by_id=by_id)
-    assert button_element is not None, report_fail(
-        name + " Button not found")
+    assert button_element is not None, "Button not found"
     driver.execute_script("arguments[0].scrollIntoView();", button_element)
-#    assert button_element.is_selected() != selected, report_fail(
-#        name + " Button not working")
-    print(name + " Button working")
+    assert button_element.is_selected() != selected, "Selection failed"
 
 def check_logged_in(driver) -> bool:
     '''
