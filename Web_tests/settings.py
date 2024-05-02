@@ -93,12 +93,12 @@ def settings(driver) -> None:
     # privacy(driver)
 
     # Page 4: Feed Settings
-    goto_subpage(driver, Subpage.FEED)
-    feed(driver)
+    # goto_subpage(driver, Subpage.FEED)
+    # feed(driver)
 
     # Page 5: Notifications
-    # goto_subpage(driver, Subpage.NOTIFICATIONS)
-    # notifications(driver)
+    goto_subpage(driver, Subpage.NOTIFICATIONS)
+    notifications(driver)
 
     # Page 6: Emails
     # goto_subpage(driver, Subpage.EMAILS)
