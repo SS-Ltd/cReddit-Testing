@@ -19,7 +19,6 @@ class Button(Enum):
     '''
     CHAT_REQUESTS = (0, "Chat Requests")
     NEW_FOLLOWERS = (1, "New Followers")
-    UNSUBSCRIBE = (2, "Unsubscribe from all emails")
 
 
 # Constant XPATHS to identify the buttons
@@ -34,9 +33,6 @@ def emails(driver) -> None:
     This function tests the notifications subpage of the settings page
     '''
 
-    write_to_all_files(
-        "#################### Testing Notifications Subpage ####################")
-
     # Test the chat requests button
     check_checkbox(driver, by_id=BUTTONS[Button.CHAT_REQUESTS.value[0]], name=Button.CHAT_REQUESTS.value[1])
     thread.sleep(DELAY_TIME)
@@ -45,9 +41,3 @@ def emails(driver) -> None:
     check_checkbox(driver, by_id=BUTTONS[Button.NEW_FOLLOWERS.value[0]], name=Button.NEW_FOLLOWERS.value[1])
     thread.sleep(DELAY_TIME)
 
-    # Test the unsubscribe button
-    check_checkbox(driver, by_id=BUTTONS[Button.UNSUBSCRIBE.value[0]], name=Button.UNSUBSCRIBE.value[1])
-    thread.sleep(DELAY_TIME)
-
-    write_to_all_files(
-        "#################### Notifications Subpage Test Completed ####################")

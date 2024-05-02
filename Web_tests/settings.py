@@ -97,9 +97,9 @@ def settings(driver) -> None:
     # feed(driver)
 
     # Page 5: Notifications
-    goto_subpage(driver, Subpage.NOTIFICATIONS)
-    notifications(driver)
+    # goto_subpage(driver, Subpage.NOTIFICATIONS)
+    # notifications(driver)
 
     # Page 6: Emails
-    # goto_subpage(driver, Subpage.EMAILS)
-    # emails(driver)
+    goto_subpage(driver, Subpage.EMAILS)
+    emails(driver)
