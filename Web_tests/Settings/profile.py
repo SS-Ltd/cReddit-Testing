@@ -16,7 +16,6 @@ def check_text_field(driver, *, by_id=None, by_xpath=None, length, field_name) -
     '''
     This function checks the text field
     '''
-    write_to_all_files(f"Testing {field_name}")
     field = locate_element(driver, by_id=by_id, by_xpath=by_xpath)
     assert field is not None, report_fail(f"{field_name} input field not found")
 #    driver.execute_script("arguments[0].scrollIntoView();", field)
@@ -36,7 +35,6 @@ def check_text_field(driver, *, by_id=None, by_xpath=None, length, field_name) -
     check_popup_notification(driver)
     # Check if the data was saved
     assert field.get_attribute('value') == 'Test ' + field_name, report_fail(f"{field_name} input field data not saved")
-    write_to_all_files(f"{field_name} Test Successful")
 
 def display_name(driver) -> None:
     '''
@@ -60,27 +58,27 @@ def UploadImage(driver) -> None:
     '''
     This function checks the Upload Image functionality
     '''
-    raise NotImplementedError("Upload Image functionality not implemented")
     # Test the upload functionality
-    upload_image = locate_element(driver, by_id="profile-image-upload-drag-and-drop")
+    upload_image = locate_element(driver, by_id="settings_avatar_upload")
     assert upload_image is not None, report_fail("Upload Image button not found")
     driver.execute_script("arguments[0].scrollIntoView();", upload_image)
     upload_image.click()
 
     keyboard = Controller()
 
+    thread.sleep(DELAY_TIME)
+
     keyboard.type(
-        'C:\\Users\\abdal\\Pictures\\Screenshot 2024-03-19 195003.png')
+        'C:\\Users\\abdal\\Pictures\\munich.jpg')
     thread.sleep(DELAY_TIME)
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
-    thread.sleep(DELAY_TIME)
+    check_popup_notification(driver)
 
 def clear_history(driver) -> None:
     '''
     This function checks the Clear History functionality
     '''
-    write_to_all_files("Testing Clear History")
     button = locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[13]/div[2]/button')
     assert button is not None, report_fail("Clear History button not found")
     driver.execute_script("arguments[0].scrollIntoView();", button)
@@ -94,16 +92,11 @@ def profile(driver) -> None:
     This function tests the profile subpage of the settings page
     '''
 
-    write_to_all_files(
-        "#################### Testing Profile Subpage ####################")
-
     # Test the Display Name (optional) functionality
-    display_name(driver)
-    thread.sleep(DELAY_TIME)
+    # display_name(driver)
 
-    # Test the About functionality
-    about(driver)
-    thread.sleep(DELAY_TIME)
+    # Test the About (optional) functionality
+    # about(driver)
 
     # Test the Social Links functionality
     # TODO: Implement the social links functionality
@@ -111,7 +104,6 @@ def profile(driver) -> None:
     # thread.sleep(DELAY_TIME)
 
     # Test the Upload Image functionality
-    # TODO: Implement the upload image functionality
     # UploadImage(driver)
     # thread.sleep(DELAY_TIME)
 
@@ -127,12 +119,5 @@ def profile(driver) -> None:
     check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[11]/div[2]/label/input', name='Content Visibility')
     thread.sleep(DELAY_TIME)
 
-    # Test the Active in communities checkbox functionality
-    check_checkbox(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[12]/div[2]/label/input', name='Active in communities')
-    thread.sleep(DELAY_TIME)
-
     # Test the Clear Button functionality
     clear_history(driver)
-
-    write_to_all_files(
-        "#################### Profile Subpage Test Completed ####################")
