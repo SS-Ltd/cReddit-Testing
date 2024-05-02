@@ -63,3 +63,6 @@ PROFILE_USER_DROPDOWN_REPORT = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[2]
 # Create Post
 CREATE_POST_RANDOM_COMMUNITY = '//*[@id="create_post_community_dropdown_menu"]/ul[2]/li[1]/div'                     # xpath
 CREATE_POST_BODY = '//*[@id="root"]/div/div[3]/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div'               # xpath
+
+# Settings
+SETTINGS_PRIVACY_ADD_BLOCKED_USERS = '//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[1]/button'                   # xpath

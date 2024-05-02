@@ -85,12 +85,12 @@ def settings(driver) -> None:
     # account(driver)
 
     # Page 2: Profile
-    goto_subpage(driver, Subpage.PROFILE)
-    profile(driver)
+    # goto_subpage(driver, Subpage.PROFILE)
+    # profile(driver)
 
     # Page 3: Safety & Privacy
-    # goto_subpage(driver, Subpage.SAFETY)
-    # privacy(driver)
+    goto_subpage(driver, Subpage.SAFETY)
+    privacy(driver)
 
     # Page 4: Feed Settings
     # goto_subpage(driver, Subpage.FEED)
