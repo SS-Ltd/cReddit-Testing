@@ -17,7 +17,6 @@ def change_email(driver) -> None:
     '''
 
     # Test the change email functionality
-    write_to_all_files("Testing Change Email")
     # First locate the button
     email = locate_element(driver, by_id='settings-change-email-button')
     assert email is not None, report_fail(
@@ -125,13 +124,11 @@ def change_email(driver) -> None:
     # Check that the text does not contain the text 'not verified!'
     assert 'not verified!' not in text.text, report_fail(
         "Something went wrong, your email should be verified!")
-    write_to_all_files("Change Email Test Successful")
 
 def change_gender(driver) -> None:
     '''
     This function tests the gender functionality
     '''
-    write_to_all_files("Testing Change Gender")
     # Locate the dropdown
     dropdown = locate_element(
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[2]/div/a')
@@ -154,16 +151,14 @@ def change_gender(driver) -> None:
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[2]/div/a')
     assert dropdown is not None, report_fail(
         "Gender Dropdown not found")
-#    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
-    # assert dropdown.text == random_text, report_fail(
-    #     "Gender Dropdown not working")
-    write_to_all_files("Test Change Gender Successful")
+    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
+    assert dropdown.text == random_text, report_fail(
+        "Gender Dropdown not working")
 
 def change_password(driver) -> None:
     '''
     This function tests the change password functionality
     '''
-    write_to_all_files("Testing Change Password")
     # First locate the button
     password = locate_element(driver, by_id='settings-change-password-button')
     assert password is not None, report_fail(
@@ -264,13 +259,11 @@ def change_password(driver) -> None:
     assert window is None, report_fail(
         "Change password window not closed")
 
-    write_to_all_files("Change Password Test Successful")
 
 def change_country(driver) -> None:
     '''
     This function tests the change country functionality
     '''
-    write_to_all_files("Testing Change Country")
     # Locate the dropdown
     dropdown = locate_element(
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[4]/div[2]/div/a')
@@ -282,7 +275,7 @@ def change_country(driver) -> None:
 
     # Choose a random element from the dropdown
     random = locate_element(
-        driver, by_id='settings-simplemenu-country-uk')
+        driver, by_id='settings-simplemenu-country-usa')
     assert random is not None, report_fail("Random Element not found")
     random_text = random.text
     random.click()
@@ -293,57 +286,14 @@ def change_country(driver) -> None:
         driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[4]/div[2]/div/a')
     assert dropdown is not None, report_fail(
         "Country Dropdown not found")
-#    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
-    # assert dropdown.text == random_text, report_fail(
-    #     "Country Dropdown not working")
-    write_to_all_files('Country Test Completed Successfully')
-
-def connect_twitter(driver) -> None:
-    '''
-    This function connects or disconnects from twitter
-    '''
-    raise NotImplementedError("This function is not implemented yet")
-    write_to_all_files("Testing Connect Twitter")
-    twitter = locate_element(driver, by_id="settings-connect-twitter-button")
-    assert twitter is not None, report_fail("Twitter button not found")
-    driver.execute_script("arguments[0].scrollIntoView();", twitter)
-    twitter.click()
-    # For now, nothing happens
-    write_to_all_files("Connect Twitter Test Successful")
-
-def connect_apple(driver) -> None:
-    '''
-    This function connects or disconnects from apple
-    '''
-    raise NotImplementedError("This function is not implemented yet")
-    write_to_all_files("Testing Connect Apple")
-    apple = locate_element(driver, by_id="settings-connect-apple-button")
-    assert apple is not None, report_fail("Apple button not found")
-    driver.execute_script("arguments[0].scrollIntoView();", apple)
-    apple.click()
-    # For now, nothing happens
-    write_to_all_files("Connect Apple Test Successful")
-
-def connect_google(driver) -> None:
-    '''
-    This function connects or disconnects from google
-    '''
-    raise NotImplementedError("This function is not implemented yet")
-    write_to_all_files("Testing Connect Google")
-    google = locate_element(driver, by_id="settings-connect-google-button")
-    assert google is not None, report_fail("Google button not found")
-    driver.execute_script("arguments[0].scrollIntoView();", google)
-    google.click()
-    # For now, nothing happens
-    write_to_all_files("Connect Google Test Successful")
+    driver.execute_script("arguments[0].scrollIntoView();", dropdown)
+    assert dropdown.text == random_text, report_fail(
+        "Country Dropdown not working")
 
 def account(driver) -> None:
     '''
     This function tests the account subpage of the settings page
     '''
-
-    write_to_all_files(
-        "#################### Testing Account Subpage ####################")
 
     # Test the change email functionality
     # TODO: Not completed or tested yet
@@ -352,7 +302,6 @@ def account(driver) -> None:
 
     # Test the gender functionality
     change_gender(driver)
-    thread.sleep(DELAY_TIME)
 
     # Test the change password functionality
     # TODO: Not completed or tested yet
@@ -361,23 +310,3 @@ def account(driver) -> None:
 
     # Test the Change Country Functionality
     change_country(driver)
-    thread.sleep(DELAY_TIME)
-
-    # Go to connected accounts
-    # 1. Connect to twitter
-    # TODO: Not completed yet
-    # connect_twitter(driver)
-    # thread.sleep(DELAY_TIME)
-
-    # 2. Connect to apple
-    # TODO: Not completed yet
-    # connect_apple(driver)
-    # thread.sleep(DELAY_TIME)
-
-    # 3. Connect to google
-    # TODO: Not completed yet
-    # connect_google(driver)
-    # thread.sleep(DELAY_TIME)
-
-    write_to_all_files(
-        "#################### Account Subpage Test Completed ####################")

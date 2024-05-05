@@ -4,6 +4,8 @@ This is the main test script for the mobile application.
 from my_imports import webdriver, AppiumOptions, thread, Dict, Any
 from helper_functions import locate_element, end_text
 from constants import DELAY_TIME
+from close_app import close_app
+from google_login import gmail_login, search_for_email
 from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME, POST_COMMENTS
                    , COMMENT_WRITE)
 from home_page import home_page
@@ -29,6 +31,8 @@ print(driver.current_activity)
 #gmail_login(driver)
 
 print("App launched")
+
+# Test the login functionality
 
 # Test the login functionality
 #login(driver)

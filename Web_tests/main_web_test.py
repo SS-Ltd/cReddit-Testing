@@ -13,6 +13,8 @@ from Registration.sign_up import signup
 from helper_functions import locate_element
 from right_side_bar import test_right_side_bar
 from comments import comment
+from profile import profile
+from Registration.login import login
 # Prepare the log files
 delete_all_files_content()
 
@@ -28,22 +30,22 @@ print(driver.title)
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 driver.maximize_window()
 thread.sleep(DELAY_TIME)
-
+# login(driver)
 # Login
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
-locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Eldred.Christiansen")
+locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Peyton26")
 locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 thread.sleep(DELAY_TIME)
-comment(driver)
-test_right_side_bar(driver)
+# test_right_side_bar(driver)
 
 # Wait for the site to load
 thread.sleep(DELAY_TIME)
-
-#home_page(driver)
+# comment(driver)
+home_page(driver)
 # login(driver)
 #google_login(driver, "cReddit support center")
+# profile(driver)
 
 
 # write_run_time_statistics()

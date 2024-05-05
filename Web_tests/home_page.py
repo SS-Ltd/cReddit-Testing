@@ -17,7 +17,7 @@ def home_page(driver) -> None:
     # login(driver)
 
     # TEST 2: Test the settings page
-    # settings(driver)
+    settings(driver)
 
     # TEST 3: Test the create post functionality
     # create_post(driver)
@@ -25,7 +25,7 @@ def home_page(driver) -> None:
     # TEST 4: Test the Left SideBar
     # left_sidebar(driver)
 
-    # Test the post interactions
-    post(driver)
+    # TEST 5: TEST the post interactions
+    # post(driver)
 
     write_to_all_files("Home page test completed")

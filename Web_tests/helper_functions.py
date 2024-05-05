@@ -47,11 +47,11 @@ def check_hyperlink(driver, url, *, by_xpath=None, by_id=None, by_classname=None
     '''
     # Locate the hyperlink
     hyperlink = locate_element(driver, by_xpath=by_xpath, by_id=by_id, by_classname=by_classname)
-    assert hyperlink is not None, report_fail(name + " hyperlink not found")
+    assert hyperlink is not None, name + " hyperlink not found"
     driver.execute_script("arguments[0].scrollIntoView();", hyperlink)
     hyperlink.click()
     thread.sleep(DELAY_TIME)
-    # assert driver.current_url == url, report_fail(name + " hyperlink not working")
+    assert driver.current_url == url, name + " hyperlink not working"
     print(name + " hyperlink working")
 
     # Go back to the previous page
@@ -59,7 +59,7 @@ def check_hyperlink(driver, url, *, by_xpath=None, by_id=None, by_classname=None
     thread.sleep(DELAY_TIME)
 
 
-def check_popup_notification(driver) -> None:
+def check_popup_notification(driver, flag = True) -> None:
     '''
     This function checks the popup notification that appears after changing
     '''
@@ -67,7 +67,11 @@ def check_popup_notification(driver) -> None:
     thread.sleep(DELAY_TIME)
     popup = locate_element(driver, by_xpath='//*[contains(@id, "popup")]')
     assert popup is not None, report_fail("Popup not found")
-    print("Popup found! ", popup.text)
+    if flag:
+        assert "Changes saved" in popup.text, "Got unexpected popup message"
+    else:
+        assert "Failed" in popup.text, "Got unexpected popup message"
+    print("Popup found: ", popup.text)
 
 def check_checkbox(driver, *, by_xpath=None, by_id=None, name) -> None:
     '''
@@ -75,8 +79,8 @@ def check_checkbox(driver, *, by_xpath=None, by_id=None, name) -> None:
     '''
     # Locate the button
     button_element = locate_element(driver, by_xpath=by_xpath, by_id=by_id)
-    assert button_element is not None, report_fail(
-        name + " Button not found")
+    assert button_element is not None, "Button not found"
+    print("Button found 1")
     driver.execute_script("arguments[0].scrollIntoView();", button_element)
     selected = button_element.is_selected()
     driver.execute_script("arguments[0].click();", button_element)
@@ -85,12 +89,9 @@ def check_checkbox(driver, *, by_xpath=None, by_id=None, name) -> None:
     driver.refresh()
     thread.sleep(DELAY_TIME)
     button_element = locate_element(driver, by_xpath=by_xpath, by_id=by_id)
-    assert button_element is not None, report_fail(
-        name + " Button not found")
+    assert button_element is not None, "Button not found"
     driver.execute_script("arguments[0].scrollIntoView();", button_element)
-#    assert button_element.is_selected() != selected, report_fail(
-#        name + " Button not working")
-    print(name + " Button working")
+    assert button_element.is_selected() != selected, "Selection failed"
 
 def check_logged_in(driver) -> bool:
     '''
