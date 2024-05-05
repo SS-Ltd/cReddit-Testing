@@ -1,6 +1,9 @@
 '''
 This file contains all the paths for the web tests.
 '''
+#ID = ID
+#PID = Partial ID
+#XPATH = Xpath
 # Comments
 COMMENT_CONTENT = ""
 COMMENT_DOWNVOTE = "_downvote_comment"
