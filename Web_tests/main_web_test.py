@@ -12,7 +12,7 @@ from google_login import google_login
 from Registration.sign_up import signup
 from helper_functions import locate_element
 from right_side_bar import test_right_side_bar
-
+from comments import comment
 # Prepare the log files
 delete_all_files_content()
 
@@ -31,10 +31,11 @@ thread.sleep(DELAY_TIME)
 
 # Login
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
-locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Malek")
-locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("12345678Mm")
+locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Eldred.Christiansen")
+locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 thread.sleep(DELAY_TIME)
+comment(driver)
 test_right_side_bar(driver)
 
 # Wait for the site to load
