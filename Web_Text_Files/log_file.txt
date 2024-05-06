@@ -5618,3 +5618,5 @@
 2024-04-15 22:21:27.853217 : The create community button was not found
 2024-04-15 22:22:30.709920 : The create community button was not found
 2024-04-15 22:23:40.059111 : About Reddit hyperlink not found
+2024-05-05 20:12:05.432742 : The community name was not found
+2024-05-05 20:12:42.305473 : The community name was not found
