@@ -69,3 +69,24 @@ CREATE_POST_BODY = '//*[@id="root"]/div/div[3]/div[1]/div[3]/div[2]/div[2]/div/d
 
 # Settings
 SETTINGS_PRIVACY_ADD_BLOCKED_USERS = '//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[1]/button'                   # xpath
+
+# Searching
+SEARCH_BAR = "navbar_searchbar_input"                                                                                #ID
+SEARCH_POSTS = "posts_option"
+SEARCH_COMMUNITIES = "communities_option"
+SEARCH_COMMENTS = "comments_option"
+SEARCH_PEOPLE = "people_option"
+SEARCH_HASHTAGS = "hashtag_option"
+SEARCH_SAFE = "ismature_switch_btn_search"
+SEARCH_SORT_BY = "sort_options"
+SEARCH_SORT_HOT = "search_hot"
+SEARCH_SORT_NEW = "search_new"
+SEARCH_SORT_TOP = "search_top"
+SEARCH_FILTER_TIME = "sort_time"
+SEARCH_FILTER_TIME_ALL_TIME = "search_all_time"
+SEARCH_FILTER_TIME_YEAR = "search_past_year"
+SEARCH_FILTER_TIME_MONTH = "search_past_month"
+SEARCH_FILTER_TIME_WEEK = "search_past_week"
+SEARCH_FILTER_TIME_TODAY = "search_past_24_hours"
+SEARCH_FILTER_TIME_NOW = "search_past_hour"
+SEARCH_CONTENT_MAP = "search_content_map"
