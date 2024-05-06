@@ -114,7 +114,11 @@ def random_login(driver):
     This function logs in with a random username
     '''
     driver.get("https://creddit.tech/")
-    thread.sleep(4)
+    thread.sleep(5)
+    if locate_element(driver, by_id="navbar_profile") is not None:
+        logout(driver)
+        driver.get("https://creddit.tech/")
+    thread.sleep(7)
     locate_element(driver, by_id="navbar_login_button").click()
     username = return_random_username()
     password = PASSWORD
@@ -123,7 +127,7 @@ def random_login(driver):
     locate_element(driver, by_id="login_password").clear()
     locate_element(driver, by_id="login_password").send_keys(password)
     locate_element(driver, by_id="login_submit").click()
-    thread.sleep(3)
+    thread.sleep(4)
 
 def logout(driver):
     '''
@@ -255,8 +259,8 @@ def comment_on_post(driver,postlink,comment,commentscount):
 
 PASSWORD = "12345678Mm"
 TIME = "1 D"
-SUBREDDIT = "https://www.reddit.com/r/RocketLeague/"
-SUBREDDIT_NAME = "RocketLeague"
+SUBREDDIT = "https://www.reddit.com/r/apexlegends/"
+SUBREDDIT_NAME = "apexlegends"
 POST_ID = "t3_"
 POST_TITLE_ID = "post-title-t3_"
 POST_TEXT_ID = "post-rtjson-content"
@@ -265,10 +269,10 @@ POST_IMAGE_ID = "post-image"
 POST_VIDEO_ID = 'aspect-ratio'
 VOTES_PATH = "faceplate-number"
 TREE_DOTS_PATH = "shreddit-post-overflow-menu//div/faceplate-dropdown-menu/button"
-MAX_NUM_POSTS = 50
+MAX_NUM_POSTS = 4
 FOLDER_PATH = "../../../../Posts_scraped/"
 REDDIT_URL = "https://www.reddit.com"
-SKIP = 19
+SKIP = 2
 service = ChromeService(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
@@ -287,8 +291,12 @@ thread.sleep(5)
 
 #expanding the page
 driver.execute_script("window.scrollBy(0, 10000)")
-thread.sleep(2)
+thread.sleep(4)
 driver.execute_script("window.scrollBy(0, -10000)")
+thread.sleep(10)
+driver.execute_script("window.scrollBy(0, 10000000)")
+thread.sleep(4)
+driver.execute_script("window.scrollBy(0, -1000000)")
 thread.sleep(15)
 #getting the posts links
 get_source = driver.page_source
@@ -304,16 +312,17 @@ for i in range(MAX_NUM_POSTS):
     temp = get_source[posts_url[i] + len(search_post_link):]
     link[i] = temp[:temp.find('"')]
     print(link[i])
-
+empty = link.count(0)
+print("Done with getting the links posts",MAX_NUM_POSTS-empty)
 data = ""
 thread.sleep(5)
-posts = []
-posts = driver.find_elements(By.XPATH, '//*[contains(@id, "'+ POST_ID +'")]')
-number_of_post = len(posts)
-number_of_post = min(MAX_NUM_POSTS,int(number_of_post/3))
+# posts = []
+# posts = driver.find_elements(By.XPATH, '//*[contains(@id, "'+ POST_ID +'")]')
+# number_of_post = len(posts)
+# number_of_post = min(MAX_NUM_POSTS,int(number_of_post/3))
 i = SKIP-1
 #looping through the posts and scraping the data from them then posting them to creddit
-for j in range (number_of_post):
+for j in range (MAX_NUM_POSTS):
     i += 1
     type = ""
     try:
@@ -366,6 +375,7 @@ for j in range (number_of_post):
     print(newlink)
     countempty = comments.count("")
     comment_on_post(driver,newlink,comments,len(comments)-countempty)
+
     for j in range(len(comments)):
         comments[j] = ""
     print("Done with post",i)
