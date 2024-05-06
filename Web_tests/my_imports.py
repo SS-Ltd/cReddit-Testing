@@ -15,3 +15,4 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.firefox.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.common.exceptions import TimeoutException , NoSuchWindowException
+from selenium.webdriver.common.keys import Keys
