@@ -269,7 +269,7 @@ POST_IMAGE_ID = "post-image"
 POST_VIDEO_ID = 'aspect-ratio'
 VOTES_PATH = "faceplate-number"
 TREE_DOTS_PATH = "shreddit-post-overflow-menu//div/faceplate-dropdown-menu/button"
-MAX_NUM_POSTS = 4
+MAX_NUM_POSTS = 150
 FOLDER_PATH = "../../../../Posts_scraped/"
 REDDIT_URL = "https://www.reddit.com"
 SKIP = 2
@@ -295,8 +295,12 @@ thread.sleep(4)
 driver.execute_script("window.scrollBy(0, -10000)")
 thread.sleep(10)
 driver.execute_script("window.scrollBy(0, 10000000)")
-thread.sleep(4)
-driver.execute_script("window.scrollBy(0, -1000000)")
+thread.sleep(5)
+driver.execute_script("window.scrollBy(0, 10000000)")
+thread.sleep(5)
+driver.execute_script("window.scrollBy(0, 10000000)")
+thread.sleep(5)
+driver.execute_script("window.scrollBy(0, -3000000)")
 thread.sleep(15)
 #getting the posts links
 get_source = driver.page_source
