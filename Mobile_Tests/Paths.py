@@ -125,37 +125,47 @@ CREATE_COMMUNITY_BUTTON = 'Create Community'#AID
 CREATE_COMMUNITY_BACK = 'Back'          #AID
 CREATE_COMMUNITY_ALREADY_EXISTS = 'Subreddit already exists'    #AID
 # posts all resource IDS except stated
-POST_UPVOTE      = 'post upvote'        #RID
-POST_VOTES       = 'post votes'         #RID        # Might not work
-POST_DOWNVOTE    = 'post downvote'      #RID
-POST_COMMENTS    = 'post comment'       #RID
-POST_USERNAME    = 'post username'      #RID        # POST USERNAME and POST SUBREDDIT together form the some reason
-POST_SUBREDDIT   = 'post subreddit'     #RID        # Might not work
-POST_TITLE       = 'post title'         #RID
-POST_SHARE       = 'post share'         #RID
+POST_UPVOTE      = 'post upvote'                #RID
+POST_VOTES       = 'post votes'                 #RID        # Might not work
+POST_DOWNVOTE    = 'post downvote'              #RID
+POST_COMMENTS    = 'post comment'               #RID
+POST_USERNAME    = 'post username'              #RID        # POST USERNAME and POST SUBREDDIT together form the some reason
+POST_SUBREDDIT   = 'post subreddit'             #RID        # Might not work
+POST_TITLE       = 'post title'                 #RID
+POST_SHARE       = 'post share'                 #RID
+POST_MODERATOR   = 'moderator post settings'    #RID
+# moderator post Card
+POST_MOD_APPROVE_POST         = 'Approve post'  #RID
+POST_MOD_REMOVE_POST          = 'Remove post'   #RID
+POST_MOD_REMOVE_AS_SPAM       = 'Remove as spam'#RID
+POST_MOD_LOCK_COMMENTS        = 'Lock comments' #RID
+POST_MOD_STICKY_POST          = 'Sticky post'   #RID out of scope for project
+POST_MOD_MARK_AS_SPOILER      = 'Mark as spoiler'#RID
+POST_MOD_MARK_AS_NSFW         = 'Mark as NSFW'   #RID
+POST_MOD_ADJUST_CROUD_CONTROL = 'Adjust Croud Control' #RID out of scope for project
 
 # Comments all resource IDS
-COMMENT_UPVOTE   = 'comment upvote'     #RID
-COMMENT_VOTES    = 'comment votes'      #RID        # Might not work
-COMMENT_DOWNVOTE = 'comment downvote'   #RID
-COMMENT_OPTIONS  = 'comment options'    #RID
-COMMENT_REPLY    = 'comment reply'      #RID
-COMMENT_USERNAME = 'comment username'   #RID
-COMMENT_CONTENT  = 'comment content'    #RID
+COMMENT_UPVOTE   = 'comment upvote'             #RID
+COMMENT_VOTES    = 'comment votes'              #RID        # Might not work
+COMMENT_DOWNVOTE = 'comment downvote'           #RID
+COMMENT_OPTIONS  = 'comment options'            #RID
+COMMENT_REPLY    = 'comment reply'              #RID
+COMMENT_USERNAME = 'comment username'           #RID
+COMMENT_CONTENT  = 'comment content'            #RID
 COMMENT_CREATE   = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View'             #XPath
 COMMENT_WRITE    = '//android.widget.EditText'
 COMMENT_POST = 'Post'                   #AID
 #AIDS
-COMMENT_EDIT    = 'Edit comment'        #AID
-COMMENT_SHARE   = 'Share'               #AID
-COMMENT_SAVE    = 'Save'                #AID
-COMMENT_UNSAVE  = 'Unsave'              #AID
+COMMENT_EDIT    = 'Edit comment'                            #AID
+COMMENT_SHARE   = 'Share'                                   #AID
+COMMENT_SAVE    = 'Save'                                    #AID
+COMMENT_UNSAVE  = 'Unsave'                                  #AID
 COMMENT_GET_REPLY_NOTIFICATIONS = 'Get reply notifications' #AID
-COMMENT_COPY_TEXT = 'Copy text'         #AID
-COMMENT_COLAPSE_THREAD = 'Collapse thread'#AID
-COMMENT_BLOCK_ACCOUNT = 'Block account' #AID
-COMMENT_REPORT  = 'Report'              #AID
-COMMENT_DELETE  = 'Delete comment'              #AID
+COMMENT_COPY_TEXT = 'Copy text'                             #AID
+COMMENT_COLAPSE_THREAD = 'Collapse thread'                  #AID
+COMMENT_BLOCK_ACCOUNT = 'Block account'                     #AID
+COMMENT_REPORT  = 'Report'                                  #AID
+COMMENT_DELETE  = 'Delete comment'                          #AID
 
 
 # Create Post
