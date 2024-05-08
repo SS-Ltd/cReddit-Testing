@@ -32,7 +32,14 @@ SIGNUP_CONTINUE2 = 'Continue'                           #AID#might need to updat
 SIGNUP_GENDER_MAN = 'Man'                               #AID
 #signup continue with google
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
+
 # Home page
+SEARCH_ICON = 'Open search'                                 #RID
+SEARCH_TEXT = 'search text'                                 #RID
+SEARCH_SEARCH_FOR = 'Search for'                            #AID
+SEARCH_RESULT = 'join or disjoin subreddit'                 #RID
+SEARCH_COMMUNNITY = 'Communities\nTab 2 of 5'               #AID
+
 # Custom Navigation Bar
 NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
@@ -189,3 +196,6 @@ CREATE_POST_POLL_OPTION_2 = 'Option 2'                                          
 CREATE_POST_POLL_ADD_OPTION = 'Add option'                                                  #AID
 CREATE_POST_POLL_OPTION_3 = 'Option 3'                                                      #RID
 CREATE_POST_CLOSE_POLL_3 = 'close option 3'                                                 #AID
+
+# Moderation
+COMMUNITY_MOD_TOOLS = 'Mod Tools'                                                           #AID

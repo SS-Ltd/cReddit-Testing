@@ -45,7 +45,7 @@ username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
 # username.clear()
-username.send_keys("Edwina54")
+username.send_keys("Curt37")
 
 password = locate_element(driver, by_xpath=START_PASSWORD)
 password.click()
@@ -56,7 +56,7 @@ end_text(driver)
 thread.sleep(2)
 locate_element(driver, by_accessibility_id=START_LOGIN).click()
 #locate_element(driver, by_id=POST_COMMENTS).click()
-profile_page(driver)
+# profile_page(driver)
 
 
 # Verify that the login was successful
