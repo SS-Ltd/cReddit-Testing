@@ -5,9 +5,10 @@ This module contains all the xPaths and accessibility IDs for the mobile applica
 # XPATH = Xpath
 # AID = Accessibility ID
 # end of text button
+ALLOW_NOTIFICATIONS = 'com.android.permissioncontroller:id/permission_allow_button'     #RID
 # Starting page for the mobile application
-START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
-START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
+START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]'
+START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[2]'
 START_SIGNUP = 'Sign Up'
 START_LOGIN = 'Continue'
 START_COUNTINUE_WITH_GOOGLE = 'Continue with Google'

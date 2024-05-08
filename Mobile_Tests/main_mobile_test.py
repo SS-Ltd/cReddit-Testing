@@ -6,8 +6,9 @@ from helper_functions import locate_element, end_text
 from constants import DELAY_TIME
 from close_app import close_app
 from google_login import gmail_login, search_for_email
-from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, HOME_PAGE_TABS_HOME, POST_COMMENTS
+from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, NAVIGATION_BAR_HOME, POST_COMMENTS
                    , COMMENT_WRITE)
+from Paths import ALLOW_NOTIFICATIONS
 from home_page import home_page
 from Profile.profile_page import profile_page
 
@@ -32,7 +33,9 @@ print(driver.current_activity)
 
 print("App launched")
 
-# Test the login functionality
+# Click allow notifications
+allow_notifications = locate_element(driver, by_id=ALLOW_NOTIFICATIONS)
+allow_notifications.click()
 
 # Test the login functionality
 #login(driver)
@@ -42,7 +45,7 @@ username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
 # username.clear()
-username.send_keys("Trevor11")
+username.send_keys("Edwina54")
 
 password = locate_element(driver, by_xpath=START_PASSWORD)
 password.click()
@@ -59,7 +62,7 @@ profile_page(driver)
 # Verify that the login was successful
 # Check the bottom tabs, one of them is an enough indication that the login was successful
 # Check the home tab (tab 1 of 5)
-home_tab = locate_element(driver, by_accessibility_id=HOME_PAGE_TABS_HOME)
+home_tab = locate_element(driver, by_accessibility_id=NAVIGATION_BAR_HOME)
 assert home_tab.is_displayed(), "Login was not successful"
 print("Login was successful")
 
