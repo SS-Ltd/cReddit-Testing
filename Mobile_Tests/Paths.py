@@ -281,3 +281,9 @@ RULES_ADD_RULE_PAC = 'Posts and comments'
 RULES_ADD_RULE_CO = 'Only comments'
 RULES_ADD_RULE_PO = 'Only posts'
 RULES_ADD_RULE_SAVE = 'Save'
+
+# Moderator Tools -> Content & Regulations -> Scheduled Posts
+SCHEDULED_POSTS_SCHEDULE = 'Schedule post'
+SCHEDULED_POSTS_MORE_OPTIONS = 'more options'
+SCHEDULED_POSTS_CALENDAR = 'Post Settings\ncalender\nSchedule Post\nschedule post'
+
