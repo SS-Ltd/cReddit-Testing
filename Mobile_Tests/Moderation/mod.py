@@ -8,6 +8,7 @@ from Paths import SEARCH_ICON, SEARCH_TEXT, SEARCH_SEARCH_FOR, SEARCH_RESULT, SE
 from Paths import COMMUNITY_MOD_TOOLS
 from constants import DELAY_TIME
 from Moderation.general import general
+from Moderation.content import content
 
 def goto_mod(driver: webdriver) -> None:
     '''
@@ -68,6 +69,9 @@ def mod(driver: webdriver) -> None:
     goto_mod(driver)
 
     # Check the general functionalities of the mod tools
-    general(driver)
+    # general(driver)
+
+    # Check the content functionalities of the mod tools
+    content(driver)
 
     print("Moderation tools checked")

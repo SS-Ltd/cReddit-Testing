@@ -252,3 +252,32 @@ POLL_ONLY_SWITCH = 'android.widget.Switch'                                      
 LOCATION_TEXT = 'android.widget.EditText'                                                                                                                                                                       #classname
 LOCATION_HEADER = 'Adding a location helps your community show up in search results and recommendations and helps local redditors find it easier.'                                                              #AID
 LOCATION_SAVE = 'save'                                                                                                                                                                                          #AID
+
+# Moderator Tools -> Content & Regulations -> Queues
+QUEUES_COMMUNITY = 'Community'
+QUEUES_NEEDS_REVIEW = 'Needs Review'
+QUEUES_POSTS_AND_COMMENTS = 'Posts and Comments'
+QUEUES_SORT = 'sort'
+QUEUES_GOTO_COMMUNITY = 'Go to community page'
+QUEUES_REVIEW_NEEDS_REVIEW = 'Needs Review'
+QUEUES_REVIEW_REMOVED = 'Removed'
+QUEUES_REVIEW_REPORTED = 'Reported'
+QUEUES_REVIEW_EDITED = 'Edited'
+QUEUES_REVIEW_UNMODERATED = 'Unmoderated'
+QUEUES_PAC_POSTS_AND_COMMENTS = 'Posts and Comments'
+QUEUES_PAC_POSTS_ONLY = 'Posts Only'
+QUEUES_PAC_COMMENTS_ONLY = 'Comments Only'
+
+# Moderator Tools -> Content & Regulations -> Rules
+RULES_ADD_RULE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+RULES_EDIT_RULE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[3]'
+RULES_DONE_EDITING = 'Done'
+RULES_DELETE_RULE = '//android.view.View[@content-desc="1\nBalbus cibus altus comburo."]/android.widget.Button'
+RULES_RULE = '//android.view.View[@content-desc="1\nBalbus cibus altus comburo."]'
+RULES_ADD_RULE_TITLE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]'
+RULES_ADD_RULE_DESCRIPTION = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[2]'
+RULES_ADD_RULE_REPORT = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[3]'
+RULES_ADD_RULE_PAC = 'Posts and comments'
+RULES_ADD_RULES_CO = 'Only comments'
+RULES_ADD_RULES_PO = 'Only posts'
+RULES_ADD_RULES_SAVE = 'Save'
