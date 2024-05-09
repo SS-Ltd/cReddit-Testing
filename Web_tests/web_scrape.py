@@ -180,9 +180,9 @@ def post_text(driver,post_title,post_text)->str:
     text_element = locate_element(driver, by_xpath='//*[@id="root"]/div/div[3]/div[1]/div[3]/div[2]/div[2]/div/div[2]/div')
     send_non_bmp_characters(text_element,post_text)
     thread.sleep(1)
-    locate_element(driver, by_id='submit_post').click()
+    locate_element(driver, by_xpath='//*[@id="root"]/div/div[3]/div[1]/div[3]/div[3]/div').click()
     thread.sleep(3)
-    WebDriverWait(driver, 10).until(EC.url_contains(SUBREDDIT_NAME))
+    WebDriverWait(driver, 700).until(EC.url_contains(SUBREDDIT_NAME))
     driverlink = driver.current_url
     thread.sleep(1)
     logout(driver)
@@ -229,7 +229,7 @@ def post_photo(driver,post_title,postpath)->str:
     thread.sleep(1)
     keyboard.release(Key.enter)
     thread.sleep(1)
-    locate_element(driver, by_id='submit_post').click()
+    locate_element(driver, by_xpath='//*[@id="root"]/div/div[3]/div[1]/div[3]/div[3]/div').click()
     print("post Photo/Video being uploaded")
     WebDriverWait(driver, 700).until(EC.url_contains(SUBREDDIT_NAME))
     thread.sleep(3)
@@ -269,7 +269,7 @@ POST_IMAGE_ID = "post-image"
 POST_VIDEO_ID = 'aspect-ratio'
 VOTES_PATH = "faceplate-number"
 TREE_DOTS_PATH = "shreddit-post-overflow-menu//div/faceplate-dropdown-menu/button"
-MAX_NUM_POSTS = 150
+MAX_NUM_POSTS = 200
 FOLDER_PATH = "../../../../Posts_scraped/"
 REDDIT_URL = "https://www.reddit.com"
 SKIP = 2
@@ -292,15 +292,19 @@ thread.sleep(5)
 #expanding the page
 driver.execute_script("window.scrollBy(0, 10000)")
 thread.sleep(4)
-driver.execute_script("window.scrollBy(0, -10000)")
-thread.sleep(10)
-driver.execute_script("window.scrollBy(0, 10000000)")
-thread.sleep(5)
-driver.execute_script("window.scrollBy(0, 10000000)")
-thread.sleep(5)
-driver.execute_script("window.scrollBy(0, 10000000)")
-thread.sleep(5)
-driver.execute_script("window.scrollBy(0, -3000000)")
+#driver.execute_script("window.scrollBy(0, -10000)")
+#thread.sleep(10)
+#driver.execute_script("window.scrollBy(0, 10000000)")
+#thread.sleep(5)
+#driver.execute_script("window.scrollBy(0, 10000000)")
+#thread.sleep(5)
+#driver.execute_script("window.scrollBy(0, 10000000)")
+#thread.sleep(5)
+#driver.execute_script("window.scrollBy(0, 10000000)")
+#thread.sleep(5)
+#driver.execute_script("window.scrollBy(0, 10000000)")
+#thread.sleep(5)
+driver.execute_script("window.scrollBy(0, -5000000)")
 thread.sleep(15)
 #getting the posts links
 get_source = driver.page_source
@@ -343,6 +347,7 @@ for j in range (MAX_NUM_POSTS):
     try:
         post_title= locate_element(driver, by_xpath='//*[contains(@id, "'+ POST_TITLE_ID +'")]').text
     except Exception as e:
+        print(e)
         continue
     data += post_title
     data += " Post content: "
@@ -368,19 +373,23 @@ for j in range (MAX_NUM_POSTS):
         data += "[comment]" + str(k) +" "+ str(comments[k])
     write_to_file(data, FOLDER_PATH + "posts.txt")
     #thread.sleep(2000)
+    try:
+        #POST TO CREDDIT
+        if type == "text":
+            newlink = post_text(driver, post_title,post_body)
+        elif type == "image":
+            newlink = post_photo(driver, post_title,image_path)
+        elif type == "video":
+            newlink = post_photo(driver, post_title,vid_path)
+        print("link is:")
+        print(newlink)
+   
+        countempty = comments.count("")
+        comment_on_post(driver,newlink,comments,len(comments)-countempty)
+        for j in range(len(comments)):
+            comments[j] = ""
+    except Exception:
+        continue
 
-    #POST TO CREDDIT
-    if type == "text":
-        newlink = post_text(driver, post_title,post_body)
-    elif type == "image":
-        newlink = post_photo(driver, post_title,image_path)
-    elif type == "video":
-        newlink = post_photo(driver, post_title,vid_path)
-    print(newlink)
-    countempty = comments.count("")
-    comment_on_post(driver,newlink,comments,len(comments)-countempty)
-
-    for j in range(len(comments)):
-        comments[j] = ""
     print("Done with post",i)
     thread.sleep(7)
