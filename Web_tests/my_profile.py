@@ -129,17 +129,50 @@ def test_comments(driver) -> None:
     assert "This is a comment" in text.text, "Comment not found"
     print("Comment found")
 
+def test_saved(driver, post_url: str) -> None:
+    '''
+    This function checks the save posts functionality
+    '''
+
+    # Go to a certain post and save it
+    driver.get(post_url)
+    thread.sleep(DELAY_TIME)
+
+    # Locate the menu button
+    menu = locate_element(driver, by_xpath="//div[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('menu') + 1) = 'menu']")
+    menu.click()
+    print("Menu clicked")
+
+    # Locate the save post button
+    save_post = locate_element(driver, by_xpath="//div[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('menu_save') + 1) = 'menu_save']")
+    save_post.click()
+    print("Post saved")
+    # Check that the post has been saved
+    assert save_post.find_element(By.XPATH, './/p[contains(text(), "Unsave")]') is not None, "Post not saved"
+    thread.sleep(DELAY_TIME)
+
+    goto_myprofile(driver)
+
+    saved = locate_element(driver, by_xpath=MY_PROFILE_SAVED)
+    assert saved is not None, "saved subfeed not found"
+    saved.click()
+    print("Saved subfeed clicked")
+    thread.sleep(DELAY_TIME)
+
+    # Check if the post is there
+    # Locate an element that contains mainfeed in its id
+    post = locate_element(driver, by_xpath="//*[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('community') + 1) = 'community']")
+    # Locate post/div/p and check that it is starts with "r/"
+    post_a = locate_element(post, by_xpath=".//a/p")
+    print(post_a.text)
+    print(post_url)
+    # assert post_a.text in post_url, "The post is incorrect"
 
 def goto_subfeed(driver) -> None:
     '''
     This function tests the subfeed it is using
     '''
     
-    saved = locate_element(driver, by_xpath=MY_PROFILE_SAVED)
-    assert saved is not None, "saved subfeed not found"
-    saved.click()
-    print("Saved subfeed clicked")
-    thread.sleep(DELAY_TIME)
     hidden = locate_element(driver, by_xpath=MY_PROFILE_HIDDEN)
     assert hidden is not None, "hidden subfeed not found"
     hidden.click()
@@ -191,6 +224,8 @@ def my_profile(driver) -> None:
 
     # test_posts(driver)
 
-    test_comments(driver)
+    # test_comments(driver, post_url)
+
+    test_saved(driver, post_url)
 
     thread.sleep(DELAY_TIME)
