@@ -74,14 +74,14 @@ def create_post(driver):
     # locate_element(driver, by_xpath=CREATE_POST_BODY).send_keys('munich betewla3 ya reggalaaaaaaa')
 
     # 2. Image
-    # image(driver)
+    image(driver)
 
     # 3. URL
     # locate_element(driver, by_id='type_link').click()
     # locate_element(driver, by_id='url_content').send_keys('https://thinking-tester-contact-list.herokuapp.com')
 
     # 4. Poll
-    poll(driver)
+    # poll(driver)
 
     thread.sleep(DELAY_TIME)
 

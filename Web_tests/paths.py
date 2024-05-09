@@ -47,7 +47,7 @@ LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD = 'community-card'                          
 LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS = '//*[@id="card-content"]/div[1]/p'                                  # xpath
 LEFT_SIDE_BAR_COMMUNITY_RANDOM = "(//a[@id='sidebar_community_icon0'])[2]"                                          # xpath
 
-# Profile Page
+# Other User Profile Page
 PROFILE_USERNAME = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[1]/div[1]/div/p'                                  # xpath
 PROFILE_MAINFEED_CATEGORY_DROPDOWN = 'mainfeed_category_dropdown'                                                   # id
 PROFILE_MAINFEED_CATEGORY_HOT = 'mainfeed_category_hot'                                                             # id
@@ -62,6 +62,15 @@ PROFILE_USER_DROPDOWN_SHARE = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[2]/
 PROFILE_USER_DROPDOWN_SEND = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[2]/div/div/div[1]/div/div[2]/div[2]'    # xpath
 PROFILE_USER_DROPDOWN_BLOCK = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[2]/div/div/div[1]/div/div[2]/div[3]'   # xpath
 PROFILE_USER_DROPDOWN_REPORT = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[2]/div/div/div[1]/div/div[2]/div[4]'  # xpath
+
+# My Profile Page
+MY_PROFILE_OVERVIEW = "//div[@id='view-profile']/div/div/div/main/div[2]/a/span/span/span"                    # xpath
+MY_PROFILE_POSTS = "//div[@id='view-profile']/div/div/div/main/div[2]/a[2]/span/span/span"                    # xpath
+MY_PROFILE_COMMENTS = "//div[@id='view-profile']/div/div/div/main/div[2]/a[3]/span/span/span"                 # xpath
+MY_PROFILE_SAVED = "//div[@id='view-profile']/div/div/div/main/div[2]/a[4]/span/span/span"                    # xpath
+MY_PROFILE_HIDDEN = "//div[@id='view-profile']/div/div/div/main/div[2]/a[5]/span/span/span"                   # xpath
+MY_PROFILE_UPVOTED = "//div[@id='view-profile']/div/div/div/main/div[2]/a[6]/span/span/span"                  # xpath
+MY_PROFILE_DOWNVOTED = "//div[@id='view-profile']/div/div/div/main/div[2]/a[7]/span/span/span"                # xpath
 
 # Create Post
 CREATE_POST_RANDOM_COMMUNITY = '//*[@id="create_post_community_dropdown_menu"]/ul[2]/li[1]/div'                     # xpath
