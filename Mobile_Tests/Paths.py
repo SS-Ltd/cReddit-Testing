@@ -199,3 +199,35 @@ CREATE_POST_CLOSE_POLL_3 = 'close option 3'                                     
 
 # Moderation
 COMMUNITY_MOD_TOOLS = 'Mod Tools'                                                           #AID
+# Moderator Tools
+# General
+MOD_TOOLS_MOD_LOG = 'Mod log'                                    #AID
+MOD_TOOLS_INSIGHTS = 'Insights'                                  #AID
+MOD_TOOLS_COMMUNITY_ICON = 'Community icon'                      #AID
+MOD_TOOLS_DESCRIPTION = 'Description'                            #AID
+MOD_TOOLS_WELCOME_MESSAGE = 'Welcome message'                    #AID
+MOD_TOOLS_TOPICS = 'Topics'                                      #AID
+MOD_TOOLS_COMMUNITY_TYPE = 'Community type'                      #AID
+MOD_TOOLS_POST_TYPE = 'Post type'                                #AID
+MOD_TOOLS_LOCATION = 'Location'                                  #AID
+# Content & Regulations
+MOD_TOOLS_QUEUES = 'Queues'                                      #AID
+MOD_TOOLS_RULES = 'Rules'                                        #AID
+MOD_TOOLS_SCHEDULED_POSTS = 'Scheduled posts'                    #AID
+# User Management
+MOD_TOOLS_MODERATORS = 'Moderators'                              #AID
+MOD_TOOLS_APPROVED_USERS = 'Approved users'                      #AID
+MOD_TOOLS_MUTED_USERS = 'Muted users'                            #AID
+MOD_TOOLS_BANNED_USERS = 'Banned users'                          #AID
+
+# Moderator Tools -> General -> Description
+MOD_TOOLS_DESCRIPTION_EDIT = '//android.widget.EditText'         #XPath
+MOD_TOOLS_DESCRIPTION_SAVE = 'Save'                              #AID
+
+# Moderator Tools -> General -> Community Type
+MOD_TOOLS_COMMUNITY_TYPE_SEEKBAR = 'android.widget.SeekBar'      #classname
+MOD_TOOLS_COMMUNITY_TYPE_PUBLIC = 'Public'                       #AID
+MOD_TOOLS_COMMUNITY_TYPE_RESTRICTED = 'Restricted'               #AID
+MOD_TOOLS_COMMUNITY_TYPE_PRIVATE = 'Private'                     #AID
+MOD_TOOLS_COMMUNITY_TYPE_SWITCH = 'android.widget.Switch'        #classname
+MOD_TOOLS_COMMUNITY_TYPE_SAVE = 'Save'                           #AID
