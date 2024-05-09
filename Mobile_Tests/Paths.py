@@ -247,3 +247,8 @@ VIDEO_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/
 POLL_POSTS = 'Poll posts\nAllow poll posts in your community'                                                                                                                                                   #AID
 POLL_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[3]'     #XPath
 POLL_ONLY_SWITCH = 'android.widget.Switch'                                                                                                                                                                      #classname
+
+# Moderator Tools -> General -> Location
+LOCATION_TEXT = 'android.widget.EditText'                                                                                                                                                                       #classname
+LOCATION_HEADER = 'Adding a location helps your community show up in search results and recommendations and helps local redditors find it easier.'                                                              #AID
+LOCATION_SAVE = 'save'                                                                                                                                                                                          #AID

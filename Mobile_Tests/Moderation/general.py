@@ -18,6 +18,7 @@ from Paths import MOD_TOOLS_POST_TYPE_SAVE
 from Paths import OPTION_ANY, OPTION_LINK, OPTION_TEXT
 from Paths import IMAGE_POSTS, VIDEO_POSTS, POLL_POSTS
 from Paths import IMAGE_SWITCH, VIDEO_SWITCH, POLL_SWITCH
+from Paths import LOCATION_TEXT, LOCATION_HEADER, LOCATION_SAVE
 
 def description(driver: webdriver) -> None:
     '''
@@ -214,6 +215,33 @@ def post_type(driver: webdriver) -> None:
     print("Post Type functionalities of the Mod Tools checked")
     driver.back()
 
+def location(driver: webdriver) -> None:
+    '''
+    This function checks the Location functionalities of the Mod Tools
+    '''
+
+    # Check that the header exists
+    header = locate_element(driver, by_accessibility_id=LOCATION_HEADER)
+    assert header is not None, "Header not found"
+    print("Header found")
+
+    # Enter some text
+    text = locate_element(driver, by_class_name=LOCATION_TEXT)
+    assert text is not None, "Text not found"
+    text.click()
+    text.send_keys("This is a test location")
+    print("Text entered")
+    end_text(driver)
+
+    # Click on the Save button
+    save = locate_element(driver, by_accessibility_id=LOCATION_SAVE)
+    assert save is not None, "Save button not found"
+    save.click()
+    print("Save button clicked")
+
+    print("Location functionalities of the Mod Tools checked")
+    driver.back()
+
 def general(driver: webdriver) -> None:
     '''
     This function checks the GENERAL functionalities of the Mod Tools
@@ -273,16 +301,17 @@ def general(driver: webdriver) -> None:
     # Click on the Post Type
     pt = locate_element(driver, by_accessibility_id=MOD_TOOLS_POST_TYPE)
     assert pt is not None, "Post type not found"
-    pt.click()
+    # pt.click()
     print("Post type clicked")
-    thread.sleep(DELAY_TIME)
-    post_type(driver)
+    # thread.sleep(DELAY_TIME)
+    # post_type(driver)
 
     # Click on the Location
-    location = locate_element(driver, by_accessibility_id=MOD_TOOLS_LOCATION)
-    assert location is not None, "Location not found"
-    # location.click()
+    loc = locate_element(driver, by_accessibility_id=MOD_TOOLS_LOCATION)
+    assert loc is not None, "Location not found"
+    loc.click()
     print("Location clicked")
-    # thread.sleep(DELAY_TIME)
+    thread.sleep(DELAY_TIME)
+    location(driver)
 
     print("General functionalities of the Mod Tools checked")
