@@ -31,20 +31,18 @@ thread.sleep(DELAY_TIME)
 # login(driver)
 # Login
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
-locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Peyton26")
+locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Edwina54")
 locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 thread.sleep(DELAY_TIME)
 # test_right_side_bar(driver)
-search(driver)
+# search(driver)
 # Wait for the site to load
 thread.sleep(DELAY_TIME)
 # comment(driver)
 home_page(driver)
 # login(driver)
 #google_login(driver, "cReddit support center")
-# profile(driver)
-
 
 # write_run_time_statistics()
 driver.quit()
