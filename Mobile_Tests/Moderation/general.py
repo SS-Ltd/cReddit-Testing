@@ -13,6 +13,11 @@ from Paths import MOD_TOOLS_LOCATION
 from Paths import MOD_TOOLS_DESCRIPTION_EDIT, MOD_TOOLS_DESCRIPTION_SAVE
 from Paths import MOD_TOOLS_COMMUNITY_TYPE_SEEKBAR, MOD_TOOLS_COMMUNITY_TYPE_SAVE, MOD_TOOLS_COMMUNITY_TYPE_SWITCH
 from Paths import MOD_TOOLS_COMMUNITY_TYPE_PRIVATE, MOD_TOOLS_COMMUNITY_TYPE_PUBLIC, MOD_TOOLS_COMMUNITY_TYPE_RESTRICTED
+from Paths import MOD_TOOLS_POST_TYPE_OPTIONS_ANY, MOD_TOOLS_POST_TYPE_OPTIONS_LINK, MOD_TOOLS_POST_TYPE_OPTIONS_TEXT
+from Paths import MOD_TOOLS_POST_TYPE_SAVE
+from Paths import OPTION_ANY, OPTION_LINK, OPTION_TEXT
+from Paths import IMAGE_POSTS, VIDEO_POSTS, POLL_POSTS
+from Paths import IMAGE_SWITCH, VIDEO_SWITCH, POLL_SWITCH
 
 def description(driver: webdriver) -> None:
     '''
@@ -119,6 +124,96 @@ def type(driver: webdriver) -> None:
     print("Community Type functionalities of the Mod Tools checked")
     driver.back()
 
+def post_type(driver: webdriver) -> None:
+    '''
+    This function checks the Post Type functionalities of the Mod Tools
+    '''
+
+    # First check that the text type shows only poll posts
+    any = locate_element(driver, by_accessibility_id=MOD_TOOLS_POST_TYPE_OPTIONS_ANY)
+    assert any is not None, "Any not found"
+    print("Any found")
+    any.click()
+    text = locate_element(driver, by_accessibility_id=OPTION_TEXT)
+    assert text is not None, "Text not found"
+    print("Text found")
+    text.click()
+    thread.sleep(DELAY_TIME)
+
+    # Check that Image Posts and Video Posts are not found
+    image = locate_element(driver, by_accessibility_id=IMAGE_POSTS)
+    assert image is None, "Image Posts found"
+    print("Image Posts not found")
+    video = locate_element(driver, by_accessibility_id=VIDEO_POSTS)
+    assert video is None, "Video Posts found"
+    print("Video Posts not found")
+    post = locate_element(driver, by_accessibility_id=POLL_POSTS)
+    assert post is not None, "Poll Posts not found"
+    print("Poll Posts found")
+
+    # Check another type of posts
+    text = locate_element(driver, by_accessibility_id=MOD_TOOLS_POST_TYPE_OPTIONS_TEXT)
+    text.click()
+    thread.sleep(DELAY_TIME)
+    link = locate_element(driver, by_accessibility_id=OPTION_LINK)
+    assert link is not None, "Link not found"
+    print("Link found")
+    link.click()
+    print("Link clicked")
+    thread.sleep(DELAY_TIME)
+
+    # Check that Image Posts and Poll Posts are found
+    image = locate_element(driver, by_xpath=IMAGE_SWITCH)
+    assert image is not None, "Image Posts not found"
+    print("Image Posts found")
+    if image.get_attribute('checked') == 'false':
+        print("Image Posts initially off")
+    elif image.get_attribute('checked') == 'true':
+        print("Image Posts initially on")
+    image.click()
+    print("Image Posts clicked")
+    thread.sleep(DELAY_TIME)
+    if image.get_attribute('checked') == 'false':
+        print("Image Posts turned off")
+    elif image.get_attribute('checked') == 'true':
+        print("Image Posts turned on")
+    video = locate_element(driver, by_xpath=VIDEO_SWITCH)
+    assert video is not None, "Video Posts not found"
+    print("Video Posts found")
+    if video.get_attribute('checked') == 'false':
+        print("Video Posts initially off")
+    elif video.get_attribute('checked') == 'true':
+        print("Video Posts initially on")
+    video.click()
+    print("Video Posts clicked")
+    thread.sleep(DELAY_TIME)
+    if video.get_attribute('checked') == 'false':
+        print("Video Posts turned off")
+    elif video.get_attribute('checked') == 'true':
+        print("Video Posts turned on")
+    poll = locate_element(driver, by_xpath=POLL_SWITCH)
+    assert poll is not None, "Poll Posts not found"
+    print("Poll Posts found")
+    if poll.get_attribute('checked') == 'false':
+        print("Poll Posts initially off")
+    elif poll.get_attribute('checked') == 'true':
+        print("Poll Posts initially on")
+    poll.click()
+    print("Poll Posts clicked")
+    thread.sleep(DELAY_TIME)
+    if poll.get_attribute('checked') == 'false':
+        print("Poll Posts turned off")
+    elif poll.get_attribute('checked') == 'true':
+        print("Poll Posts turned on")
+
+    save = locate_element(driver, by_accessibility_id=MOD_TOOLS_POST_TYPE_SAVE)
+    assert save is not None, "Save button not found"
+    save.click()
+    print("Save button clicked")
+
+    print("Post Type functionalities of the Mod Tools checked")
+    driver.back()
+
 def general(driver: webdriver) -> None:
     '''
     This function checks the GENERAL functionalities of the Mod Tools
@@ -170,17 +265,18 @@ def general(driver: webdriver) -> None:
     # Click on the Community Type
     community_type = locate_element(driver, by_accessibility_id=MOD_TOOLS_COMMUNITY_TYPE)
     assert community_type is not None, "Community type not found"
-    community_type.click()
+    # community_type.click()
     print("Community type clicked")
-    thread.sleep(DELAY_TIME)
-    type(driver)
+    # thread.sleep(DELAY_TIME)
+    # type(driver)
 
     # Click on the Post Type
-    post_type = locate_element(driver, by_accessibility_id=MOD_TOOLS_POST_TYPE)
-    assert post_type is not None, "Post type not found"
-    # post_type.click()
+    pt = locate_element(driver, by_accessibility_id=MOD_TOOLS_POST_TYPE)
+    assert pt is not None, "Post type not found"
+    pt.click()
     print("Post type clicked")
-    # thread.sleep(DELAY_TIME)
+    thread.sleep(DELAY_TIME)
+    post_type(driver)
 
     # Click on the Location
     location = locate_element(driver, by_accessibility_id=MOD_TOOLS_LOCATION)

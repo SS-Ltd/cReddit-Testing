@@ -231,3 +231,19 @@ MOD_TOOLS_COMMUNITY_TYPE_RESTRICTED = 'Restricted'               #AID
 MOD_TOOLS_COMMUNITY_TYPE_PRIVATE = 'Private'                     #AID
 MOD_TOOLS_COMMUNITY_TYPE_SWITCH = 'android.widget.Switch'        #classname
 MOD_TOOLS_COMMUNITY_TYPE_SAVE = 'Save'                           #AID
+
+# Moderator Tools -> General -> Post Type
+MOD_TOOLS_POST_TYPE_OPTIONS_ANY = 'Post type options\nChoose the types of posts you allow in your community\nAny'                                                                                               #AID
+MOD_TOOLS_POST_TYPE_OPTIONS_LINK = 'Post type options\nChoose the types of posts you allow in your community\nLink'                                                                                             #AID
+MOD_TOOLS_POST_TYPE_OPTIONS_TEXT = 'Post type options\nChoose the types of posts you allow in your community\nText'                                                                                             #AID
+MOD_TOOLS_POST_TYPE_SAVE = 'Save'                                                                                                                                                                               #AID
+OPTION_ANY = 'Any\nAllow text, link, image, and video posts'                                                                                                                                                    #AID
+OPTION_LINK = 'Link only\nOnly allow link posts'                                                                                                                                                                     #AID
+OPTION_TEXT = 'Text only\nOnly allow text posts'                                                                                                                                                                     #AID
+IMAGE_POSTS = 'Image posts\nAllow images uploaded directly to Reddit as well as links to popular image hosting sites such as lmgur'                                                                             #AID
+IMAGE_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[1]'    #XPath
+VIDEO_POSTS = 'Video posts\nAllow videos uploaded directly to Reddit'                                                                                                                                           #AID
+VIDEO_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[2]'    #XPath
+POLL_POSTS = 'Poll posts\nAllow poll posts in your community'                                                                                                                                                   #AID
+POLL_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[3]'     #XPath
+POLL_ONLY_SWITCH = 'android.widget.Switch'                                                                                                                                                                      #classname
