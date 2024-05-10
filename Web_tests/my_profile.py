@@ -201,32 +201,31 @@ def test_upvoted(driver) -> None:
     print("Upvoted subfeed clicked")
     thread.sleep(DELAY_TIME)
 
-    # Go to the first post
-    post = locate_element(driver, by_xpath="//*[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('comment') + 1) = 'comment']")
-    assert post is not None, "Post not found"
-    post.click()
-    print("Post clicked")
-    thread.sleep(DELAY_TIME)
-
     # Check that the upvote button is clicked
     upvote = locate_element(driver, by_xpath="//span[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('upvote') + 1) = 'upvote']")
     assert "hover:bg-opacity-30" in upvote.get_attribute("class"), "Upvote not clicked"
 
     print("Upvoted subfeed test successful")
 
-    goto_myprofile(driver)
+    # goto_myprofile(driver)
 
-
-def goto_subfeed(driver) -> None:
+def test_downvoted(driver) -> None:
     '''
-    This function tests the subfeed it is using
+    This function checks the downvoted functionality
     '''
-
     downvoted = locate_element(driver, by_xpath=MY_PROFILE_DOWNVOTED)
     assert downvoted is not None, "downvoted subfeed not found"
     downvoted.click()
     print("Downvoted subfeed clicked")
     thread.sleep(DELAY_TIME)
+
+    # Check that the downvote button is clicked
+    downvote = locate_element(driver, by_xpath="//span[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('downvote') + 1) = 'downvote']")
+    assert "hover:bg-opacity-30" in downvote.get_attribute("class"), "Downvote css not changed"
+
+    print("Downvoted subfeed test successful")
+
+    # goto_myprofile(driver)
 
 def random_post(driver) -> str:
     '''
@@ -270,5 +269,7 @@ def my_profile(driver) -> None:
     # test_hidden(driver)
 
     test_upvoted(driver)
+
+    test_downvoted(driver)
 
     thread.sleep(DELAY_TIME)
