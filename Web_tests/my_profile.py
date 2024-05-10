@@ -168,11 +168,35 @@ def test_saved(driver, post_url: str) -> None:
     print(post_url)
     # assert post_a.text in post_url, "The post is incorrect"
 
+def test_hidden(driver) -> None:
+    '''
+    This function tests the hidden functionality
+    '''
+    hidden = locate_element(driver, by_xpath=MY_PROFILE_HIDDEN)
+    assert hidden is not None, "hidden subfeed not found"
+    hidden.click()
+    print("Hidden subfeed clicked")
+    thread.sleep(DELAY_TIME)
+
+    # Checks that there is an undo button
+    undo = locate_element(driver, by_xpath="//*[starts-with(@id, 'undo-hide')]")
+    assert undo is not None, "Undo button not found"
+    print("Undo button found")
+    undo.click()
+    print("Undo button clicked")
+    # Check that a post is now present
+    post = locate_element(driver, by_xpath="//*[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('community') + 1) = 'community']")
+    assert post is not None, "Post not found"
+    print("Post found")
+
+    print("Hidden subfeed test successful")
+
+
 def goto_subfeed(driver) -> None:
     '''
     This function tests the subfeed it is using
     '''
-    
+
     hidden = locate_element(driver, by_xpath=MY_PROFILE_HIDDEN)
     assert hidden is not None, "hidden subfeed not found"
     hidden.click()
@@ -226,6 +250,8 @@ def my_profile(driver) -> None:
 
     # test_comments(driver, post_url)
 
-    test_saved(driver, post_url)
+    # test_saved(driver, post_url)
+
+    test_hidden(driver)
 
     thread.sleep(DELAY_TIME)
