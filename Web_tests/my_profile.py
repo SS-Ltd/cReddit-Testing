@@ -299,6 +299,11 @@ def my_profile(driver) -> None:
 
     # test_downvoted(driver)
 
-    insert_picture(driver)
+    # insert_picture(driver)
+
+    locate_element(driver, by_xpath="//div[@id='right-sidebar']/div/div[2]/ul/li/div/span[2]/span/a/span/span").click()
+    assert "settings" in driver.current_url, "Not in settings page"
+    print("Redirect successful from right sidebar to settings page")
+    driver.back()
 
     thread.sleep(DELAY_TIME)
