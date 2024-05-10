@@ -12,8 +12,8 @@ from google_login import google_login
 from Registration.sign_up import signup
 from helper_functions import locate_element
 from right_side_bar import test_right_side_bar
-from messages import messages
-from comments import comment
+from Community.community import community
+from Community.create_community import create_community
 from Registration.login import login 
 # Prepare the log files
 delete_all_files_content()
@@ -32,13 +32,13 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "bo
 thread.sleep(DELAY_TIME)
 # login(driver)
 # Login
+login(driver)
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
 locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Curt37")
 locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 thread.sleep(DELAY_TIME)
 thread.sleep(DELAY_TIME)
-messages(driver)
 # test_right_side_bar(driver)
 # search(driver)
 # Wait for the site to load
