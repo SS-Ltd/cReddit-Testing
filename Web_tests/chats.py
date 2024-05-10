@@ -8,10 +8,15 @@ from constants import DELAY_TIME, SITE_NAME
 from helper_functions import locate_element
 from paths import NAVBAR_CHAT, LANDING_CREATE_CHANNEL, ADD_CHAT
 from paths import CHAT_SEARCHBAR_INPUT, CHAT_SEARCHBAR_USER, CHAT_CREATE_CHAT
-from paths import CHAT_INPUT_TEXT, CHAT_SEND_MESSAGE
+from paths import CHAT_INPUT_TEXT, CHAT_SEND_MESSAGE, CHAT_GROUP_INPUT
 
 usernames = ['chat10', 'chat11', 'chat12', 'chat13', 'chat14', 'chat15', 'chat16', 'chat17', 'chat18', 'chat19']
 password = 'ABcd1234'
+
+def send_keys_slowly(element, text, delay=0.1):
+    for character in text:
+        element.send_keys(character)
+        thread.sleep(delay)
 
 def logout(driver: webdriver) -> None:
     '''
@@ -58,7 +63,7 @@ def select_a_chat_thread(driver: webdriver, user: str) -> str:
         print(f"Creating a chat with user: {random_user}")
         input_field = locate_element(driver, by_id=CHAT_SEARCHBAR_INPUT)
         input_field.click()
-        input_field.send_keys(random_user)
+        send_keys_slowly(input_field, random_user)
         thread.sleep(DELAY_TIME)
         locate_element(driver, by_id=CHAT_SEARCHBAR_USER).click()
         locate_element(driver, by_id=CHAT_CREATE_CHAT).click()
@@ -222,6 +227,128 @@ def personal_chat(driver: webdriver) -> None:
     # Check if the message is received
     assert check_receive(driver, sent_message, username), "Reply not received"
 
+def create_group_chat(driver: webdriver, user2: str, user3: str, grpname: str) -> bool:
+    '''
+    This function creates a group chat with 3 users
+    '''
+
+    # Click on the add chat button
+    locate_element(driver, by_id=ADD_CHAT).click()
+    print(f"Creating a group chat with users: {user2}, {user3}")
+    input_field = locate_element(driver, by_id=CHAT_SEARCHBAR_INPUT)
+    input_field.click()
+    input_field.clear()
+    send_keys_slowly(input_field, user2)
+    thread.sleep(DELAY_TIME)
+    locate_element(driver, by_id=CHAT_SEARCHBAR_USER).click()
+    thread.sleep(DELAY_TIME)
+    input_field = locate_element(driver, by_id=CHAT_SEARCHBAR_INPUT)
+    input_field.click()
+    input_field.clear()
+    send_keys_slowly(input_field, user3)
+    thread.sleep(DELAY_TIME)
+    locate_element(driver, by_id=CHAT_SEARCHBAR_USER).click()
+    thread.sleep(DELAY_TIME)
+    input_field = locate_element(driver, by_id=CHAT_GROUP_INPUT)
+    input_field.send_keys(grpname)
+    locate_element(driver, by_id=CHAT_CREATE_CHAT).click()
+    thread.sleep(DELAY_TIME)
+    # Check that it has been created
+    chat_threads = driver.find_elements(By.CSS_SELECTOR, "[data-testid='open-threads']")
+    chat_threads.pop(0)
+    for chat_thread in chat_threads:
+        # Get username from the first paragraph with class "text-white"
+        groupname_element = locate_element(chat_thread, by_css="p.text-white.text-sm")
+        groupname = groupname_element.text
+
+        # Get timestamp from the second paragraph with class "text-gray-500"
+        timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
+        timestamp = timestamp_element.text
+
+        # Print the extracted information for each chat thread
+        print(f"Groupname/Username: {groupname}")
+        print(f"Timestamp: {timestamp}")
+        print("-" * 30)
+
+        if groupname == grpname and "a few seconds ago" in timestamp:
+            print("Group chat created successfully")
+            chat_thread.click()
+            return True
+    print("Group chat not created")
+    return False
+    
+def group_chat(driver: webdriver) -> None:
+    '''
+    This function tests the group chat functionality
+    '''
+
+    user1 = random.choice(usernames)
+    user2 = random.choice(usernames)
+    while user1 == user2:
+        user2 = random.choice(usernames)
+    user3 = random.choice(usernames)
+    while user3 == user2 or user3 == user1:
+        user3 = random.choice(usernames)
+    
+    print(f"Logging in with username: {user1}")
+    login(driver, user1)
+
+    goto_chat_page(driver)
+
+    # Create a group chat with user2 and user3
+    group_name = 'Discord1'
+    assert create_group_chat(driver, user2, user3, group_name), "Group chat not created"
+
+    # Send a message in the group chat
+    sent_message = send_a_message(driver, "Hello, how are you?")
+    assert sent_message is not None, "Message not sent"
+
+    # Logout
+    driver.get(SITE_NAME)
+    logout(driver)
+
+    # Login with the user2
+    print(f"Logging in with username: {user2}")
+    login(driver, user2)
+    goto_chat_page(driver)
+
+    # Check if the message is received
+    assert check_receive(driver, sent_message, group_name), "Message not received"
+
+    # Reply back to the message
+    sent_message = send_a_message(driver, "I am fine, thank you!")
+    assert sent_message is not None, "Message not sent"
+
+    # Logout
+    driver.get(SITE_NAME)
+    logout(driver)
+
+    # Login with the user3
+    print(f"Logging in with username: {user3}")
+    login(driver, user3)
+    goto_chat_page(driver)
+
+    # Check if the message is received
+    assert check_receive(driver, sent_message, group_name), "Reply not received"
+
+    # Reply back to the message
+    sent_message = send_a_message(driver, "I am glad you are both fine!")
+    assert sent_message is not None, "Message not sent"
+
+    # Logout
+    driver.get(SITE_NAME)
+    logout(driver)
+
+    # Login with the user1
+    print(f"Logging in with username: {user1}")
+    login(driver, user1)
+    goto_chat_page(driver)
+
+    # Check if the message is received
+    assert check_receive(driver, sent_message, group_name), "Reply not received"
+
+    print("Group chat functionality is working fine")
+
 
 def chats(driver: webdriver) -> None:
     '''
@@ -232,5 +359,7 @@ def chats(driver: webdriver) -> None:
     logout(driver)
 
     personal_chat(driver)
+
+    # group_chat(driver)
 
     print("Chatting functionality is working fine")
