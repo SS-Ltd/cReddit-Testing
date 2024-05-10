@@ -44,35 +44,15 @@ def goto_chat_page(driver: webdriver) -> None:
     thread.sleep(DELAY_TIME)
     assert 'chat' in driver.current_url, "Chat button is not working"
 
-def select_a_chat_thread(driver: webdriver, user: str) -> str:
+def check_chat_exists(driver: webdriver, chat_name=None, chat_message=None, chat_timestamp=None) -> bool:
     '''
-    This function selects a random chat thread, or creates one if none exist
-    It returns the username of the selected chat thread
+    This function checks whether a chat exists inside the chat threads
+    If a message or timestamp are provided, check that they match
     '''
-
-    # Pick a random user to create a chat with
-    random_user = random.choice(usernames)
-    while random_user == user:
-        random_user = random.choice(usernames)
-    # Wait for the element to load (adjust timeout if needed)
+    print(f"Checking if chat thread exists with name: {chat_name}, message: {chat_message}, timestamp: {chat_timestamp}")
     chat_threads = driver.find_elements(By.CSS_SELECTOR, "[data-testid='open-threads']")
     if len(chat_threads) == 1:
-        print("No chat threads found, creating a new one")
-        # Create a new chat thread with another user
-        locate_element(driver, by_id=LANDING_CREATE_CHANNEL).click()
-        print(f"Creating a chat with user: {random_user}")
-        input_field = locate_element(driver, by_id=CHAT_SEARCHBAR_INPUT)
-        input_field.click()
-        send_keys_slowly(input_field, random_user)
-        thread.sleep(DELAY_TIME)
-        locate_element(driver, by_id=CHAT_SEARCHBAR_USER).click()
-        locate_element(driver, by_id=CHAT_CREATE_CHAT).click()
-        thread.sleep(DELAY_TIME)
-        # Check if the chat thread is created
-        chat_threads = driver.find_elements(By.CSS_SELECTOR, "[data-testid='open-threads']")
-        if len(chat_threads) == 1:
-            print("Chat thread was not created")
-            return None
+        return False
     chat_threads.pop(0)
     for chat_thread in chat_threads:
         # Get username from the first paragraph with class "text-white"
@@ -87,21 +67,44 @@ def select_a_chat_thread(driver: webdriver, user: str) -> str:
         timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
         timestamp = timestamp_element.text
 
+        # If message is longer than 20 chars, '...' appears at the end, remove it
+        if len(message) > 20:
+            message = message[:-3]
+
         # Print the extracted information for each chat thread
         print(f"Username: {username}")
         print(f"Message: {message}")
         print(f"Timestamp: {timestamp}")
         print("-" * 30)  # Separator for better readability
 
-    # Click on a random thread from chat_threads and see what happens
-    random_chat_thread = random.choice(chat_threads)
-    # username of the chat thread
-    username_element = locate_element(random_chat_thread, by_css="p.text-white.text-sm")
-    username = username_element.text
-    print(f"Selecting chat thread with user: {username}")
-    random_chat_thread.click()
-    thread.sleep(DELAY_TIME)
-    return username
+        if (chat_name is None or chat_name == username) and (chat_message is None or message in chat_message) and (chat_timestamp is None or timestamp in chat_timestamp):
+            print("Chat thread found")
+            chat_thread.click()
+            return True
+    print("Chat thread not found")
+    return False
+
+def select_a_chat_thread(driver: webdriver, user1: str, user2: str) -> str:
+    '''
+    This function selects a random chat thread, or creates one if none exist
+    It returns the username of the selected chat thread
+    '''
+    print("User2 is : ", user2)
+    if not check_chat_exists(driver, chat_name=user2):
+        # Create a new chat thread with another user
+        locate_element(driver, by_id=LANDING_CREATE_CHANNEL).click()
+        print(f"Creating a chat with user: {user2}")
+        input_field = locate_element(driver, by_id=CHAT_SEARCHBAR_INPUT)
+        input_field.click()
+        send_keys_slowly(input_field, user2)
+        thread.sleep(DELAY_TIME)
+        locate_element(driver, by_id=CHAT_SEARCHBAR_USER).click()
+        locate_element(driver, by_id=CHAT_CREATE_CHAT).click()
+        thread.sleep(DELAY_TIME)
+    if check_chat_exists(driver, chat_name=user2):
+        return user2
+    print("Chat thread not found")
+    return None
 
 def send_a_message(driver: webdriver, msg: str) -> str:
     '''
@@ -119,28 +122,9 @@ def send_a_message(driver: webdriver, msg: str) -> str:
     thread.sleep(DELAY_TIME)
     driver.refresh()
     thread.sleep(DELAY_TIME)
-    chat_threads = driver.find_elements(By.CSS_SELECTOR, "[data-testid='open-threads']")
-    chat_threads.pop(0)
-    for chat_thread in chat_threads:
-        # Get message from the second paragraph with class "text-gray-400"
-        message_element = locate_element(chat_thread, by_css="p.text-gray-400.text-sm")
-        message = message_element.text
-        # Get timestamp from the second paragraph with class "text-gray-500"
-        timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
-        timestamp = timestamp_element.text
-
-        # If message is longer than 20 chars, '...' appears at the end, remove it
-        if len(message) > 20:
-            message = message[:-3]
-
-        # Print the extracted information for each chat thread
-        print(f"Message: {message}")
-        print(f"Timestamp: {timestamp}")
-        print("-" * 30)
-
-        if message in msg and "a few seconds ago" in timestamp:
-            print("Message sent successfully")
-            return message
+    if check_chat_exists(driver, chat_message=msg, chat_timestamp="a few seconds ago"):
+        print("Message sent successfully")
+        return msg
     print("Message not sent")
     return None
 
@@ -148,35 +132,9 @@ def check_receive(driver: webdriver, sent_message: str, sent_user: str) -> bool:
     '''
     This function checks the chat thread for a message from a specific user with a specific text
     '''
-    chat_threads = driver.find_elements(By.CSS_SELECTOR, "[data-testid='open-threads']")
-    chat_threads.pop(0)
-    for chat_thread in chat_threads:
-        # Get username from the first paragraph with class "text-white"
-        username_element = locate_element(chat_thread, by_css="p.text-white.text-sm")
-        username = username_element.text
-
-        # Get message from the second paragraph with class "text-gray-400"
-        message_element = locate_element(chat_thread, by_css="p.text-gray-400.text-sm")
-        message = message_element.text
-
-        # Get timestamp from the second paragraph with class "text-gray-500"
-        timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
-        timestamp = timestamp_element.text
-
-        # If message is longer than 20 chars, '...' appears at the end, remove it
-        if len(message) > 20:
-            message = message[:-3]
-
-        # Print the extracted information for each chat thread
-        print(f"Username: {username}")
-        print(f"Message: {message}")
-        print(f"Timestamp: {timestamp}")
-        print("-" * 30)
-
-        if username == sent_user and message in sent_message and "a few seconds ago" in timestamp:
-            print("Message received successfully")
-            chat_thread.click()
-            return True
+    if check_chat_exists(driver, chat_name=sent_user, chat_message=sent_message, chat_timestamp="a few seconds ago"):
+        print("Message received successfully")
+        return True
     print("Message not received")
     return False
 
@@ -185,14 +143,17 @@ def personal_chat(driver: webdriver) -> None:
     This function tests the chat between 2 users functionality
     '''
     # Login with one of our test users
-    temp_username = random.choice(usernames)
-    print(f"Logging in with username: {temp_username}")
-    login(driver, temp_username)
+    user1 = random.choice(usernames)
+    print(f"Logging in with username: {user1}")
+    login(driver, user1)
 
     goto_chat_page(driver)
 
     # Select a chat thread
-    username = select_a_chat_thread(driver, temp_username)
+    user2 = random.choice(usernames)
+    while user1 == user2:
+        user2 = random.choice(usernames)
+    username = select_a_chat_thread(driver, user1, user2)
     assert username is not None, "Chat thread not found"
 
     # Send a message in the chat thread
@@ -209,7 +170,7 @@ def personal_chat(driver: webdriver) -> None:
     goto_chat_page(driver)
 
     # Check if the message is received
-    assert check_receive(driver, sent_message, temp_username), "Message not received"
+    assert check_receive(driver, sent_message, user1), "Message not received"
 
     # Reply back to the message
     sent_message = send_a_message(driver, "I am fine, thank you!")
@@ -220,12 +181,15 @@ def personal_chat(driver: webdriver) -> None:
     logout(driver)
 
     # Login with the other user
-    print(f"Logging in with username: {temp_username}")
-    login(driver, temp_username)
+    print(f"Logging in with username: {user1}")
+    login(driver, user1)
     goto_chat_page(driver)
 
     # Check if the message is received
     assert check_receive(driver, sent_message, username), "Reply not received"
+
+    print("Personal chat functionality is working fine")
+
 
 def create_group_chat(driver: webdriver, user2: str, user3: str, grpname: str) -> bool:
     '''
@@ -254,26 +218,10 @@ def create_group_chat(driver: webdriver, user2: str, user3: str, grpname: str) -
     locate_element(driver, by_id=CHAT_CREATE_CHAT).click()
     thread.sleep(DELAY_TIME)
     # Check that it has been created
-    chat_threads = driver.find_elements(By.CSS_SELECTOR, "[data-testid='open-threads']")
-    chat_threads.pop(0)
-    for chat_thread in chat_threads:
-        # Get username from the first paragraph with class "text-white"
-        groupname_element = locate_element(chat_thread, by_css="p.text-white.text-sm")
-        groupname = groupname_element.text
-
-        # Get timestamp from the second paragraph with class "text-gray-500"
-        timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
-        timestamp = timestamp_element.text
-
-        # Print the extracted information for each chat thread
-        print(f"Groupname/Username: {groupname}")
-        print(f"Timestamp: {timestamp}")
-        print("-" * 30)
-
-        if groupname == grpname and "a few seconds ago" in timestamp:
-            print("Group chat created successfully")
-            chat_thread.click()
-            return True
+    
+    if check_chat_exists(driver, chat_name=grpname, chat_timestamp="a few seconds ago"):
+        print("Group chat created successfully")
+        return True
     print("Group chat not created")
     return False
     
@@ -296,7 +244,8 @@ def group_chat(driver: webdriver) -> None:
     goto_chat_page(driver)
 
     # Create a group chat with user2 and user3
-    group_name = 'Discord1'
+    # Set the group name with Discord + the last 2 characters of each user
+    group_name = "Discord" + user1[-2:] + user2[-2:] + user3[-2:]
     assert create_group_chat(driver, user2, user3, group_name), "Group chat not created"
 
     # Send a message in the group chat
@@ -356,10 +305,15 @@ def chats(driver: webdriver) -> None:
     '''
 
     # Logout if already logged in
+    driver.get(SITE_NAME)
     logout(driver)
 
     personal_chat(driver)
+    
+    # Logout if already logged in
+    driver.get(SITE_NAME)
+    logout(driver)
 
-    # group_chat(driver)
+    group_chat(driver)
 
     print("Chatting functionality is working fine")
