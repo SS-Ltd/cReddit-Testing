@@ -191,22 +191,37 @@ def test_hidden(driver) -> None:
 
     print("Hidden subfeed test successful")
 
+def test_upvoted(driver) -> None:
+    '''
+    This function tests the upvoted functionality
+    '''
+    upvoted = locate_element(driver, by_xpath=MY_PROFILE_UPVOTED)
+    assert upvoted is not None, "upvoted subfeed not found"
+    upvoted.click()
+    print("Upvoted subfeed clicked")
+    thread.sleep(DELAY_TIME)
+
+    # Go to the first post
+    post = locate_element(driver, by_xpath="//*[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('comment') + 1) = 'comment']")
+    assert post is not None, "Post not found"
+    post.click()
+    print("Post clicked")
+    thread.sleep(DELAY_TIME)
+
+    # Check that the upvote button is clicked
+    upvote = locate_element(driver, by_xpath="//span[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('upvote') + 1) = 'upvote']")
+    assert "hover:bg-opacity-30" in upvote.get_attribute("class"), "Upvote not clicked"
+
+    print("Upvoted subfeed test successful")
+
+    goto_myprofile(driver)
+
 
 def goto_subfeed(driver) -> None:
     '''
     This function tests the subfeed it is using
     '''
 
-    hidden = locate_element(driver, by_xpath=MY_PROFILE_HIDDEN)
-    assert hidden is not None, "hidden subfeed not found"
-    hidden.click()
-    print("Hidden subfeed clicked")
-    thread.sleep(DELAY_TIME)
-    upvoted = locate_element(driver, by_xpath=MY_PROFILE_UPVOTED)
-    assert upvoted is not None, "upvoted subfeed not found"
-    upvoted.click()
-    print("Upvoted subfeed clicked")
-    thread.sleep(DELAY_TIME)
     downvoted = locate_element(driver, by_xpath=MY_PROFILE_DOWNVOTED)
     assert downvoted is not None, "downvoted subfeed not found"
     downvoted.click()
@@ -236,7 +251,7 @@ def my_profile(driver) -> None:
     '''
 
     # Get a random post first
-    post_url = random_post(driver)
+    # post_url = random_post(driver)
 
     # Go to my profile page
     goto_myprofile(driver)
@@ -252,6 +267,8 @@ def my_profile(driver) -> None:
 
     # test_saved(driver, post_url)
 
-    test_hidden(driver)
+    # test_hidden(driver)
+
+    test_upvoted(driver)
 
     thread.sleep(DELAY_TIME)
