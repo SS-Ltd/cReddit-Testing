@@ -25,8 +25,8 @@ def create_community(driver) -> None:
     '''
     This function tests the create community functionality of the website
     '''
-    create_community_xpaths = '//*[@id="root"]/div/div[3]/div/div[1]/div/div[6]/div[1]/span[2]'
-    locate_element(driver, by_xpath=create_community_xpaths).click()
+    create_community_id = 'sidebar-create-community-icon'
+    locate_element(driver, by_id=create_community_id).click()
     thread.sleep(SEE_TIME)
     assert locate_element(driver, by_id="community-name"), report_fail("The community name textbox was not found")
     #duplicate community name
@@ -46,7 +46,7 @@ def create_community(driver) -> None:
     thread.sleep(SEE_TIME)
     
     #check the cancel button 
-    locate_element(driver, by_xpath=create_community_xpaths).click()
+    locate_element(driver, by_id=create_community_id).click()
     thread.sleep(SEE_TIME)
     
     assert locate_element(driver, by_id="cancel-create-community") , report_fail("The cancel button was not found")
@@ -54,7 +54,7 @@ def create_community(driver) -> None:
     thread.sleep(SEE_TIME)
 
     #check the create community correct senario
-    locate_element(driver, by_xpath=create_community_xpaths).click() 
+    locate_element(driver, by_id=create_community_id).click() 
     thread.sleep(SEE_TIME)
 
     community_name = generate_new_community_name()
