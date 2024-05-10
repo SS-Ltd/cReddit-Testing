@@ -23,7 +23,7 @@ def home_page(driver) -> None:
     # settings(driver)
 
     # TEST 3: Test the create post functionality
-    # create_post(driver)
+    create_post(driver)
 
     # TEST 4: Test the Left SideBar
     # left_sidebar(driver)
@@ -38,6 +38,6 @@ def home_page(driver) -> None:
     # my_profile(driver)
 
     # TEST 8: Chats
-    chats(driver)
+    # chats(driver)
 
     write_to_all_files("Home page test completed")
