@@ -74,7 +74,10 @@ MY_PROFILE_DOWNVOTED = "//div[@id='view-profile']/div/div/div/main/div[2]/a[7]/s
 
 # Create Post
 CREATE_POST_RANDOM_COMMUNITY = '//*[@id="create_post_community_dropdown_menu"]/ul[2]/li[1]/div'                     # xpath
-CREATE_POST_BODY = '//*[@id="root"]/div/div[3]/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div'               # xpath
+CREATE_POST_BODY = "//div[@id='root']/div/div[3]/div/div[3]/div[2]/div[2]/div/div[2]/div/p"                         # xpath
+CREATE_POST_POST = '//*[@id="root"]/div/div[3]/div[1]/div[3]/div[3]/div'                                             # xpath
+CREATE_POST_LINK = 'type_link'
+CREATE_POST_URL = 'url_content'
 
 # Settings
 SETTINGS_PRIVACY_ADD_BLOCKED_USERS = '//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[1]/button'                   # xpath

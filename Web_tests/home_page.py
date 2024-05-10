@@ -24,10 +24,10 @@ def home_page(driver) -> None:
     # settings(driver)
 
     # TEST 3: Create a community
-    create_community(driver)
+    # create_community(driver)
 
     # TEST 4: Test the create post functionality
-    # create_post(driver)
+    create_post(driver)
 
     # TEST 5: Test the Left SideBar
     # left_sidebar(driver)
