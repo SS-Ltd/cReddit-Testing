@@ -10,6 +10,7 @@ from left_sidebar import left_sidebar
 from post import post
 from profile import profile
 from my_profile import my_profile
+from chats import chats
 
 def home_page(driver) -> None:
     '''
@@ -34,6 +35,9 @@ def home_page(driver) -> None:
     # profile(driver)
 
     # TEST 7: Test my profile page
-    my_profile(driver)
+    # my_profile(driver)
+
+    # TEST 8: Chats
+    chats(driver)
 
     write_to_all_files("Home page test completed")
