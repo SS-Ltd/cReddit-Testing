@@ -45,7 +45,7 @@ LEFT_SIDE_BAR_COMMUNITY = 'sidebar_communities'                                 
 LEFT_SIDE_BAR_CREATE_COMMUNITY = "(//button[@id='sidebar-create-community-icon']/span[2])[3]"                       # xpath
 LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD = 'community-card'                                                              # id
 LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS = '//*[@id="card-content"]/div[1]/p'                                  # xpath
-LEFT_SIDE_BAR_COMMUNITY_RANDOM = "(//a[@id='sidebar_community_icon0'])[2]"                                          # xpath
+LEFT_SIDE_BAR_COMMUNITY_RANDOM = "(//div[@id='sidebar_community_icon0']/div/span)[3]"                               # xpath
 
 # Other User Profile Page
 PROFILE_USERNAME = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[1]/div[1]/div/p'                                  # xpath

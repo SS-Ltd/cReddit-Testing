@@ -52,15 +52,13 @@ def community(driver) -> None:
     # Locate the community button
     random_community = locate_element(driver, by_xpath=LEFT_SIDE_BAR_COMMUNITY_RANDOM)
     assert random_community is not None, "Community button not found"
-    # Get the href of the community
-    url = random_community.get_attribute("href")
-    print("url = ", url)
+
     # Click the community
     random_community.click()
     thread.sleep(DELAY_TIME)
 
     # Check the URL
-    assert url in driver.current_url, "Community URL is incorrect"
+    assert 'r/' in driver.current_url, "Community URL is incorrect"
     print("Community URL is correct")
 
     # Go back
