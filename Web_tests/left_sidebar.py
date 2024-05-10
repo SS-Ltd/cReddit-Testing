@@ -10,63 +10,6 @@ from paths import LEFT_SIDE_BAR_RECENT, LEFT_SIDE_BAR_RECENT_COMMUNITY, LEFT_SID
 from paths import LEFT_SIDE_BAR_COMMUNITY, LEFT_SIDE_BAR_CREATE_COMMUNITY, LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD
 from paths import LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS, LEFT_SIDE_BAR_COMMUNITY_RANDOM
 
-def create_community(driver) -> None:
-    """
-    This function test the create community functionality
-    """
-
-    thread.sleep(DELAY_TIME)
-    # Locate the create community button
-    create = locate_element(driver, by_xpath=LEFT_SIDE_BAR_CREATE_COMMUNITY)
-    assert create is not None, "Create community button not found"
-    create.click()
-    thread.sleep(DELAY_TIME)
-
-    assert (
-        locate_element(
-            driver, by_id=LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD) is not None
-    ), "Create community page not displayed"
-
-    # Enter community name
-    community_name = locate_element(driver, by_id="community-name")
-    assert community_name is not None, "Community name not found"
-    community_name.send_keys("")
-    driver.execute_script("arguments[0].blur()", community_name)
-    assert (
-        locate_element(
-            driver, by_xpath='//*[@id="card-content"]/div[1]/div/div[2]/p')
-        is not None
-    ), "Empty field error not displayed"
-    community_name.send_keys("7aree2aInMunich")
-    assert (
-        locate_element(
-            driver, by_xpath='//*[@id="card-content"]/div[1]/div/div[2]/p')
-        is None
-    ), "Empty field error displayed"
-    locate_element(driver, by_id="Public-community-type").click()
-    # locate_element(driver, by_id="ismature-switch-btn").click()
-    locate_element(driver, by_id="name-create-community").click()
-    thread.sleep(DELAY_TIME)
-
-    # Check that the community already exists
-    assert (
-        locate_element(
-            driver, by_xpath=LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS
-        ) is not None
-    ), "Community already exists error not displayed"
-    community_name.clear()
-    community_name.send_keys("7aree2aInMunich3")
-    locate_element(driver, by_id="name-create-community").click()
-    thread.sleep(DELAY_TIME)
-
-    # Check that the community was created
-    assert (
-        "r/7aree2aInMunich3" in driver.current_url
-    ), "Community was not created"
-    print("Community created successfully")
-    thread.sleep(DELAY_TIME)
-    driver.back()
-    thread.sleep(DELAY_TIME)
 
 
 def recent(driver) -> None:
@@ -132,32 +75,32 @@ def left_sidebar(driver) -> None:
     # Locate the all button
     all = locate_element(driver, by_id=LEFT_SIDE_BAR_ALL)
     assert all is not None, "All button not found"
-    # all.click()
-    # thread.sleep(DELAY_TIME)
+    all.click()
+    thread.sleep(DELAY_TIME)
     # Check the URL
-    # assert "all" in driver.current_url, "All URL is incorrect"
+    assert "all" in driver.current_url, "All URL is incorrect"
     # Go Back
-    # driver.back()
-    # thread.sleep(DELAY_TIME)
+    driver.back()
+    thread.sleep(DELAY_TIME)
 
     # Locate the popular button
     popular = locate_element(driver, by_id=LEFT_SIDE_BAR_POPULAR)
     assert popular is not None, "Popular button not found"
-    # popular.click()
-    # thread.sleep(DELAY_TIME)
+    popular.click()
+    thread.sleep(DELAY_TIME)
     # Check the URL
-    # assert "popular" in driver.current_url, "Popular URL is incorrect"
+    assert "popular" in driver.current_url, "Popular URL is incorrect"
 
     # Locate the home button
     home = locate_element(driver, by_id=LEFT_SIDE_BAR_HOME)
     assert home is not None, "Home button not found"
-    # home.click()
-    # thread.sleep(DELAY_TIME)
+    home.click()
+    thread.sleep(DELAY_TIME)
     # Check the URL
-    # assert SITE_NAME == driver.current_url, "Home URL is incorrect"
+    assert SITE_NAME == driver.current_url, "Home URL is incorrect"
 
     # Check Recent Communities
-    # recent(driver)
+    recent(driver)
 
     # Locate the recent communities to minimize the thing
     dropdown_recent = locate_element(driver, by_id=LEFT_SIDE_BAR_RECENT)
@@ -165,11 +108,8 @@ def left_sidebar(driver) -> None:
     dropdown_recent.click()
     thread.sleep(1)
 
-    # Create a community
-    # create_community(driver)
-
     # Check Community
-    # community(driver)
+    community(driver)
 
     # Check Resources
     # check_hyperlink(

@@ -11,6 +11,7 @@ from post import post
 from profile import profile
 from my_profile import my_profile
 from chats import chats
+from create_community import create_community
 
 def home_page(driver) -> None:
     '''
@@ -22,22 +23,25 @@ def home_page(driver) -> None:
     # TEST 2: Test the settings page
     # settings(driver)
 
-    # TEST 3: Test the create post functionality
-    create_post(driver)
+    # TEST 3: Create a community
+    create_community(driver)
 
-    # TEST 4: Test the Left SideBar
+    # TEST 4: Test the create post functionality
+    # create_post(driver)
+
+    # TEST 5: Test the Left SideBar
     # left_sidebar(driver)
 
-    # TEST 5: TEST the post interactions
+    # TEST 6: TEST the post interactions
     # post(driver)
 
-    # TEST 6: Test a random user profile
+    # TEST 7: Test a random user profile
     # profile(driver)
 
-    # TEST 7: Test my profile page
+    # TEST 8: Test my profile page
     # my_profile(driver)
 
-    # TEST 8: Chats
+    # TEST 9: Chats
     # chats(driver)
 
     write_to_all_files("Home page test completed")

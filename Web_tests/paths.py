@@ -42,7 +42,7 @@ LEFT_SIDE_BAR_RECENT = 'sidebar_recent'                                         
 LEFT_SIDE_BAR_RECENT_COMMUNITY = 'sidebar_recent_icon0'                                                             # id
 LEFT_SIDE_BAR_RECENT_COMMUNITY_TEXT = '//*[@id="sidebar_recent_icon0"]/span[2]'                                     # xpath
 LEFT_SIDE_BAR_COMMUNITY = 'sidebar_communities'                                                                     # id
-LEFT_SIDE_BAR_CREATE_COMMUNITY = "(//button[@id='sidebar-create-community-icon'])[2]"                               # xpath
+LEFT_SIDE_BAR_CREATE_COMMUNITY = "(//button[@id='sidebar-create-community-icon']/span[2])[3]"                       # xpath
 LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD = 'community-card'                                                              # id
 LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS = '//*[@id="card-content"]/div[1]/p'                                  # xpath
 LEFT_SIDE_BAR_COMMUNITY_RANDOM = "(//a[@id='sidebar_community_icon0'])[2]"                                          # xpath
