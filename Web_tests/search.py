@@ -115,6 +115,7 @@ def search(driver):
 
     for search_result in search_results_2:
         locate_element(driver, by_id=search_result).click()
+        thread.sleep(DELAY_TIME)
         search_feed_has_items(driver)
         thread.sleep(DELAY_TIME)
 
