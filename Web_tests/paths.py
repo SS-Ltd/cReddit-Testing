@@ -99,3 +99,13 @@ SEARCH_FILTER_TIME_WEEK = "search_past_week"
 SEARCH_FILTER_TIME_TODAY = "search_past_24_hours"
 SEARCH_FILTER_TIME_NOW = "search_past_hour"
 SEARCH_CONTENT_MAP = "search_content_map"
+
+# Chats
+NAVBAR_CHAT = 'navbar_chat'                                                                                         # id
+LANDING_CREATE_CHANNEL = 'landing-creat-channel'                                                                    # id
+ADD_CHAT = 'add-chat'                                                                                               # id
+CHAT_SEARCHBAR_INPUT = 'chat_searchbar_input'                                                                       # id
+CHAT_SEARCHBAR_USER = 'search-user-row-0'                                                                           # id
+CHAT_CREATE_CHAT = 'btn-creat-channel'                                                                              # id
+CHAT_INPUT_TEXT = "//div[@id='root']/div/div[2]/div[2]/div/div[4]/div/div/div/div[2]"                               # xpath
+CHAT_SEND_MESSAGE="#send-message-icon > path"                                                                       # CSS
