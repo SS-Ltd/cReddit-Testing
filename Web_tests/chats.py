@@ -98,14 +98,14 @@ def select_a_chat_thread(driver: webdriver, user: str) -> str:
     thread.sleep(DELAY_TIME)
     return username
 
-def send_a_message(driver: webdriver) -> str:
+def send_a_message(driver: webdriver, msg: str) -> str:
     '''
     This function sends a message in the chat thread
     This function returns the sent message
     '''
     input_field = locate_element(driver, by_xpath=CHAT_INPUT_TEXT)
     assert input_field is not None, "Input field not found"
-    input_field.send_keys("Hello, how are you?")
+    input_field.send_keys(msg)
     button = locate_element(driver, by_css=CHAT_SEND_MESSAGE)
     assert button is not None, "Send button not found"
     button.click()
@@ -120,18 +120,26 @@ def send_a_message(driver: webdriver) -> str:
         # Get message from the second paragraph with class "text-gray-400"
         message_element = locate_element(chat_thread, by_css="p.text-gray-400.text-sm")
         message = message_element.text
+        # Get timestamp from the second paragraph with class "text-gray-500"
+        timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
+        timestamp = timestamp_element.text
+
+        # If message is longer than 20 chars, '...' appears at the end, remove it
+        if len(message) > 20:
+            message = message[:-3]
 
         # Print the extracted information for each chat thread
         print(f"Message: {message}")
+        print(f"Timestamp: {timestamp}")
         print("-" * 30)
 
-        if message == "Hello, how are you?":
+        if message in msg and "a few seconds ago" in timestamp:
             print("Message sent successfully")
             return message
     print("Message not sent")
     return None
 
-def check_receive(driver: webdriver, sent_message: str, sent_user: str) -> None:
+def check_receive(driver: webdriver, sent_message: str, sent_user: str) -> bool:
     '''
     This function checks the chat thread for a message from a specific user with a specific text
     '''
@@ -146,23 +154,31 @@ def check_receive(driver: webdriver, sent_message: str, sent_user: str) -> None:
         message_element = locate_element(chat_thread, by_css="p.text-gray-400.text-sm")
         message = message_element.text
 
+        # Get timestamp from the second paragraph with class "text-gray-500"
+        timestamp_element = locate_element(chat_thread, by_css="p.text-gray-500.text-xs")
+        timestamp = timestamp_element.text
+
+        # If message is longer than 20 chars, '...' appears at the end, remove it
+        if len(message) > 20:
+            message = message[:-3]
+
         # Print the extracted information for each chat thread
+        print(f"Username: {username}")
         print(f"Message: {message}")
+        print(f"Timestamp: {timestamp}")
         print("-" * 30)
 
-        if username == sent_user and message == sent_message:
+        if username == sent_user and message in sent_message and "a few seconds ago" in timestamp:
             print("Message received successfully")
-            return
+            chat_thread.click()
+            return True
     print("Message not received")
+    return False
 
-def chats(driver: webdriver) -> None:
+def personal_chat(driver: webdriver) -> None:
     '''
-    This is the main function of testing the chats functionality
+    This function tests the chat between 2 users functionality
     '''
-
-    # Logout if already logged in
-    logout(driver)
-
     # Login with one of our test users
     temp_username = random.choice(usernames)
     print(f"Logging in with username: {temp_username}")
@@ -175,7 +191,7 @@ def chats(driver: webdriver) -> None:
     assert username is not None, "Chat thread not found"
 
     # Send a message in the chat thread
-    sent_message = send_a_message(driver)
+    sent_message = send_a_message(driver, "Hello, how are you?")
     assert sent_message is not None, "Message not sent"
 
     # Logout
@@ -188,6 +204,33 @@ def chats(driver: webdriver) -> None:
     goto_chat_page(driver)
 
     # Check if the message is received
-    check_receive(driver, sent_message, temp_username)
+    assert check_receive(driver, sent_message, temp_username), "Message not received"
+
+    # Reply back to the message
+    sent_message = send_a_message(driver, "I am fine, thank you!")
+    assert sent_message is not None, "Message not sent"
+
+    # Logout
+    driver.get(SITE_NAME)
+    logout(driver)
+
+    # Login with the other user
+    print(f"Logging in with username: {temp_username}")
+    login(driver, temp_username)
+    goto_chat_page(driver)
+
+    # Check if the message is received
+    assert check_receive(driver, sent_message, username), "Reply not received"
+
+
+def chats(driver: webdriver) -> None:
+    '''
+    This is the main function of testing the chats functionality
+    '''
+
+    # Logout if already logged in
+    logout(driver)
+
+    personal_chat(driver)
 
     print("Chatting functionality is working fine")
