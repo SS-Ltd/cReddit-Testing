@@ -20,7 +20,7 @@ def element_dissapeared(driver, by_id=None, by_xpath=None) -> bool:
             )
     return None
 
-def locate_element(driver, *, by_id=None, by_xpath=None, by_classname=None) -> WebDriverWait:
+def locate_element(driver, *, by_id=None, by_xpath=None, by_classname=None, by_css=None) -> WebDriverWait:
     '''
     This function is used to locate an element
     '''
@@ -36,6 +36,10 @@ def locate_element(driver, *, by_id=None, by_xpath=None, by_classname=None) -> W
         if by_classname:
             return WebDriverWait(driver, DELAY_TIME).until(
                 EC.presence_of_element_located((By.CLASS_NAME, by_classname))
+                )
+        if by_css:
+            return WebDriverWait(driver, DELAY_TIME).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, by_css))
                 )
     except TimeoutException:
         return None
