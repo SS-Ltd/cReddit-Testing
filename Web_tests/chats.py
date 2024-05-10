@@ -59,6 +59,10 @@ def check_chat_exists(driver: webdriver, chat_name=None, chat_message=None, chat
         username_element = locate_element(chat_thread, by_css="p.text-white.text-sm")
         username = username_element.text
 
+        # If username is longer than 20 chars, '...' appears at the end, remove it
+        if len(username) > 20:
+            username = username[:-3]
+
         # Get message from the second paragraph with class "text-gray-400"
         message_element = locate_element(chat_thread, by_css="p.text-gray-400.text-sm")
         message = message_element.text
@@ -77,7 +81,7 @@ def check_chat_exists(driver: webdriver, chat_name=None, chat_message=None, chat
         print(f"Timestamp: {timestamp}")
         print("-" * 30)  # Separator for better readability
 
-        if (chat_name is None or chat_name == username) and (chat_message is None or message in chat_message) and (chat_timestamp is None or timestamp in chat_timestamp):
+        if (chat_name is None or username in chat_name) and (chat_message is None or message in chat_message) and (chat_timestamp is None or timestamp in chat_timestamp):
             print("Chat thread found")
             chat_thread.click()
             return True
