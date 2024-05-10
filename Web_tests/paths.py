@@ -42,10 +42,10 @@ LEFT_SIDE_BAR_RECENT = 'sidebar_recent'                                         
 LEFT_SIDE_BAR_RECENT_COMMUNITY = 'sidebar_recent_icon0'                                                             # id
 LEFT_SIDE_BAR_RECENT_COMMUNITY_TEXT = '//*[@id="sidebar_recent_icon0"]/span[2]'                                     # xpath
 LEFT_SIDE_BAR_COMMUNITY = 'sidebar_communities'                                                                     # id
-LEFT_SIDE_BAR_CREATE_COMMUNITY = "(//button[@id='sidebar-create-community-icon'])[2]"                               # xpath
+LEFT_SIDE_BAR_CREATE_COMMUNITY = "(//button[@id='sidebar-create-community-icon']/span[2])[3]"                       # xpath
 LEFT_SIDE_BAR_CREATE_COMMUNITY_CARD = 'community-card'                                                              # id
 LEFT_SIDE_BAR_CREATE_COMMUNITY_ALREADY_EXISTS = '//*[@id="card-content"]/div[1]/p'                                  # xpath
-LEFT_SIDE_BAR_COMMUNITY_RANDOM = "(//a[@id='sidebar_community_icon0'])[2]"                                          # xpath
+LEFT_SIDE_BAR_COMMUNITY_RANDOM = "(//div[@id='sidebar_community_icon0']/div/span)[3]"                               # xpath
 
 # Other User Profile Page
 PROFILE_USERNAME = '//*[@id="root"]/div/div[3]/div/div[3]/div/div[1]/div[1]/div/p'                                  # xpath
@@ -74,7 +74,10 @@ MY_PROFILE_DOWNVOTED = "//div[@id='view-profile']/div/div/div/main/div[2]/a[7]/s
 
 # Create Post
 CREATE_POST_RANDOM_COMMUNITY = '//*[@id="create_post_community_dropdown_menu"]/ul[2]/li[1]/div'                     # xpath
-CREATE_POST_BODY = '//*[@id="root"]/div/div[3]/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div'               # xpath
+CREATE_POST_BODY = "//div[@id='root']/div/div[3]/div/div[3]/div[2]/div[2]/div/div[2]/div/p"                         # xpath
+CREATE_POST_POST = '//*[@id="root"]/div/div[3]/div[1]/div[3]/div[3]/div'                                             # xpath
+CREATE_POST_LINK = 'type_link'
+CREATE_POST_URL = 'url_content'
 
 # Settings
 SETTINGS_PRIVACY_ADD_BLOCKED_USERS = '//*[@id="root"]/div/div[4]/div[3]/div/div[2]/div[1]/button'                   # xpath
