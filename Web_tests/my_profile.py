@@ -260,6 +260,17 @@ def insert_picture(driver) -> None:
     # Go back
     driver.back()
 
+    redirect = locate_element(driver, by_xpath="//div[@id='right-sidebar']/div/div/div/div/a")
+    assert redirect is not None, "Redirect not found"
+    redirect.click()
+    thread.sleep(DELAY_TIME)
+
+    # Check if the user is redirected to the settings page
+    assert "settings" in driver.current_url, "Not in settings page"
+
+    # Go back
+    driver.back()
+
 def my_profile(driver) -> None:
     '''
     This function is supposed to test my Profile page.
