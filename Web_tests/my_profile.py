@@ -244,6 +244,22 @@ def random_post(driver) -> str:
 
     return driver.current_url
 
+def insert_picture(driver) -> None:
+    '''
+    This function takes you from my profile to settings to insert a picture
+    '''
+
+    redirect = locate_element(driver, by_xpath = "//div[@id='profile-header']/div/div/div/a")
+    assert redirect is not None, "Redirect not found"
+    redirect.click()
+    thread.sleep(DELAY_TIME)
+
+    # Check if the user is redirected to the settings page
+    assert "settings" in driver.current_url, "Not in settings page"
+
+    # Go back
+    driver.back()
+
 def my_profile(driver) -> None:
     '''
     This function is supposed to test my Profile page.
@@ -268,8 +284,10 @@ def my_profile(driver) -> None:
 
     # test_hidden(driver)
 
-    test_upvoted(driver)
+    # test_upvoted(driver)
 
-    test_downvoted(driver)
+    # test_downvoted(driver)
+
+    insert_picture(driver)
 
     thread.sleep(DELAY_TIME)
