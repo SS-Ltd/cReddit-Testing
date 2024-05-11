@@ -322,3 +322,15 @@ MOD_APPROVED_USERS_ADD_USER_CLOSE = '//android.widget.FrameLayout[@resource-id="
 
 # Moderator Tools -> User Management -> Muted Users
 MOD_MUTED_USERS_INVITE = 'Invite'
+
+# Moderator Tools -> User Management -> Banned Users
+MOD_BANNED_USERS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+MOD_BANNED_USERS_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
+MOD_BANNED_USERS_REASON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
+MOD_BANNED_USERS_NOTE_MOD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[3]'
+MOD_BANNED_USERS_DAYS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[4]'
+MOD_BANNED_USERS_PERMANENT = '//android.widget.CheckBox'
+MOD_BANNED_USERS_NOTE_USER = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[5]'
+MOD_BANNED_USERS_BAN = 'Add'
+MOD_BANNED_USERS_CANCEL = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+

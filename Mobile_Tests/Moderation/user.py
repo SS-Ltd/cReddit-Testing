@@ -28,6 +28,15 @@ from Paths import MOD_APPROVED_USERS_ADD_USER_USERNAME
 from Paths import MOD_APPROVED_USERS_ADD_USER_ADD
 from Paths import MOD_APPROVED_USERS_ADD_USER_CLOSE
 from Paths import MOD_MUTED_USERS_INVITE
+from Paths import MOD_BANNED_USERS
+from Paths import MOD_BANNED_USERS_USERNAME
+from Paths import MOD_BANNED_USERS_REASON
+from Paths import MOD_BANNED_USERS_NOTE_MOD
+from Paths import MOD_BANNED_USERS_DAYS
+from Paths import MOD_BANNED_USERS_PERMANENT
+from Paths import MOD_BANNED_USERS_NOTE_USER
+from Paths import MOD_BANNED_USERS_BAN
+from Paths import MOD_BANNED_USERS_CANCEL
 
 
 def moderators(driver: webdriver) -> None:
@@ -162,6 +171,53 @@ def muted_users(driver: webdriver) -> None:
 
     print("Muted users functionalities checked")
 
+def banned_users(driver: webdriver) -> None:
+    '''
+    This function tests the banned users functionalities of the mobile application.
+    '''
+    # Click on the banned users
+    locate_element(driver, by_accessibility_id=MOD_TOOLS_BANNED_USERS).click()
+    print("Banned users clicked")
+
+    locate_element(driver, by_xpath=MOD_BANNED_USERS).click()
+    print("Banned clicked")
+    username = locate_element(driver, by_xpath=MOD_BANNED_USERS_USERNAME)
+    username.click()
+    username.send_keys("username")
+    end_text(driver)
+    print("Username entered")
+    reason = locate_element(driver, by_xpath=MOD_BANNED_USERS_REASON)
+    reason.click()
+    reason.send_keys("reason")
+    end_text(driver)
+    print("Reason entered")
+    note_mod = locate_element(driver, by_xpath=MOD_BANNED_USERS_NOTE_MOD)
+    note_mod.click()
+    note_mod.send_keys("note mod")
+    end_text(driver)
+    print("Note mod entered")
+    days = locate_element(driver, by_xpath=MOD_BANNED_USERS_DAYS)
+    days.click()
+    days.send_keys("7")
+    end_text(driver)
+    print("Days entered")
+    permanent = locate_element(driver, by_xpath=MOD_BANNED_USERS_PERMANENT)
+    permanent.click()
+    print("Permanent clicked")
+    note_user = locate_element(driver, by_xpath=MOD_BANNED_USERS_NOTE_USER)
+    note_user.click()
+    note_user.send_keys("note user")
+    end_text(driver)
+    print("Note user entered")
+    locate_element(driver, by_accessibility_id=MOD_BANNED_USERS_BAN).click()
+    print("Ban clicked")
+    locate_element(driver, by_xpath=MOD_BANNED_USERS_CANCEL).click()
+    print("Cancel clicked")
+
+    print("Banned users functionalities checked")
+    driver.back()
+
+
 def user_management(driver: webdriver) -> None:
     '''
     This function tests the user management functionalities of the mobile application.
@@ -171,6 +227,8 @@ def user_management(driver: webdriver) -> None:
 
     # approved_users(driver)
 
-    muted_users(driver)
+    # muted_users(driver)
+
+    banned_users(driver)
 
     print("User management functionalities checked")
