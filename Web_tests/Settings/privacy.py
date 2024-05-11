@@ -23,11 +23,11 @@ def users_block(driver: WebDriver) -> None:
     check_popup_notification(driver, False)
     thread.sleep(DELAY_TIME)
     input_field.clear()
-    input_field.send_keys('Hettie_Spinka')
+    input_field.send_keys('Chat0')
     locate_element(driver, by_xpath=SETTINGS_PRIVACY_ADD_BLOCKED_USERS).click()
     check_popup_notification(driver, True)
     # Check that the user has been added to the list of blocked users
-    users = driver.find_elements(By.XPATH, '//*[contains(text(), "Hettie_Spinka")]')
+    users = driver.find_elements(By.XPATH, '//*[contains(text(), "Chat0")]')
     print("users: \n", users)
     # check if users is not empty
     assert users, "User not found in blocked users list"
@@ -43,7 +43,7 @@ def users_block(driver: WebDriver) -> None:
         thread.sleep(DELAY_TIME)
 
     # Check that the user has been removed from the list of blocked users
-    users = driver.find_elements(By.XPATH, '//*[contains(text(), "Hettie_Spinka")]')
+    users = driver.find_elements(By.XPATH, '//*[contains(text(), "Chat0")]')
     assert not users, "User found in blocked users list"
 
 
@@ -61,11 +61,11 @@ def communities_mute(driver) -> None:
     check_popup_notification(driver, False)
     thread.sleep(DELAY_TIME)
     input_field.clear()
-    input_field.send_keys('apexlegends')
+    input_field.send_keys('Chat_Community0')
     locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[4]/div[1]/button').click()
     check_popup_notification(driver, True)
     # Check that the community has been added to the list of muted communities
-    communities = driver.find_elements(By.XPATH, '//*[contains(text(), "apexlegends")]')
+    communities = driver.find_elements(By.XPATH, '//*[contains(text(), "Chat_Community0")]')
     # check if communities is not empty
     assert communities is not None, "Community not found in muted communities list"
     for community in communities:
@@ -80,7 +80,7 @@ def communities_mute(driver) -> None:
         thread.sleep(DELAY_TIME)
 
     # Check that the community has been removed from the list of muted communities
-    communities = driver.find_elements(By.XPATH, '//*[contains(text(), "apexlegends")]')
+    communities = driver.find_elements(By.XPATH, '//*[contains(text(), "Chat_Community0")]')
     assert not communities, "Community found in muted communities list"
 
 def privacy(driver) -> None:

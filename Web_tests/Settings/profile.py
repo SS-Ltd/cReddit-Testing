@@ -79,7 +79,7 @@ def clear_history(driver) -> None:
     '''
     This function checks the Clear History functionality
     '''
-    button = locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[13]/div[2]/button')
+    button = locate_element(driver, by_xpath='//*[@id="root"]/div/div[4]/div[3]/div/div[12]/div[2]/button')
     assert button is not None, report_fail("Clear History button not found")
     driver.execute_script("arguments[0].scrollIntoView();", button)
     button.click()

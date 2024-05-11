@@ -12,7 +12,9 @@ from google_login import google_login
 from Registration.sign_up import signup
 from helper_functions import locate_element
 from right_side_bar import test_right_side_bar
-from search import search
+from Community.community import community
+from Community.create_community import create_community
+from Registration.login import login 
 # Prepare the log files
 delete_all_files_content()
 
@@ -26,25 +28,25 @@ print(driver.title)
 
 # Wait for the site to load
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-driver.maximize_window()
+
 thread.sleep(DELAY_TIME)
 # login(driver)
 # Login
+# login(driver)
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
-locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Peyton26")
+locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Curt37")
 locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")
 locate_element(driver, by_xpath='//*[@id="login_submit"]').click()
 thread.sleep(DELAY_TIME)
-# test_right_side_bar(driver)
-search(driver)
-# Wait for the site to load
 thread.sleep(DELAY_TIME)
+# test_right_side_bar(driver)
+# search(driver)
+# Wait for the site to load
+# thread.sleep(DELAY_TIME)
 # comment(driver)
 home_page(driver)
 # login(driver)
 #google_login(driver, "cReddit support center")
-# profile(driver)
-
 
 # write_run_time_statistics()
 driver.quit()

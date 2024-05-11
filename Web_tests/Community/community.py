@@ -14,12 +14,12 @@ def community(driver)->str:
     '''
     This function tests the community page of the website
     '''
-    community_link = "https://creddit.tech/r/Carlotta.Kreiger61"
+    community_link = "https://creddit.tech/r/thebesttester"
     driver.get(community_link)
     thread.sleep(SEE_TIME)
     thread.sleep(DELAY_TIME)
     print(locate_element(driver, by_id="community-header__info__community__name").text)
-    assert locate_element(driver, by_id="community-header__info__community__name").text == "r/Carlotta.Kreiger61", report_fail("The community name was not found")
+    assert locate_element(driver, by_id="community-header__info__community__name").text == "r/thebesttester", report_fail("The community name was not found")
     
     locate_element(driver, by_id="community-header__info__community__create-post__icon").click()
     thread.sleep(SEE_TIME)
@@ -39,6 +39,7 @@ def community(driver)->str:
     assert get_source.count("Joined") != source_after_click.count("Joined"), report_fail("The join button was not found")
 
     # Test the mute button
+    thread.sleep(SEE_TIME)
     get_source = driver.page_source
     locate_element(driver, by_id="community-header__info__community__mute__button").click()
     driver.refresh()

@@ -1,5 +1,5 @@
 '''
-This Module is supposed to test the Profile page of the website.
+This Module is supposed to test the Profile page of another user.
 '''
 
 from constants import DELAY_TIME, SITE_NAME
@@ -120,7 +120,7 @@ def test_feed(driver) -> None:
     '''
     # Locate the username and check that it contains the correct username
     username = locate_element(driver, by_xpath=PROFILE_USERNAME)
-    assert username.text == "u/Taya_Shanahan38", "The username is incorrect"
+    assert username.text == "u/Edwina54", "The username is incorrect"
 
     # Sort the content by new
     sort_feed(driver, "New")
@@ -140,7 +140,7 @@ def test_feed(driver) -> None:
     # Locate an element that contains mainfeed in its id
     post = locate_element(driver, by_xpath="//*[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('community') + 1) = 'community']")
     # Locate post/a/p and check that it is starts with "r/"
-    post_a = locate_element(post, by_xpath=".//a/p")
+    post_a = locate_element(post, by_xpath=".//div/p")
     print(post_a.text)
     assert post_a.text.startswith("r/"), "The post is incorrect"
     
@@ -155,7 +155,7 @@ def test_feed(driver) -> None:
     # Locate the div with id = 'mainfeed' and check that it contains a p tag in its descendents that contains the text "Taya_Shanahan38"
     comment_p = locate_element(driver, by_xpath=PROFILE_FIRST_COMMENT)
     print(comment_p.text)
-    assert "Taya_Shanahan38" in comment_p.text, "The comment is incorrect"
+    assert "Edwina54" in comment_p.text, "The comment is incorrect"
     thread.sleep(DELAY_TIME)
 
 
@@ -165,11 +165,11 @@ def profile(driver) -> None:
     '''
 
     # Go to a random user's profile
-    driver.get(SITE_NAME + "user/Taya_Shanahan38/")
+    driver.get(SITE_NAME + "user/Edwina54/")
     thread.sleep(DELAY_TIME)
 
     # Test1: Test the feed
-    # test_feed(driver)
+    test_feed(driver)
 
     # Test2: Test the user card
     test_usercard(driver)

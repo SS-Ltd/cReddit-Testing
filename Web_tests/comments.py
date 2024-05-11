@@ -182,18 +182,20 @@ def comment(driver):
     This function tests the comments feature of the mobile app.
     '''
     #goto post
+    thread.sleep(DELAY_TIME)
     post_comments = locate_element(driver,by_xpath='//*[contains(@id, "'+POST_COMMENTS+'")]')
     assert post_comments is not None, 'Post comments button not found'
     post_comments.click()
     thread.sleep(SEE_TIME)
     #locate comment
     create_comment(driver)
+    driver.refresh()
     thread.sleep(6)
     up_down_vote_comment(driver)
-    #edit_comment(driver)
+    edit_comment(driver)
     save_comment(driver)
     unsave_comment(driver)
-    #copy_comment(driver)
-    #delete_comment(driver)
-    #report_comment(driver)
+    copy_comment(driver)
+    delete_comment(driver)
+    report_comment(driver)
     share_comment(driver)
