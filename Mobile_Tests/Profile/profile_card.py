@@ -6,7 +6,7 @@ from my_imports import thread, Dict, Any
 from constants import DELAY_TIME
 from helper_functions import locate_element, end_text
 from Paths import (CREATE_YOUR_OWN_AVATAR, ABOUT_USER_BLOCK_ACCOUNT,ABOUT_USER_SEND_MESSAGE
-                   , ABOUT_USER_VIEW_PROFILE,POST_USERNAME,PROFILE_PAGE_ABOUT,PROFILE_PAGE_BACK)
+                   , ABOUT_USER_VIEW_PROFILE,POST_USERNAME,PROFILE_PAGE_ABOUT,PROFILE_PAGE_BACK,POST_COMMENTS)
 
 
 
@@ -16,7 +16,9 @@ def profile_card(driver):
     '''
     # Click on the profile name
     thread.sleep(2)
-    #locate_element(driver, by_id=POST_USERNAME).click() not working
+    locate_element(driver, by_id=POST_COMMENTS).click()
+    thread.sleep(2)
+    locate_element(driver, by_id=POST_USERNAME).click()
     thread.sleep(2)
     # Check the profile window
     view_profile = locate_element(driver, by_accessibility_id=ABOUT_USER_VIEW_PROFILE)

@@ -10,8 +10,7 @@ from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, NAVIGATION_BAR_H
                    , COMMENT_WRITE)
 from Paths import ALLOW_NOTIFICATIONS
 from home_page import home_page
-from Profile.profile_page import profile_page
-from Profile.profile_card import profile_card
+from Registration.login import login
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -48,6 +47,7 @@ username = locate_element(driver, by_xpath=START_USERNAME)
 username.click()
 thread.sleep(2)
 # username.clear()
+login(driver)
 username.send_keys("Curt37")
 
 password = locate_element(driver, by_xpath=START_PASSWORD)
@@ -59,8 +59,6 @@ end_text(driver)
 thread.sleep(2)
 locate_element(driver, by_accessibility_id=START_LOGIN).click()
 #locate_element(driver, by_id=POST_COMMENTS).click()
-profile_card(driver)
-profile_page(driver)
 
 
 # Verify that the login was successful
