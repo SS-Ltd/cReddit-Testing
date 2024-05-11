@@ -4,7 +4,7 @@ This file contains all the helper functions that are used throughout the project
 
 from my_imports import webdriver, WebDriverWait, EC, AppiumBy, thread
 from constants import DELAY_TIME
-
+from Paths import OPEN_RIGHT_SIDE_BAR,LOGOUT
 def locate_element(driver: webdriver, *, by_accessibility_id=None, by_xpath=None, by_class_name=None, by_id = None) -> WebDriverWait:
     '''
     This function locates an element on the page
@@ -75,3 +75,19 @@ def check_hyperlink(driver, hyperlink: str) -> None:
     # Swipe randomly
     driver.swipe(100, 1000, 100, 100, 200)
     thread.sleep(DELAY_TIME)
+
+def logout(driver,username):
+    '''
+    This function logs out the user
+    '''
+    # Click on the profile icon
+    profile_icon = locate_element(driver, by_accessibility_id=OPEN_RIGHT_SIDE_BAR)
+    profile_icon.click()
+    thread(DELAY_TIME)
+    # Click on the username button
+    username_button = locate_element(driver, by_accessibility_id="u/"+username)
+    username_button.click()
+    thread(DELAY_TIME)
+    # Click on the logout button
+    logout_button = locate_element(driver, by_accessibility_id=LOGOUT)
+    logout_button.click()
