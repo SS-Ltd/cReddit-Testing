@@ -32,7 +32,7 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "bo
 thread.sleep(DELAY_TIME)
 # login(driver)
 # Login
-login(driver)
+# login(driver)
 locate_element(driver, by_xpath='//*[@id="navbar_login_button"]').click()
 locate_element(driver, by_xpath='//*[@id="login_username"]').send_keys("Curt37")
 locate_element(driver, by_xpath='//*[@id="login_password"]').send_keys("1")

@@ -12,6 +12,7 @@ from other_profile import profile
 from my_profile import my_profile
 from chats import chats
 from create_community import create_community
+from notifications import notifications
 
 def home_page(driver) -> None:
     '''
@@ -42,6 +43,9 @@ def home_page(driver) -> None:
     # my_profile(driver)
 
     # TEST 9: Chats
-    chats(driver)
+    # chats(driver)
+
+    # TEST 10: Notifications
+    notifications(driver)
 
     write_to_all_files("Home page test completed")
