@@ -34,11 +34,11 @@ SIGNUP_GENDER_MAN = 'Man'                               #AID
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
 
 # Home page
-SEARCH_ICON = 'Open search'                                 #RID
-SEARCH_TEXT = 'search text'                                 #RID
-SEARCH_SEARCH_FOR = 'Search for'                            #AID
-SEARCH_RESULT = 'join or disjoin subreddit'                 #RID
-SEARCH_COMMUNNITY = 'Communities\nTab 2 of 5'               #AID
+SEARCH_ICON = 'Open search'                             #RID
+SEARCH_TEXT = 'search text'                             #RID
+SEARCH_SEARCH_FOR = 'Search for'                        #AID
+SEARCH_RESULT = 'join or disjoin subreddit'             #RID
+SEARCH_COMMUNNITY = 'Communities\nTab 2 of 5'           #AID
 
 
 # Custom Navigation Bar
@@ -46,11 +46,11 @@ NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
 NAVIGATION_BAR_CREATE_POST = 'Create\nTab 3 of 5'       #AID
 NAVIGATION_BAR_CHAT = 'Chat Tab 4 of 5'                 #AID
-NAVIGATION_BAR_INBOX = 'Inbox Tab 5 of 5'               #AID
+NAVIGATION_BAR_INBOX = 'Inbox Tab 5 of 5'               #AID contains
 
 # Profile Icon
 HOME_PAGE_PROFILE_ICON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[4]'
-
+OPEN_RIGHT_SIDE_BAR = 'Open right sidebar'              #RID
 # Within Profile Window
 PROFILE_WINDOW_PROFILE = 'My Profile'
 PROFILE_WINDOW_CREATE_COMMUNITY = 'Create a Community'  #AID
@@ -343,3 +343,23 @@ SEARCH_COMMUNITY_HEADER = '(//android.view.View[@content-desc="r/Chat_Community0
 SEARCH_PEOPLE_HEADER = '(//android.view.View[@content-desc="Velda"])[2]'
 SEARCH_BUTTON = 'Search for cha'
 
+# notifications
+NOTIFICATIONS = "Notifications Tab 1 of 2"
+MESSAGES = "Messages Tab 2 of 2"
+NOTIFICATIONS_RIGHT_THREE_DOTS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Button'
+NOTIFICATIONS_THREE_DOTS_LOCATION = [1250,530]
+NOTIFICATIONS_HIDE_NOTIFICATION = 'Hide this notification'
+NOTIFICATIONS_DISABLE_UPDATES = 'Disable updates from this community'
+NOTIFICATIONS_TURN_OFF_NOTIFICATION = 'Tun off this notification type'
+NOTIFICATIONS_MENU_CLOSE = 'Close'
+
+#messages
+MESSAGES_NEW_MESSAGE = 'New Message'                            #AID
+MESSAGES_MARK_ALL_READ = 'Mark all inbox tabs as read'          #AID
+MESSAGE_USERNAME = 'username'                                   #RID
+MESSAGES_SUBJECT = 'Subject'                                    #RID
+MESSAGES_MESSAGE = 'Message'                                    #RID
+MESSAGES_SEND    = 'Send'                                       #AID
+
+# logout
+LOGOUT = '//android.widget.Button'                              #xpath
