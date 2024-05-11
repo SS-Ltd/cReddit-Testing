@@ -319,3 +319,6 @@ MOD_APPROVED_USERS_ADD_USER = '//android.widget.FrameLayout[@resource-id="androi
 MOD_APPROVED_USERS_ADD_USER_USERNAME = '//android.widget.EditText'
 MOD_APPROVED_USERS_ADD_USER_ADD = 'Add'
 MOD_APPROVED_USERS_ADD_USER_CLOSE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+
+# Moderator Tools -> User Management -> Muted Users
+MOD_MUTED_USERS_INVITE = 'Invite'

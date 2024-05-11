@@ -27,6 +27,7 @@ from Paths import MOD_APPROVED_USERS_ADD_USER
 from Paths import MOD_APPROVED_USERS_ADD_USER_USERNAME
 from Paths import MOD_APPROVED_USERS_ADD_USER_ADD
 from Paths import MOD_APPROVED_USERS_ADD_USER_CLOSE
+from Paths import MOD_MUTED_USERS_INVITE
 
 
 def moderators(driver: webdriver) -> None:
@@ -121,14 +122,55 @@ def approved_users(driver: webdriver) -> None:
     print("Approved users functionalities checked")
     driver.back()
 
+def muted_users(driver: webdriver) -> None:
+    '''
+    This function tests the muted users functionalities of the mobile application.
+    '''
+    # Click on the muted users
+    locate_element(driver, by_accessibility_id=MOD_TOOLS_MUTED_USERS).click()
+    print("Muted users clicked")
+
+    locate_element(driver, by_xpath=MOD_APPROVED_USERS_ADD_USER).click()
+    print("Add user clicked")
+    username = locate_element(driver, by_xpath=MOD_APPROVED_USERS_ADD_USER_USERNAME)
+    username.click()
+    username.send_keys("username")
+    end_text(driver)
+    print("Username entered")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_FULL_PERMISSIONS).click()
+    print("Full permissions clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_ACCESS).click()
+    print("Access clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_MAIL).click()
+    print("Mail clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_CONFIG).click()
+    print("Config clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_POSTS).click()
+    print("Posts clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_FLAIR).click()
+    print("Flair clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_WIKI).click()
+    print("Wiki clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_CHAT_CONFIG).click()
+    print("Chat config clicked")
+    locate_element(driver, by_xpath=MOD_MODERATORS_ADD_MODERATOR_CHAT_OPERATOR).click()
+    print("Chat operator clicked")
+    locate_element(driver, by_accessibility_id=MOD_MUTED_USERS_INVITE).click()
+    print("Invite clicked")
+    locate_element(driver, by_xpath=MOD_APPROVED_USERS_ADD_USER_CLOSE).click()
+    print("Close clicked")
+
+    print("Muted users functionalities checked")
 
 def user_management(driver: webdriver) -> None:
     '''
     This function tests the user management functionalities of the mobile application.
     '''
-    
+
     # moderators(driver)
 
-    approved_users(driver)
+    # approved_users(driver)
+
+    muted_users(driver)
 
     print("User management functionalities checked")
