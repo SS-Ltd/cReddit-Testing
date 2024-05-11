@@ -9,6 +9,7 @@ from Paths import COMMUNITY_MOD_TOOLS
 from constants import DELAY_TIME
 from Moderation.general import general
 from Moderation.content import content
+from Moderation.user import user_management
 
 def goto_mod(driver: webdriver) -> None:
     '''
@@ -72,6 +73,11 @@ def mod(driver: webdriver) -> None:
     # general(driver)
 
     # Check the content functionalities of the mod tools
-    content(driver)
+    # content(driver)
+    # goto_mod(driver)
+
+    # Check the user management functionalities of the mod tools
+    user_management(driver)
+
 
     print("Moderation tools checked")

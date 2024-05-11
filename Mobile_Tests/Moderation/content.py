@@ -11,7 +11,8 @@ from Paths import QUEUES_REVIEW_NEEDS_REVIEW, QUEUES_REVIEW_REMOVED, QUEUES_REVI
 from Paths import QUEUES_PAC_POSTS_AND_COMMENTS, QUEUES_PAC_POSTS_ONLY, QUEUES_PAC_COMMENTS_ONLY
 from Paths import RULES_ADD_RULE, RULES_EDIT_RULE, RULES_DELETE_RULE, RULES_DONE_EDITING, RULES_RULE
 from Paths import RULES_ADD_RULE_TITLE, RULES_ADD_RULE_DESCRIPTION, RULES_ADD_RULE_REPORT, RULES_ADD_RULE_PAC, RULES_ADD_RULE_CO, RULES_ADD_RULE_PO, RULES_ADD_RULE_SAVE
-
+from Paths import SCHEDULED_POSTS_SCHEDULE_POST, SCHEDULED_POSTS_SCHEDULE
+from Paths import SCHEDULED_POSTS_TITLE
 
 def queues(driver: webdriver) -> None:
     '''
@@ -145,7 +146,15 @@ def scheduled_posts(driver: webdriver) -> None:
     '''
     This function tests the scheduled posts functionalities of the mobile application.
     '''
-    pass
+    locate_element(driver, by_accessibility_id=SCHEDULED_POSTS_SCHEDULE).click()
+    input_field = locate_element(driver, by_id=SCHEDULED_POSTS_TITLE)
+    input_field.click()
+    input_field.send_keys("Title")
+    end_text(driver)
+    locate_element(driver, by_accessibility_id=SCHEDULED_POSTS_SCHEDULE_POST).click()
+    print("Scheduled post created")
+
+
 
 def content(driver: webdriver) -> None:
     '''
