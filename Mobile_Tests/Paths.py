@@ -45,8 +45,8 @@ SEARCH_COMMUNNITY = 'Communities\nTab 2 of 5'           #AID
 NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
 NAVIGATION_BAR_CREATE_POST = 'Create\nTab 3 of 5'       #AID
-NAVIGATION_BAR_CHAT = 'Chat Tab 4 of 5'                 #AID
-NAVIGATION_BAR_INBOX = 'Inbox Tab 5 of 5'               #AID contains
+NAVIGATION_BAR_CHAT = 'Chat\nTab 4 of 5'                 #AID
+NAVIGATION_BAR_INBOX = '28\nInbox\nTab 5 of 5'            #AID contains
 
 # Profile Icon
 HOME_PAGE_PROFILE_ICON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[4]'
@@ -156,14 +156,15 @@ POST_MOD_ADJUST_CROUD_CONTROL = 'Adjust Croud Control' #RID out of scope for pro
 # Comments all resource IDS
 COMMENT_UPVOTE   = 'comment upvote'             #RID
 COMMENT_VOTES    = 'comment votes'              #RID        # Might not work
-COMMENT_DOWNVOTE = 'comment downvote'           #RID
+COMMENT_DOWNVOTE = 'comment //android.view.View[@content-desc="Now dsadada comment upvote comment votes 1 comment downvote"]/android.widget.Button[4]'           #RID
 COMMENT_OPTIONS  = 'comment options'            #RID
 COMMENT_REPLY    = 'comment reply'              #RID
 COMMENT_USERNAME = 'comment username'           #RID
-COMMENT_CONTENT  = 'comment content'            #RID
-COMMENT_CREATE   = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View'             #XPath
+COMMENT_CONTENT  = 'Your Comment'            #RID
+COMMENT_CREATE   = 'Add a comment'              #RID
 COMMENT_WRITE    = '//android.widget.EditText'
 COMMENT_POST = 'Post'                   #AID
+COMMENTS_BACK = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'                  #xpath
 #AIDS
 COMMENT_EDIT    = 'Edit comment'                            #AID
 COMMENT_SHARE   = 'Share'                                   #AID
@@ -363,3 +364,4 @@ MESSAGES_SEND    = 'Send'                                       #AID
 
 # logout
 LOGOUT = '//android.widget.Button'                              #xpath
+LAST_LOGOUT = 'Logout'                                          #AID

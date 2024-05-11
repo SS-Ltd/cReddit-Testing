@@ -11,7 +11,8 @@ from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, NAVIGATION_BAR_H
 from Paths import ALLOW_NOTIFICATIONS
 from home_page import home_page
 from Profile.profile_page import profile_page
-from Mobile_Tests.notifications_and_messages import notifications
+from Profile.profile_card import profile_card
+
 cap: Dict[str, Any] = {
     "platformName": "Android",
     "automationName": "UiAutomator2",
@@ -20,7 +21,8 @@ cap: Dict[str, Any] = {
     "appActivity": "com.example.reddit_clone.MainActivity",
     "language": "en",
     "locale": "US",
-    "appium:disableIdLocatorAutocompletion":True
+    "appium:disableIdLocatorAutocompletion":True,
+    "autoGrantPermissions": True
 }
 
 URL = "http://localhost:4724"
@@ -34,8 +36,9 @@ print(driver.current_activity)
 print("App launched")
 
 # Click allow notifications
-allow_notifications = locate_element(driver, by_id=ALLOW_NOTIFICATIONS)
-allow_notifications.click()
+thread.sleep(7)
+#allow_notifications = locate_element(driver, by_xpath=ALLOW_NOTIFICATIONS)
+#allow_notifications.click()
 
 # Test the login functionality
 #login(driver)
@@ -56,8 +59,8 @@ end_text(driver)
 thread.sleep(2)
 locate_element(driver, by_accessibility_id=START_LOGIN).click()
 #locate_element(driver, by_id=POST_COMMENTS).click()
-notifications(driver)
-# profile_page(driver)
+profile_card(driver)
+profile_page(driver)
 
 
 # Verify that the login was successful
