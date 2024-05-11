@@ -11,7 +11,7 @@ from Paths import (START_USERNAME, START_PASSWORD, START_LOGIN, NAVIGATION_BAR_H
 from Paths import ALLOW_NOTIFICATIONS
 from home_page import home_page
 from Profile.profile_page import profile_page
-
+from Mobile_Tests.notifications_and_messages import notifications
 cap: Dict[str, Any] = {
     "platformName": "Android",
     "automationName": "UiAutomator2",
@@ -56,6 +56,7 @@ end_text(driver)
 thread.sleep(2)
 locate_element(driver, by_accessibility_id=START_LOGIN).click()
 #locate_element(driver, by_id=POST_COMMENTS).click()
+notifications(driver)
 # profile_page(driver)
 
 
