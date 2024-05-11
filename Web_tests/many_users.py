@@ -2,7 +2,7 @@
 This module is used as the main function to test the functionality of a website Reddit clone.
 """
 
-email = 'yirawav345@mfyax.com'
+email = 'notifications@gmail.com'
 
 from chrome import chrome
 # from firefox import firefox
@@ -22,7 +22,7 @@ print(driver.title)
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 thread.sleep(DELAY_TIME)
 
-for i in range(10, 20):
+for i in range(10):
     # Generate a unique email
     # change any letter of email before the '@' character
     temp_email = email[:-15] + str(i) + email[-14:]
@@ -30,20 +30,20 @@ for i in range(10, 20):
     locate_element(driver, by_xpath='//*[@id="navbar_signup_button"]').click()
     locate_element(driver, by_xpath='//*[@id="signup_email"]').send_keys(temp_email)
     locate_element(driver, by_xpath='//*[@id="signup_email_continue"]').click()
-    locate_element(driver, by_xpath='//*[@id="signup_username"]').send_keys('chat' + str(i))
+    locate_element(driver, by_xpath='//*[@id="signup_username"]').send_keys('notifications' + str(i))
     locate_element(driver, by_xpath='//*[@id="signup_password"]').send_keys('ABcd1234')
     locate_element(driver, by_xpath='//*[@id="gender_dropdown_button"]').click()
     locate_element(driver, by_xpath="//li[@id='gender_woman']/p").click()
     locate_element(driver, by_xpath='//*[@id="signup_submit"]').click()
     thread.sleep(DELAY_TIME)
 
-    print("Logged In with username ", 'chat' + str(i))
+    print("Logged In with username ", 'notifications' + str(i))
 
     locate_element(driver, by_xpath='//*[@id="navbar_profile"]').click()
     locate_element(driver, by_xpath='//*[@id="profile_logout"]').click()
     thread.sleep(DELAY_TIME)
 
-    print("Logged Out with username ", 'chat' + str(i))
+    print("Logged Out with username ", 'notifications' + str(i))
 
 # write_run_time_statistics()
 driver.quit()

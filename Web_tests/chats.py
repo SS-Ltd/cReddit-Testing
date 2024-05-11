@@ -10,7 +10,7 @@ from paths import NAVBAR_CHAT, LANDING_CREATE_CHANNEL, ADD_CHAT
 from paths import CHAT_SEARCHBAR_INPUT, CHAT_SEARCHBAR_USER, CHAT_CREATE_CHAT
 from paths import CHAT_INPUT_TEXT, CHAT_SEND_MESSAGE, CHAT_GROUP_INPUT
 
-usernames = ['chat10', 'chat11', 'chat12', 'chat13', 'chat14', 'chat15', 'chat16', 'chat17', 'chat18', 'chat19']
+usernames = ['notifications0', 'notifications1', 'notifications2', 'notifications3', 'notifications4', 'notifications5', 'notifications6', 'notifications7', 'notifications8', 'notifications9']
 password = 'ABcd1234'
 
 def send_keys_slowly(element, text, delay=0.1):
@@ -60,7 +60,7 @@ def check_chat_exists(driver: webdriver, chat_name=None, chat_message=None, chat
         username = username_element.text
 
         # If username is longer than 20 chars, '...' appears at the end, remove it
-        if len(username) > 20:
+        if len(username) > 12:
             username = username[:-3]
 
         # Get message from the second paragraph with class "text-gray-400"
@@ -81,7 +81,7 @@ def check_chat_exists(driver: webdriver, chat_name=None, chat_message=None, chat
         print(f"Timestamp: {timestamp}")
         print("-" * 30)  # Separator for better readability
 
-        if (chat_name is None or username in chat_name) and (chat_message is None or message in chat_message) and (chat_timestamp is None or timestamp in chat_timestamp):
+        if (chat_name is None or username in chat_name) and (chat_message is None or message in chat_message) and (chat_timestamp is None or chat_timestamp in timestamp):
             print("Chat thread found")
             chat_thread.click()
             return True
@@ -126,7 +126,7 @@ def send_a_message(driver: webdriver, msg: str) -> str:
     thread.sleep(DELAY_TIME)
     driver.refresh()
     thread.sleep(DELAY_TIME)
-    if check_chat_exists(driver, chat_message=msg, chat_timestamp="a few seconds ago"):
+    if check_chat_exists(driver, chat_message=msg, chat_timestamp="seconds"):
         print("Message sent successfully")
         return msg
     print("Message not sent")
@@ -136,7 +136,7 @@ def check_receive(driver: webdriver, sent_message: str, sent_user: str) -> bool:
     '''
     This function checks the chat thread for a message from a specific user with a specific text
     '''
-    if check_chat_exists(driver, chat_name=sent_user, chat_message=sent_message, chat_timestamp="a few seconds ago"):
+    if check_chat_exists(driver, chat_name=sent_user, chat_message=sent_message, chat_timestamp="seconds"):
         print("Message received successfully")
         return True
     print("Message not received")
@@ -222,8 +222,8 @@ def create_group_chat(driver: webdriver, user2: str, user3: str, grpname: str) -
     locate_element(driver, by_id=CHAT_CREATE_CHAT).click()
     thread.sleep(DELAY_TIME)
     # Check that it has been created
-    
-    if check_chat_exists(driver, chat_name=grpname, chat_timestamp="a few seconds ago"):
+
+    if check_chat_exists(driver, chat_name=grpname, chat_timestamp="seconds"):
         print("Group chat created successfully")
         return True
     print("Group chat not created")

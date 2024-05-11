@@ -159,7 +159,7 @@ def test_saved(driver, post_url: str) -> None:
     # Locate an element that contains mainfeed in its id
     post = locate_element(driver, by_xpath="//*[starts-with(@id, 'mainfeed') and substring(@id, string-length(@id) - string-length('community') + 1) = 'community']")
     # Locate post/div/p and check that it is starts with "r/"
-    post_a = locate_element(post, by_xpath=".//a/p")
+    post_a = locate_element(post, by_xpath=".//div/p")
     print(post_a.text)
     print(post_url)
     # assert post_a.text in post_url, "The post is incorrect"

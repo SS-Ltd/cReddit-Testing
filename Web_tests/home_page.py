@@ -36,12 +36,12 @@ def home_page(driver) -> None:
     # post(driver)
 
     # TEST 7: Test a random user profile
-    profile(driver)
+    # profile(driver)
 
     # TEST 8: Test my profile page
     # my_profile(driver)
 
     # TEST 9: Chats
-    # chats(driver)
+    chats(driver)
 
     write_to_all_files("Home page test completed")
