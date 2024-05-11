@@ -5,9 +5,10 @@ This module contains all the xPaths and accessibility IDs for the mobile applica
 # XPATH = Xpath
 # AID = Accessibility ID
 # end of text button
+ALLOW_NOTIFICATIONS = 'com.android.permissioncontroller:id/permission_allow_button'     #RID
 # Starting page for the mobile application
-START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
-START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
+START_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]'
+START_PASSWORD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[2]'
 START_SIGNUP = 'Sign Up'
 START_LOGIN = 'Continue'
 START_COUNTINUE_WITH_GOOGLE = 'Continue with Google'
@@ -31,17 +32,25 @@ SIGNUP_CONTINUE2 = 'Continue'                           #AID#might need to updat
 SIGNUP_GENDER_MAN = 'Man'                               #AID
 #signup continue with google
 SIGNUP_CONTINUE_WITH_GOOGLE = 'Continue with Google'    #AID
+
 # Home page
+SEARCH_ICON = 'Open search'                             #RID
+SEARCH_TEXT = 'search text'                             #RID
+SEARCH_SEARCH_FOR = 'Search for'                        #AID
+SEARCH_RESULT = 'join or disjoin subreddit'             #RID
+SEARCH_COMMUNNITY = 'Communities\nTab 2 of 5'           #AID
+
+
 # Custom Navigation Bar
 NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
 NAVIGATION_BAR_CREATE_POST = 'Create\nTab 3 of 5'       #AID
-NAVIGATION_BAR_CHAT = 'Chat Tab 4 of 5'                 #AID
-NAVIGATION_BAR_INBOX = 'Inbox Tab 5 of 5'               #AID
+NAVIGATION_BAR_CHAT = 'Chat\nTab 4 of 5'                 #AID
+NAVIGATION_BAR_INBOX = '28\nInbox\nTab 5 of 5'            #AID contains
 
 # Profile Icon
 HOME_PAGE_PROFILE_ICON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[4]'
-
+OPEN_RIGHT_SIDE_BAR = 'Open right sidebar'              #RID
 # Within Profile Window
 PROFILE_WINDOW_PROFILE = 'My Profile'
 PROFILE_WINDOW_CREATE_COMMUNITY = 'Create a Community'  #AID
@@ -125,37 +134,48 @@ CREATE_COMMUNITY_BUTTON = 'Create Community'#AID
 CREATE_COMMUNITY_BACK = 'Back'          #AID
 CREATE_COMMUNITY_ALREADY_EXISTS = 'Subreddit already exists'    #AID
 # posts all resource IDS except stated
-POST_UPVOTE      = 'post upvote'        #RID
-POST_VOTES       = 'post votes'         #RID        # Might not work
-POST_DOWNVOTE    = 'post downvote'      #RID
-POST_COMMENTS    = 'post comment'       #RID
-POST_USERNAME    = 'post username'      #RID        # POST USERNAME and POST SUBREDDIT together form the some reason
-POST_SUBREDDIT   = 'post subreddit'     #RID        # Might not work
-POST_TITLE       = 'post title'         #RID
-POST_SHARE       = 'post share'         #RID
+POST_UPVOTE      = 'post upvote'                #RID
+POST_VOTES       = 'post votes'                 #RID        # Might not work
+POST_DOWNVOTE    = 'post downvote'              #RID
+POST_COMMENTS    = 'post comment'               #RID
+POST_USERNAME    = 'post username'              #RID        # POST USERNAME and POST SUBREDDIT together form the some reason
+POST_SUBREDDIT   = 'post subreddit'             #RID        # Might not work
+POST_TITLE       = 'post title'                 #RID
+POST_SHARE       = 'post share'                 #RID
+POST_MODERATOR   = 'moderator post settings'    #RID
+# moderator post Card
+POST_MOD_APPROVE_POST         = 'Approve post'  #RID
+POST_MOD_REMOVE_POST          = 'Remove post'   #RID
+POST_MOD_REMOVE_AS_SPAM       = 'Remove as spam'#RID
+POST_MOD_LOCK_COMMENTS        = 'Lock comments' #RID
+POST_MOD_STICKY_POST          = 'Sticky post'   #RID out of scope for project
+POST_MOD_MARK_AS_SPOILER      = 'Mark as spoiler'#RID
+POST_MOD_MARK_AS_NSFW         = 'Mark as NSFW'   #RID
+POST_MOD_ADJUST_CROUD_CONTROL = 'Adjust Croud Control' #RID out of scope for project
 
 # Comments all resource IDS
-COMMENT_UPVOTE   = 'comment upvote'     #RID
-COMMENT_VOTES    = 'comment votes'      #RID        # Might not work
-COMMENT_DOWNVOTE = 'comment downvote'   #RID
-COMMENT_OPTIONS  = 'comment options'    #RID
-COMMENT_REPLY    = 'comment reply'      #RID
-COMMENT_USERNAME = 'comment username'   #RID
-COMMENT_CONTENT  = 'comment content'    #RID
-COMMENT_CREATE   = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View'             #XPath
+COMMENT_UPVOTE   = 'comment upvote'             #RID
+COMMENT_VOTES    = 'comment votes'              #RID        # Might not work
+COMMENT_DOWNVOTE = 'comment //android.view.View[@content-desc="Now dsadada comment upvote comment votes 1 comment downvote"]/android.widget.Button[4]'           #RID
+COMMENT_OPTIONS  = 'comment options'            #RID
+COMMENT_REPLY    = 'comment reply'              #RID
+COMMENT_USERNAME = 'comment username'           #RID
+COMMENT_CONTENT  = 'Your Comment'            #RID
+COMMENT_CREATE   = 'Add a comment'              #RID
 COMMENT_WRITE    = '//android.widget.EditText'
 COMMENT_POST = 'Post'                   #AID
+COMMENTS_BACK = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'                  #xpath
 #AIDS
-COMMENT_EDIT    = 'Edit comment'        #AID
-COMMENT_SHARE   = 'Share'               #AID
-COMMENT_SAVE    = 'Save'                #AID
-COMMENT_UNSAVE  = 'Unsave'              #AID
+COMMENT_EDIT    = 'Edit comment'                            #AID
+COMMENT_SHARE   = 'Share'                                   #AID
+COMMENT_SAVE    = 'Save'                                    #AID
+COMMENT_UNSAVE  = 'Unsave'                                  #AID
 COMMENT_GET_REPLY_NOTIFICATIONS = 'Get reply notifications' #AID
-COMMENT_COPY_TEXT = 'Copy text'         #AID
-COMMENT_COLAPSE_THREAD = 'Collapse thread'#AID
-COMMENT_BLOCK_ACCOUNT = 'Block account' #AID
-COMMENT_REPORT  = 'Report'              #AID
-COMMENT_DELETE  = 'Delete comment'              #AID
+COMMENT_COPY_TEXT = 'Copy text'                             #AID
+COMMENT_COLAPSE_THREAD = 'Collapse thread'                  #AID
+COMMENT_BLOCK_ACCOUNT = 'Block account'                     #AID
+COMMENT_REPORT  = 'Report'                                  #AID
+COMMENT_DELETE  = 'Delete comment'                          #AID
 
 
 # Create Post
@@ -178,3 +198,170 @@ CREATE_POST_POLL_OPTION_2 = 'Option 2'                                          
 CREATE_POST_POLL_ADD_OPTION = 'Add option'                                                  #AID
 CREATE_POST_POLL_OPTION_3 = 'Option 3'                                                      #RID
 CREATE_POST_CLOSE_POLL_3 = 'close option 3'                                                 #AID
+
+# Moderation
+COMMUNITY_MOD_TOOLS = 'Mod Tools'                                                           #AID
+# Moderator Tools
+# General
+MOD_TOOLS_MOD_LOG = 'Mod log'                                    #AID
+MOD_TOOLS_INSIGHTS = 'Insights'                                  #AID
+MOD_TOOLS_COMMUNITY_ICON = 'Community icon'                      #AID
+MOD_TOOLS_DESCRIPTION = 'Description'                            #AID
+MOD_TOOLS_WELCOME_MESSAGE = 'Welcome message'                    #AID
+MOD_TOOLS_TOPICS = 'Topics'                                      #AID
+MOD_TOOLS_COMMUNITY_TYPE = 'Community type'                      #AID
+MOD_TOOLS_POST_TYPE = 'Post type'                                #AID
+MOD_TOOLS_LOCATION = 'Location'                                  #AID
+# Content & Regulations
+MOD_TOOLS_QUEUES = 'Queues'                                      #AID
+MOD_TOOLS_RULES = 'Rules'                                        #AID
+MOD_TOOLS_SCHEDULED_POSTS = 'Scheduled posts'                    #AID
+# User Management
+MOD_TOOLS_MODERATORS = 'Moderators'                              #AID
+MOD_TOOLS_APPROVED_USERS = 'Approved users'                      #AID
+MOD_TOOLS_MUTED_USERS = 'Muted users'                            #AID
+MOD_TOOLS_BANNED_USERS = 'Banned users'                          #AID
+
+# Moderator Tools -> General -> Description
+MOD_TOOLS_DESCRIPTION_EDIT = '//android.widget.EditText'         #XPath
+MOD_TOOLS_DESCRIPTION_SAVE = 'Save'                              #AID
+
+# Moderator Tools -> General -> Community Type
+MOD_TOOLS_COMMUNITY_TYPE_SEEKBAR = 'android.widget.SeekBar'      #classname
+MOD_TOOLS_COMMUNITY_TYPE_PUBLIC = 'Public'                       #AID
+MOD_TOOLS_COMMUNITY_TYPE_RESTRICTED = 'Restricted'               #AID
+MOD_TOOLS_COMMUNITY_TYPE_PRIVATE = 'Private'                     #AID
+MOD_TOOLS_COMMUNITY_TYPE_SWITCH = 'android.widget.Switch'        #classname
+MOD_TOOLS_COMMUNITY_TYPE_SAVE = 'Save'                           #AID
+
+# Moderator Tools -> General -> Post Type
+MOD_TOOLS_POST_TYPE_OPTIONS_ANY = 'Post type options\nChoose the types of posts you allow in your community\nAny'                                                                                               #AID
+MOD_TOOLS_POST_TYPE_OPTIONS_LINK = 'Post type options\nChoose the types of posts you allow in your community\nLink'                                                                                             #AID
+MOD_TOOLS_POST_TYPE_OPTIONS_TEXT = 'Post type options\nChoose the types of posts you allow in your community\nText'                                                                                             #AID
+MOD_TOOLS_POST_TYPE_SAVE = 'Save'                                                                                                                                                                               #AID
+OPTION_ANY = 'Any\nAllow text, link, image, and video posts'                                                                                                                                                    #AID
+OPTION_LINK = 'Link only\nOnly allow link posts'                                                                                                                                                                     #AID
+OPTION_TEXT = 'Text only\nOnly allow text posts'                                                                                                                                                                     #AID
+IMAGE_POSTS = 'Image posts\nAllow images uploaded directly to Reddit as well as links to popular image hosting sites such as lmgur'                                                                             #AID
+IMAGE_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[1]'    #XPath
+VIDEO_POSTS = 'Video posts\nAllow videos uploaded directly to Reddit'                                                                                                                                           #AID
+VIDEO_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[2]'    #XPath
+POLL_POSTS = 'Poll posts\nAllow poll posts in your community'                                                                                                                                                   #AID
+POLL_SWITCH = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Switch[3]'     #XPath
+POLL_ONLY_SWITCH = 'android.widget.Switch'                                                                                                                                                                      #classname
+
+# Moderator Tools -> General -> Location
+LOCATION_TEXT = 'android.widget.EditText'                                                                                                                                                                       #classname
+LOCATION_HEADER = 'Adding a location helps your community show up in search results and recommendations and helps local redditors find it easier.'                                                              #AID
+LOCATION_SAVE = 'save'                                                                                                                                                                                          #AID
+
+# Moderator Tools -> Content & Regulations -> Queues
+QUEUES_COMMUNITY = 'Community'
+QUEUES_NEEDS_REVIEW = 'Needs Review'
+QUEUES_POSTS_AND_COMMENTS = 'Posts and Comments'
+QUEUES_SORT = 'sort'
+QUEUES_GOTO_COMMUNITY = 'Go to community page'
+QUEUES_REVIEW_NEEDS_REVIEW = 'Needs Review'
+QUEUES_REVIEW_REMOVED = 'Removed'
+QUEUES_REVIEW_REPORTED = 'Reported'
+QUEUES_REVIEW_EDITED = 'Edited'
+QUEUES_REVIEW_UNMODERATED = 'Unmoderated'
+QUEUES_PAC_POSTS_AND_COMMENTS = 'Posts and Comments'
+QUEUES_PAC_POSTS_ONLY = 'Posts Only'
+QUEUES_PAC_COMMENTS_ONLY = 'Comments Only'
+
+# Moderator Tools -> Content & Regulations -> Rules
+RULES_ADD_RULE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+RULES_EDIT_RULE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[3]'
+RULES_DONE_EDITING = 'Done'
+RULES_DELETE_RULE = '//android.view.View[@content-desc="1\nBalbus cibus altus comburo."]/android.widget.Button'
+RULES_RULE = '//android.view.View[@content-desc="1\nBalbus cibus altus comburo."]'
+RULES_ADD_RULE_TITLE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]'
+RULES_ADD_RULE_DESCRIPTION = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[2]'
+RULES_ADD_RULE_REPORT = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[3]'
+RULES_ADD_RULE_PAC = 'Posts and comments'
+RULES_ADD_RULE_CO = 'Only comments'
+RULES_ADD_RULE_PO = 'Only posts'
+RULES_ADD_RULE_SAVE = 'Save'
+
+# Moderator Tools -> Content & Regulations -> Scheduled Posts
+SCHEDULED_POSTS_SCHEDULE = 'Schedule post'
+SCHEDULED_POSTS_MORE_OPTIONS = 'more options'
+SCHEDULED_POSTS_CALENDAR = 'Post Settings\ncalender\nSchedule Post\nschedule post'
+SCHEDULED_POSTS_SCHEDULE_POST = 'Schedule'
+SCHEDULED_POSTS_TITLE = 'Create Post Title'
+
+# Moderator Tools -> User Management -> Moderators
+MOD_MODERATORS_ALL = 'All\nTab 1 of 2'
+MOD_MODERATORS_EDITABLE = 'Editable\nTab 2 of 2'
+MOD_MODERATORS_ADD_MODERATOR = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+MOD_MODERATORS_EDIT_MODERATOR = '(//android.view.View[@content-desc="cake"])[1]/android.widget.Button'
+MOD_MODERATORS_EDIT_PERMISSIONS = 'Edit permissions'
+MOD_MODERATORS_VIEW_PROFILE = 'View profile'
+MOD_MODERATORS_REMOVE_MODERATOR = 'Remove'
+MOD_MODERATORS_ADD_MODERATOR_USERNAME = '//android.widget.EditText'
+MOD_MODERATORS_ADD_MODERATOR_FULL_PERMISSIONS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[1]'
+MOD_MODERATORS_ADD_MODERATOR_ACCESS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[2]'
+MOD_MODERATORS_ADD_MODERATOR_MAIL = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[3]'
+MOD_MODERATORS_ADD_MODERATOR_CONFIG = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[4]'
+MOD_MODERATORS_ADD_MODERATOR_POSTS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[5]'
+MOD_MODERATORS_ADD_MODERATOR_FLAIR = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[6]'
+MOD_MODERATORS_ADD_MODERATOR_WIKI = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[7]'
+MOD_MODERATORS_ADD_MODERATOR_CHAT_CONFIG = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[8]'
+MOD_MODERATORS_ADD_MODERATOR_CHAT_OPERATOR = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[9]'
+MOD_MODERATORS_ADD_MODERATOR_INVITE = 'Invite'
+MOD_MODERATORS_ADD_MODERATOR_CANCEL = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+
+# Moderator Tools -> User Management -> Approved Users
+MOD_APPROVED_USERS_EDIT = '(//android.view.View[@content-desc="cake"])[1]/android.widget.Button'
+MOD_APPROVED_USERS_EDIT_PERMISSIONS = 'Edit permissions'
+MOD_APPROVED_USERS_VIEW_PROFILE = 'View profile'
+MOD_APPROVED_USERS_REMOVE = 'Remove'
+MOD_APPROVED_USERS_ADD_USER = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+MOD_APPROVED_USERS_ADD_USER_USERNAME = '//android.widget.EditText'
+MOD_APPROVED_USERS_ADD_USER_ADD = 'Add'
+MOD_APPROVED_USERS_ADD_USER_CLOSE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+
+# Moderator Tools -> User Management -> Muted Users
+MOD_MUTED_USERS_INVITE = 'Invite'
+
+# Moderator Tools -> User Management -> Banned Users
+MOD_BANNED_USERS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+MOD_BANNED_USERS_USERNAME = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]'
+MOD_BANNED_USERS_REASON = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]'
+MOD_BANNED_USERS_NOTE_MOD = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[3]'
+MOD_BANNED_USERS_DAYS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[4]'
+MOD_BANNED_USERS_PERMANENT = '//android.widget.CheckBox'
+MOD_BANNED_USERS_NOTE_USER = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[5]'
+MOD_BANNED_USERS_BAN = 'Add'
+MOD_BANNED_USERS_CANCEL = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+
+# Search
+SEARCH_BAR = 'search text'
+SEARCH_AUTOFILL_COMMUNITY = 'Chat_Community0\n1 members'
+SEARCH_AUTOFILL_PEOPLE = 'chat13'
+SEARCH_COMMUNITY_HEADER = '(//android.view.View[@content-desc="r/Chat_Community0"])[2]'
+SEARCH_PEOPLE_HEADER = '(//android.view.View[@content-desc="Velda"])[2]'
+SEARCH_BUTTON = 'Search for cha'
+
+# notifications
+NOTIFICATIONS = "Notifications Tab 1 of 2"
+MESSAGES = "Messages Tab 2 of 2"
+NOTIFICATIONS_RIGHT_THREE_DOTS = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Button'
+NOTIFICATIONS_THREE_DOTS_LOCATION = [1250,530]
+NOTIFICATIONS_HIDE_NOTIFICATION = 'Hide this notification'
+NOTIFICATIONS_DISABLE_UPDATES = 'Disable updates from this community'
+NOTIFICATIONS_TURN_OFF_NOTIFICATION = 'Tun off this notification type'
+NOTIFICATIONS_MENU_CLOSE = 'Close'
+
+#messages
+MESSAGES_NEW_MESSAGE = 'New Message'                            #AID
+MESSAGES_MARK_ALL_READ = 'Mark all inbox tabs as read'          #AID
+MESSAGE_USERNAME = 'username'                                   #RID
+MESSAGES_SUBJECT = 'Subject'                                    #RID
+MESSAGES_MESSAGE = 'Message'                                    #RID
+MESSAGES_SEND    = 'Send'                                       #AID
+
+# logout
+LOGOUT = '//android.widget.Button'                              #xpath
+LAST_LOGOUT = 'Logout'                                          #AID

@@ -214,7 +214,7 @@ def login_wrong_password(driver) -> None:
     # Check the bottom tabs, one of them is an enough indication that the login was successful
     # Check the home tab (tab 1 of 5)
     home_tab = locate_element(driver, by_accessibility_id=NAVIGATION_BAR_HOME)
-    assert not home_tab.is_displayed(), "Login was successful"
+    assert not home_tab, "Login was successful"
     print("Login was not successful")
 
     # TEST FUNCTIONALITIES HERE
@@ -225,9 +225,9 @@ def login(driver) -> None:
 
     thread.sleep(DELAY_TIME)
     #login_continue_with_google(driver)
-    #forgot_password(driver)
-    #signup(driver, "husseinelhawary4@gmail.com")
-    login_wrong_password(driver)
+    forgot_password(driver)
+    #signup(driver, "dasdsa@smail.codm")
+    #login_wrong_password(driver)
         # Check that another context has opened
     assert "WEBVIEW_chrome" in driver.contexts, "Content Policy page not found"
     print("Content Policy page found")

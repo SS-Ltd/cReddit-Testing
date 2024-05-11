@@ -12,16 +12,25 @@ from helper_functions import locate_element
 from settings import settings
 from post import post
 from create_community import create_community
+from search import search
+from Moderation.mod import mod
 
 def home_page(driver) -> None:
     '''
     This function checks the functionalities of the home page of the mobile application.
     '''
-    # # Click on the profile icon
-    profile_icon = locate_element(driver, by_xpath=HOME_PAGE_PROFILE_ICON)
-    profile_icon.click()
-    thread.sleep(DELAY_TIME)
-    print("Profile icon clicked")
+
+    # Check Moderation Tools
+    # mod(driver)
+
+    # Check search
+    search(driver)
+
+    # Click on the profile icon
+    # profile_icon = locate_element(driver, by_xpath=HOME_PAGE_PROFILE_ICON)
+    # profile_icon.click()
+    # thread.sleep(DELAY_TIME)
+    # print("Profile icon clicked")
 
     # # Click on the settings
     # settings_icon = locate_element(driver, by_accessibility_id=PROFILE_SETTINGS)
@@ -46,10 +55,10 @@ def home_page(driver) -> None:
     # print("Community page displayed")
 
     # Create a Community
-    create = locate_element(driver, by_accessibility_id=PROFILE_WINDOW_CREATE_COMMUNITY)
-    create.click()
-    thread.sleep(DELAY_TIME)
-    print("Create community clicked")
-    create_community(driver)
+    # create = locate_element(driver, by_accessibility_id=PROFILE_WINDOW_CREATE_COMMUNITY)
+    # create.click()
+    # thread.sleep(DELAY_TIME)
+    # print("Create community clicked")
+    # create_community(driver)
 
     print("Home page functionalities checked")

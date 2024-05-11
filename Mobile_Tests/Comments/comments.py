@@ -14,7 +14,7 @@ def create_comment(driver)->str:
     '''
     This function tests creating a comment
     '''
-    locate_element(driver, by_xpath=COMMENT_CREATE).click()
+    locate_element(driver, by_id=COMMENT_CREATE).click()
     comment_create = locate_element(driver, by_xpath=COMMENT_WRITE)
     thread.sleep(SEE_TIME)
     thread.sleep(3)
