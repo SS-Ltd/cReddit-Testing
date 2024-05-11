@@ -12,6 +12,7 @@ from helper_functions import locate_element
 from settings import settings
 from post import post
 from create_community import create_community
+from search import search
 from Moderation.mod import mod
 
 def home_page(driver) -> None:
@@ -20,7 +21,10 @@ def home_page(driver) -> None:
     '''
 
     # Check Moderation Tools
-    mod(driver)
+    # mod(driver)
+
+    # Check search
+    search(driver)
 
     # Click on the profile icon
     # profile_icon = locate_element(driver, by_xpath=HOME_PAGE_PROFILE_ICON)

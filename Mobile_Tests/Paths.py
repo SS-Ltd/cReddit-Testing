@@ -40,6 +40,7 @@ SEARCH_SEARCH_FOR = 'Search for'                            #AID
 SEARCH_RESULT = 'join or disjoin subreddit'                 #RID
 SEARCH_COMMUNNITY = 'Communities\nTab 2 of 5'               #AID
 
+
 # Custom Navigation Bar
 NAVIGATION_BAR_HOME = 'Home\nTab 1 of 5'                #AID
 NAVIGATION_BAR_COMMUNITIES = 'Communities Tab 2 of 5'   #AID
@@ -333,4 +334,12 @@ MOD_BANNED_USERS_PERMANENT = '//android.widget.CheckBox'
 MOD_BANNED_USERS_NOTE_USER = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[5]'
 MOD_BANNED_USERS_BAN = 'Add'
 MOD_BANNED_USERS_CANCEL = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+
+# Search
+SEARCH_BAR = 'search text'
+SEARCH_AUTOFILL_COMMUNITY = 'Chat_Community0\n1 members'
+SEARCH_AUTOFILL_PEOPLE = 'chat13'
+SEARCH_COMMUNITY_HEADER = '(//android.view.View[@content-desc="r/Chat_Community0"])[2]'
+SEARCH_PEOPLE_HEADER = '(//android.view.View[@content-desc="Velda"])[2]'
+SEARCH_BUTTON = 'Search for cha'
 
