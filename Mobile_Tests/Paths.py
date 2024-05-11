@@ -309,3 +309,13 @@ MOD_MODERATORS_ADD_MODERATOR_CHAT_CONFIG = '//android.widget.FrameLayout[@resour
 MOD_MODERATORS_ADD_MODERATOR_CHAT_OPERATOR = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.CheckBox[9]'
 MOD_MODERATORS_ADD_MODERATOR_INVITE = 'Invite'
 MOD_MODERATORS_ADD_MODERATOR_CANCEL = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
+
+# Moderator Tools -> User Management -> Approved Users
+MOD_APPROVED_USERS_EDIT = '(//android.view.View[@content-desc="cake"])[1]/android.widget.Button'
+MOD_APPROVED_USERS_EDIT_PERMISSIONS = 'Edit permissions'
+MOD_APPROVED_USERS_VIEW_PROFILE = 'View profile'
+MOD_APPROVED_USERS_REMOVE = 'Remove'
+MOD_APPROVED_USERS_ADD_USER = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]'
+MOD_APPROVED_USERS_ADD_USER_USERNAME = '//android.widget.EditText'
+MOD_APPROVED_USERS_ADD_USER_ADD = 'Add'
+MOD_APPROVED_USERS_ADD_USER_CLOSE = '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[1]'
